@@ -45,9 +45,11 @@
 % **************************** Custom Packages ********************************
 
 % ************************* Algorithms and Pseudocode **************************
+% and maths symbols
 
 %\usepackage{algpseudocode}
-
+\usepackage{bm}
+\newcommand{\e}{\mathcal{E}}
 
 % ********************Captions and Hyperreferencing / URL **********************
 
@@ -93,7 +95,7 @@
 % University guidelines
 
 % \doublespacing
-% \onehalfspacing
+\onehalfspacing
 % \singlespacing
 
 
@@ -104,12 +106,12 @@
 %\widowpenalty=500
 
 %\usepackage[perpage]{footmisc} %Range of footnote options
-
+\usepackage{comment}
 
 % *****************************************************************************
 % *************************** Bibliography  and References ********************
 
-%\usepackage{cleveref} %Referencing without need to explicitly state fig /table
+\usepackage[noabbrev]{cleveref} %Referencing without need to explicitly state fig /table
 
 % Add `custombib' in the document class option to use this section
 \ifuseCustomBib
@@ -160,7 +162,7 @@
 % *********************** Configure Draft Mode **********************************
 
 % Uncomment to disable figures in `draft'
-%\setkeys{Gin}{draft=true}  % set draft to false to enable figures in `draft'
+\setkeys{Gin}{draft=true}  % set draft to false to enable figures in `draft'
 
 % These options are active only during the draft mode
 % Default text is "Draft"
@@ -180,13 +182,13 @@
 % ******************************** Todo Notes **********************************
 %% Uncomment the following lines to have todonotes.
 
-%\ifsetDraft
-%	\usepackage[colorinlistoftodos]{todonotes}
-%	\newcommand{\mynote}[1]{\todo[author=kks32,size=\small,inline,color=green!40]{#1}}
-%\else
-%	\newcommand{\mynote}[1]{}
-%	\newcommand{\listoftodos}{}
-%\fi
+\ifsetDraft
+	\usepackage[colorinlistoftodos]{todonotes}
+	\newcommand{\mynote}[1]{\todo[author=ak2351,size=\small,inline,color=green!40]{#1}}
+\else
+	\newcommand{\mynote}[1]{}
+	\newcommand{\listoftodos}{}
+\fi
 
 % Example todo: \mynote{Hey! I have a note}
 
