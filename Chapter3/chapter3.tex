@@ -11,21 +11,114 @@
     \graphicspath{{Chapter3/Figs/Vector/}{Chapter3/Figs/}}
 \fi
 
-Models of organisms and population dynamics must be designed by either describing potentially many discrete units\footnote{in this case, cells} with continuous functions or dealing with the analytical complexity of discretisation. Even with the continuous description of \textit{C. flexa} described previously, numerical solutions to the shape equations would require discretisation of a surface. Here, I pursue a simplified, discrete description of \textit{C. flexa} sheets. As in \cref{ch:2}, I proceed by formulating an energy function based on the coordinate vectors of cells and vary it with respect to the coordinates. This procedure results in expressions for the forces on the coordinates, which can be forward integrated in time to study the dynamics and steady state geometries of \textit{C. flexa} sheets.
+Models of organisms and population dynamics must be designed by either describing potentially many discrete units\footnote{in this case, cells} with continuous functions or dealing with the analytical complexity of discretisation. 
+Even with the continuous description of \textit{C. flexa} described previously, numerical solutions to the shape equations would require discretisation of a surface. 
+Here, I pursue a simplified, discrete description of \textit{C. flexa} sheets. 
+As in \cref{ch:2}, I proceed by formulating an energy function based on the coordinate vectors of cells and vary it with respect to the coordinates. 
+This procedure results in expressions for the forces on the coordinates, which can be forward integrated in time to study the dynamics and steady state geometries of \textit{C. flexa} sheets.
 
-In addition to avoiding the complexity of describing surface curvatures $H, K$ in a discrete program, I find the force equations are relatively quite tractable. Expressing the gradient of the energy as summations over collars belonging to each cell or cell-cell interactions makes it possible to neatly arrange the force calculations as tensor index contractions or, even more simply, matrix multiplications. Of course, describing choanoflagellate sheets as discrete systems also remains faithful to real sheets, and this approach remains applicable over colonies of all cell counts. 
+In addition to avoiding the complexity of describing surface curvatures $H, K$ in a discrete program, I find the force equations are relatively quite tractable. 
+Expressing the gradient of the energy as summations over collars belonging to each cell or cell-cell interactions makes it possible to neatly arrange the force calculations as tensor index contractions or, even more simply, matrix multiplications. 
+Of course, describing choanoflagellate sheets as discrete systems also remains faithful to real sheets, and this approach remains applicable over colonies of all cell counts. 
 
 \section{Discrete sheet description}
 
-The most natural framework to describe a interactions between a set of discrete points is graph theory. Since colonies of \textit{C. flexa} form sheets with two distinct sides and there is no evidence to suggest that \textit{Choanoeca} acts otherwise \citep{brunet2019,leadbeater1983}, we are welcome to treat the network of interactions between cells as a plane graph $G$. With cells $C = \{\alpha\}_{\alpha\in C}$ making up vertices and cell-cell interactions via collars $E = \{(\alpha, \beta)\}_{(\alpha,\beta)\in E}$ making up edges in $G$, we describe which cells impart forces on each other.
+The most natural framework to describe a interactions between a set of discrete points is graph theory. 
+Since colonies of \textit{C. flexa} form sheets with two distinct sides and there is no evidence to suggest that \textit{Choanoeca} acts otherwise \citep{brunet2019,leadbeater1983}, we are welcome to treat the network of interactions between cells as a plane graph $G$. 
+With cells $C = \{\alpha\}_{\alpha\in C}$ making up vertices and cell-cell interactions via collars $E = \{(\alpha, \beta)\}_{(\alpha,\beta)\in E}$ making up edges in a graph $G$, we describe which cells impart forces on each other.
 
-However, we understand from the studies into \textit{Choanoeca} that cells interact through their collars \citep{ellis1930,leadbeater1983,brunet2019}. Guided by sheet-tangential imaging \mynote{reference a figure with \citet{leadbeater1983} 6A and \citet{brunet2019} 5B}, we see that another natural planar graph $G^*$ is that with edges along interfaces between cells' collars. \footnote{Until noted otherwise, I treat the several collars interacting between two cells as a continuous line of interaction with infinitesimal collars spanning the cells' interface. The implications of this choice are discussed later.} In this description, vertices mark the points at which the interface between a pair of cells $(\alpha, \beta)\in E$ ends. For a cell $\alpha\in C$ whose collar microvilli are all in contact with those of other cells, the vertices in $G^*$ corresponding to cell $\alpha$ are points where $\alpha$ interacts with two or more cells simultaneously.
+However, we understand from the studies into \textit{Choanoeca} that cells interact through their collars \citep{ellis1930,leadbeater1983,brunet2019}. 
+Guided by imaging in the sheet-tangential plane (\cref{subfig:voronoi}), we see that another natural planar graph $G^*$ is that with edges along interfaces between cells' collars. 
+\footnote{Until noted otherwise, I treat the several collars interacting between two cells as a continuous line of interaction with infinitesimal collars spanning the cells' interface. The implications of this choice are discussed later.} 
+In this description, vertices mark the points at which the interface between a pair of cells $(\alpha, \beta)\in E$ ends. 
+For a cell $\alpha\in C$ whose collar microvilli are all in contact with those of other cells, the vertices in $G^*$ corresponding to cell $\alpha$ are points where $\alpha$ interacts with two or more cells simultaneously.
 
-As each edge in $G^*$ transects an edge $(\alpha, \beta)$ between cells $\alpha, \beta$ in $G$, we identify $G^*$ as the dual graph of $G$ \footnote{As $G$ is finite, all vertices in $G^*$ as described above which indicate two cells' interactions ending at the edge of a colony sheet would be merged into a single vertex $v_*$ in the dual graph of $G$. Consequently $G^*$ is not exactly the dual graph of $G$. We address this later when defining sheet edges numerically by replacing each edge $(v, v^*)$ in $G^*$ with the edge $(v, v')$ for new vertices $v'$ and removing $v_*$ from $G^*$ and deleting all edges incident on $v_*$.} (\cref{subfig:duals1}). Consequently, we have that either $G$ or $G^*$ is sufficient to specify the topology of the other provided the coordinates of vertices (\cref{subfig:duals2}). 
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.52\textwidth}
+        \includegraphics[width=\textwidth]{duals1.jpg}
+        \caption{}
+        \label{subfig:duals1}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[b]{0.46\textwidth}
+        \includegraphics[width=\textwidth]{duals2.jpg}
+        \caption{}
+        \label{subfig:duals2}
+    \end{subfigure}
+    \caption{Two views of the physical dual graphs used in describing \textit{C. flexa}.}
+    \label{fig:duals}
+\end{figure}
 
-\mynote{todo: include here discussion of which descriptions to use. Why do we choose the more complex model with both collar vertices and cell positions? }
+As each edge in $G^*$ transects an edge $(\alpha, \beta)$ between cells $\alpha, \beta$ in $G$, we identify $G^*$ as the dual graph of $G$ (\cref{subfig:duals1}). \footnote{As $G$ is finite, all vertices in $G^*$ as described above which indicate two cells' interactions ending at the edge of a colony sheet would be merged into a single vertex $v_*$ in the dual graph of $G$. Consequently $G^*$ is not exactly the dual graph of $G$. We address this later when defining sheet edges numerically by replacing each edge $(v, v^*)$ in $G^*$ with the edge $(v, v')$ for new vertices $v'$ and removing $v_*$ from $G^*$ and deleting all edges incident on $v_*$.}
+Consequently, we have that either $G$ or $G^*$ is sufficient to specify the topology of the other provided the coordinates of vertices (\cref{subfig:duals2}). 
 
-\subsection{Numerically specifying initial conditions}
+\subsection{Defining a sheet}
+
+A reasonable simplification of the cell sheet will use either the cell-cell interaction graph $G$ or the collar boundary edge graph $G^*$. 
+Since physical interactions occur at the collar interfaces, I consider first the physical details of a model defined on $G^*$. 
+
+The physical interactions happen at the collar boundaries, so it makes sense to define energy based on the graph $G^*$ that describes them. 
+If two cells have a collar boundary described by $\bm{r}_\rho t + (1-t)\bm{r}_\sigma$ with $0 \leq t \leq 1$ and the energy is defined by continuously many springs from the boundary to a projected cell point $\bm{r}^*_\alpha$, then the energy $E_{\rho\sigma}$ of that boundary is 
+
+\begin{align}
+    E_{\rho\sigma} = \int_0^1 \left[(\bm{r}_\rho t + (1-t)\bm{r}_\sigma) - \bm{r}^*_\alpha \right]^2 dt &= \frac{1}{3} (\bm{r}_\rho + \bm{r}_\sigma)^2 - \frac{1}{3} \bm{r}_\rho\cdot\bm{r}_\sigma - \bm{r}^*_\alpha \cdot (\bm{r}_\sigma + \bm{r}_\sigma) + \bm{r}^{*2}_\alpha. \label{eq:eab}
+\end{align}
+
+The energy corresponding to a cell consists of the line energies of all the collar interfaces. 
+We find the position $\bm{r}^*_\alpha$ by setting the gradient of equation \ref{eq:eab} with respect to $\bm{r}^*_\alpha$ to zero for all lines $\rho\sigma$. 
+If $\rho$ indexes the vertices that cell $\alpha$ has (which I denote $\rho\in\alpha$ for the remainder of this chapter), then 
+
+\begin{align*}
+    0 = \frac{dE}{d\bm{r}^*_\alpha} &= -\sum_{\rho\in\alpha} \bm{r}_\sigma + 2n\bm{r}^*_\alpha \\
+    \bm{r}^*_\alpha &= \frac{1}{n} \sum_{\rho\in\alpha} \bm{r}_\rho.
+\end{align*}
+
+The force on vertex $\sigma$ is then given by the gradient of the whole sheet energy $E_{\text{sheet}}$, which is the sum of the energies $E_\alpha$ corresponding to each cell $\alpha$. 
+
+\begin{align*}
+    \frac{d \e_{\text{sheet}}}{d\bm{r_a}} &= \frac{d}{d\bm{r_a}} \sum_\Delta \e_\Delta = \sum_{\Delta:a \in \Delta} \frac{d\e_\Delta}{d\bm{r_a}} = \sum_{\Delta:a\in\Delta} \frac{d}{d\bm{r_a}} \sum_{b \in \Delta} (\bm{r_b} - \bm{r_\Delta})^2. \\
+    \intertext{Since $\bm{r_\Delta}$ depends on $\bm{r_a}$ itself, we write} \\
+    \bm{f_{\text{on }a}} &= -\sum_{\Delta:a\in\Delta} \frac{d}{d\bm{r_a}} \sum_{b \in \Delta} \left(\bm{r_b} - \frac{1}{n} \sum_{c\in\Delta} \bm{r_c} \right)^2 \\
+    &= \sum_{\Delta:a\in\Delta} \sum_{b \in \Delta} \left(2\bm{r_a}\delta_{ab} - \frac{2}{n} \sum_{c\in\Delta}\left(\bm{r_c}\delta_{ab} + \bm{r_b}\delta_{ac}\right) + \frac{1}{n^2} \sum_{c\in\Delta}\sum_{d\in\Delta} \left(\delta_{ac}\bm{r_d} + \delta_{ad}\bm{r_c} \right) \right) \\
+    &= -2\left(\bm{r_a} - \bm{r_\Delta} \right)
+\end{align*}
+
+This process was overkill, since we could have reasonably assumed that $\bm{r_\Delta}$ would be at the vertices' center of mass and that we'd effectively get springs from $\bm{r_\Delta}$ to each vertex. 
+This is thanks to linearity of the collar springs. 
+However, assuming that the collars have a positive equilibrium length $r_0$ makes it necessary to go through the above procedure.
+
+If instead the line energy is 
+
+\begin{align*}
+    \e_{ab} &= \int_0^1 \left(\left|\bm{r_a}t + (1-t)\bm{r_b} - \bm{r_\Delta}\right| - r_0 \right)^2 dt, \\
+    \intertext{then the cell position $\bm{r_\Delta}$ is the solution to} \\
+    0 &= -2 \sum_{b\in\Delta} \bm{r_b} + 6 \bm{r_\Delta} - 2r_0 \frac{d}{d\bm{r_\Delta}} \sum_{(b,c) \text{ edge in }\Delta} \int_0^1 \left| \bm{r_b}t - (1-t)\bm{r_c} - \bm{r_\Delta} \right| dt \\
+    0 &= -2 \sum_{b\in\Delta} \bm{r_b} + 6 \bm{r_\Delta} - 2r_0 \sum_{(b,c)} \int_0^1 \frac{\bm{r_\Delta} - \bm{r_c} - t(\bm{r_b} - \bm{r_c})}{\left|\bm{r_b}t - (1-t)\bm{r_c} - \bm{r_\Delta} \right|} dt.
+\end{align*}
+
+We can actually evaluate the integral above, but I found that it gives a transcendental equation for $\bm{r_\Delta}$ and decided it wasn't pursuing further on paper. 
+Nonzero equilibrium length springs is better pursued numerically. 
+Alternatively, we simply define springs from $\bm{r_\Delta}$ to each dual graph vertex rather than making the collars consist of continuous springs.
+
+\subsubsection{Bending}
+
+One way to define a bending energy is to give each cell a vector that corresponds to the midline pointing out from the center of the cell, which I have implicitly drawn in the figures of individuals flexas. 
+From there, we could reasonably define a bending energy from the interactions between two interacting flexas by the angle between their corresponding ``normal'' vectors weighted by the length of their interface. 
+
+Defining an individual vector is made complicated by the fact that the vertices along the cycles corresponding to each flexa are not necessarily coplanar, provided that a given cell is interacting with more than three other cells. 
+One option, although I have not developed it, is to find the plane whose summed mean squared distances to each vertex for a cell is minimised. 
+It would possibly be more accurate to again treat the edges as lines and minimise the integrated distance from the normal plane to the edges. 
+Either way, the energy dictated by the angle between adjacent normal vectors will need to be summed over all pairs of neighboring cells, namely all edges in the graph where edges correspond to cell neighbors (not collar interfaces).
+
+\subsection{Surface formed by cell bodies}
+
+The graph of cell bodies and neighbor edges makes it easy to work with springs, but it is less clear how to define a bending energy. 
+The math for springs is identical to previously, so let's just think about how to define bending energy.
+
+\mynote{needs more work}
+
+\subsection{Numerically specifying initial conditions} \label{subsec:init}
 
 For sheets whose graph of cell-cell connections $G$ can be drawn on a plane with edges as straight lines, it is simplest to define the initial spatial graph $G$ as lying in the $xy$-plane with cell coordinates $\{\bm{r}_\alpha\}_{\alpha\in C}$ and to use Voronoi tessellation to generate collar vertices in $G^*$. Voronoi tessellation allows for generalisation beyond regular lattices, though it does not facilitate graph topologies that cannot be drawn in a plane as described above. 
 
@@ -41,7 +134,7 @@ As Voronoi diagrams for finitely many cells include ridges that extend out to in
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\textwidth]{voronoi.png}
-    \caption{Voronoi tesselation of initial cell placement. Cell bodies shown in blue points, collar boundaries shown in black lines with collar boundary end points shown in orange. Notably, the regions corresponding to boundary cells extend out to infinity. We need to add all boundary collar vertices along the infinite dashed lines.}
+    \caption[Voronoi tesselation of initial cell placement in the $xy$-plane]{Voronoi tesselation of initial cell placement. Cell bodies shown in blue points, collar boundaries shown in black lines with collar boundary end points shown in orange. Notably, the regions corresponding to boundary cells extend out to infinity. We need to add all boundary collar vertices along the infinite dashed lines.}
     \label{fig:voronoi}
 \end{figure}
 
@@ -83,7 +176,7 @@ This process produced reasonable boundary collar vertex positions to initialise 
 \begin{figure}[hbtp]
     \centering
     \includegraphics[width=0.8\textwidth]{layout_init.png}
-    \caption{Initial layout for the flexa sheet. Cell bodies are shown in large purple points and collar boundary vertices are shown in small yellow points. Black edges connect cells to collar boundary vertices, and orange edges show cell-cell neighbor relations (though these orange edges are not physically present). The physical interactions are mediated through the black edges.}
+    \caption[Initial layout of the hexagonal lattice flexa sheet]{Initial layout for the flexa sheet. Cell bodies are shown in large purple points and collar boundary vertices are shown in small yellow points. Black edges connect cells to collar boundary vertices, and orange edges show cell-cell neighbor relations (though these orange edges are not physically present). The physical interactions are mediated through the black edges.}
     \label{fig:layout_init}
 \end{figure}
 
@@ -94,14 +187,11 @@ In developing the simplified, discrete model for \textit{C. flexa} as a spatial 
 Consequently, as detailed in the continuous model description of \cref{ch:2}, I build an energy function $\e$ that penalises deviations for angles $\phi$ and $\psi$, which describe angles between ($\phi$) collar microvilli and cell normal vectors $\bh{n}_\alpha$ and ($\psi$) plane normals $\bh{n}_{\rho\alpha\sigma}, \bh{n}_{\rho\beta\sigma}$.
 
 \subsection{Cell-collar angle energy}
-\subsubsection{Cell normal definition}
 For a physical \textit{C. flexa} cell $\alpha$ with fixed position $\bm{r}_\alpha$ and fixed collar positions $\{\bm{r}_\rho\}_{\rho\in\alpha}$, we realise that the cell still has freedom in its rotation which we expect will contribute substantially to its energy. 
 In other words, there should be an optimal rotation for the cell to minimise its mechanical energy. 
 Since we treat \textit{C. flexa} cells as rotationally symmetric above the apicobasal axis, it suffices in our description to assign to each cell $\alpha$ in the graph $\mathfrak{G}$ a unit vector $\bh{n}_\alpha$ 
 
 For simplicity, each vector $\bh{n}_\alpha$ is initially defined as the unit vector in the direction of $\sum_{\rho\in\alpha} \vec{\alpha\rho}$, where $\vec{\alpha\rho} = \bm{r}_\rho - \bm{r}_\alpha$.
-
-\subsubsection{Energy $\e_\phi$}
 
 Defining an energy term on the angle $\phi$ between a cell $\alpha$'s collars and the apicobasal axis $\bh{n}_\alpha$ is established on descriptions of \textit{Choanoeca} in the literature. 
 \citet{brunet2019} describes the change in this angle as the result of exposure to light in \textit{C. flexa}.
@@ -115,10 +205,8 @@ Consequently, we consider an energy term $\e_\phi(\{\bm{r}_\alpha, \bh{n}_\alpha
 
 The sum indicates summation over all cell-collar pairs $(\alpha, \rho)$ in the sheet $\mathfrak{G}$. The angle $\phi_{(\alpha, \rho)}$ is calculated entirely based on the cell normal vector $\bh{n}_\alpha$ and unit vector $\hat{\alpha\rho}$ pointing in the direction of $\bh{r}_\rho - \bh{r}_\alpha$:
 
-\mynote{make this equation numbered and number other substantial equations}
-
 \begin{align*}
-	\phi_{(\alpha, \rho)} &= \arccos \left(\bh{n}_\alpha \cdot \hat{\alpha\rho} \right) = \arccos \left(\bh{n}_\alpha \cdot \frac{\hat{\alpha\rho}}{\left| \hat{\alpha\rho}\right|} \right).
+	\phi_{(\alpha, \rho)} &= \arccos \left(\bh{n}_\alpha \cdot \hat{\alpha\rho} \right) = \arccos \left(\bh{n}_\alpha \cdot \frac{\hat{\alpha\rho}}{\left| \hat{\alpha\rho}\right|} \right). \label{eq:phi}
 \end{align*}
 
 \subsubsection{Optimal cell normal vectors}
@@ -165,7 +253,7 @@ The plane approximation approach is easiest achieved using ordinary least square
 Briefly, we approximate $\hat{r}_{\rho 3} = (r_{\rho 1}, r_{\rho 2}) \cdot (\beta_1, \beta_2) + \beta_0$ and minimise the sum of squared residuals $\sum_{\rho\in\alpha} (\hat{r}_{\rho 3} - r_{\rho 3})^2$ with respect to $\beta_0, \beta_1, \beta_2$. 
 The normal vector of the plane approximation is then $(\beta_1, \beta_2, -1)$ up to normalisation and multiplication by $-1$.\footnote{The notation here is chosen to be consistent with that typically used in ordinary least squares, hence the hatted values indicate an approximation rather than vector normalisation as I use otherwise.} 
 
-\subsection{Cell-cell junction angle $\psi$ energy} \label{subsec:e_psi}
+\subsection{Collar-collar interface angle energy} \label{subsec:e_psi}
 
 As in \cref{ch:2}, we aim to produce sheet curvature with the angle $\psi$ that two cells' collars make at their interface. As in \cref{subsubsec:bdary_verts}, we calculate the angle between planes defined by two cells $\alpha, \beta$ and their mutual flanking collar vertices $\rho, \sigma$ with
 
@@ -176,7 +264,8 @@ As in \cref{ch:2}, we aim to produce sheet curvature with the angle $\psi$ that 
 The normal vectors $\bh{n}_{\rho\alpha\sigma}$ for a plane given by points $\rho, \alpha, \sigma$ must have a systematically defined orientation, as they can point in either direction $\pm (\bm{r}_\rho - \bm{r}_\alpha) \times (\bm{r}_\sigma - \bm{r}_\alpha)$. 
 In the geometry used to define $\psi$ in \cref{eq:psi}, the collar-cell-collar normal vectors are assumed to be pointing in the direction of the cells' flagella. 
 With the simplifying assumption that the cell normal always points in the inside of the collar, we have that the collar-cell-collar normals must take orientation to align with their corresponding cell normals. 
-Consequently, we let $\bh{n}_{\rho\alpha\sigma}' = \vec{\alpha\rho} \times \vec{\alpha\sigma}$ and set $\bh{n}_{\rho\alpha\sigma} = \sgn (\bh{n}_{\rho\alpha\sigma}' \cdot \bh{n}_\alpha) \bh{n}_{\rho\alpha\sigma}'$.\footnote{Here $\sgn$ is the sign operator.}
+Consequently, we let $\bh{n}_{\rho\alpha\sigma}' = \vec{\alpha\rho} \times \vec{\alpha\sigma}$ and set $\bh{n}_{\rho\alpha\sigma} = \sgn (\bh{n}_{\rho\alpha\sigma}' \cdot \bh{n}_\alpha) \bh{n}_{\rho\alpha\sigma}'$.
+Here $\sgn: \mathbb{R} \to \mathbb{R}$ is the sign operator: $\sgn(x) = 1$ if $x \geq 0$ and $\sgn(x) = -1$ if $x < 0$.
 
 Defining $\bh{n}_{\rho\alpha\sigma}$ in this way makes it dependent on the cell normal vectors $\bh{n}_\alpha$. 
 However, when minimising the energy, I work to develop methods such that $\sgn (\bh{n}_{\rho\alpha\sigma} \cdot \bh{n}_\alpha)$ remains constant. 
@@ -199,29 +288,41 @@ To provide sufficient flexibility to sheets through collar microvilli, I introdu
 
 \noindent where $\ell_{0\alpha\rho}$ is an equilibrium length for edge $(\alpha, \rho)$. The sum indicates summation over all cell, collar pairs $(\alpha, \rho)$ in the sheet $\mathfrak{G}$.
 
-All cells are assumed to take identical properties, so all values $\ell_{0\alpha\rho}$ are set to a constant $\ell_0$ unless indicated otherwise. When done so, we find that $\ell_0$ is the only length defined in the problem.
+All cells are assumed to take identical properties, so all values $\ell_{0\alpha\rho}$ are set to a constant $\ell_0$ unless indicated otherwise. 
+When done so, we find that $\phi_0, \psi_0$, and $\ell_0$ allow us to calculate a natural length scale for the problem, $1/H_0$ (\cref{eq:h0}).
 
-When interested in sheets with constrained collar length, we may either take a numerical approach or exploit the above energy term by setting $k_{\text{sp}}$ to a large value. The former is discussed in \cref{subsec:numerical}.
-
+When interested in sheets with constrained collar length, we may either take a numerical approach or exploit the above energy term by setting $k_{\text{sp}}$ to a large value. 
+The former is discussed in \cref{subsec:numerical}.
 
 \section{Minimising sheet energy}
 
-\mynote{resume from here}
+The sheet energy $\e(\{\bm{r}_\gamma \}_{\gamma \in \mathfrak{G}}$ (\cref{eq:e}) is parameterised over the cell and collar boundary vertex coordinates given a function $\bh{n}_\alpha(\bm{r}_\alpha, \{\bm{r}_\rho \}_{\rho\in\alpha})$ that approximates the cell normal for all cells $\alpha$.
+When sheet topology is left fixed, the summations in \cref{eq:e_phi,eq:e_psi,eq:e_sp} remain unchanged.
 
-We now have an energy $\e\{ \bm{r}_v \}_{v \in \mathfrak{G}} = \e_\phi + \e_\psi$ which is parameterised over the cell and collar boundary vertex positions. Notably, we treat the topology of the network as fixed, so the indices of the summations for $\e_\phi$ and $\e_\psi$ are unchanged even as we minimise energy.
+I began by using a numerical optimisation routine to minimise $\e$ with respect to the cell coordinates for sheets generated as in \cref{subsec:init}. 
+Sheets with a regular hexagonal lattice permit sheet bending for sufficiently few cells at the sheet boundary.
+For sheets which are too large, buckling at the sheet boundary emerges due to the inability for collars to compress enough to accommodate the preferred curvature throughout the rest of the sheet.
 
-\subsubsection{Flat sheet as a solution} \label{subsubsec:flat}
+\subsection{Numerical optimisation}
 
-Notice that we have a pair $(\phi_0, \psi_0)$ that gives $\e = \e_\phi + \e_\psi = 0$. Since the $\phi$ and $\psi$ energies are nonnegative, the flat sheet is a stable minimum. 
+I minimised energy using the sequential quadratic programming algorithm implemented in the Python module \texttt{scipy} \citep{kraft1994}.
+All code written and used in this chapter is available online at \url{https://github.com/adkonk/flexa}.
 
 \subsubsection{Constant collar length constraint}
 
-For now, we are numerically constraining the cell-collar lengths at $\ell$, their initial lengths (which are constant for all cells). If we want to use the generalisability of our model to use an random initial cell distribution and generate the irregular boundaries with Voronoi tesselation, we will have to relax this condition and add a collar length spring energy to $\e$. The constant collar length constraint only applies to sheets generated by regular lattices when laid flat on a plane.
+I began with sheets at fixed collar length to study flexibility only at the joints with angles $\phi$ and $\psi$.
+For sheets beginning with a regular hexagonal lattice, we are able to fix all collar lengths to $\ell_0$, the common collar length at the initial condition. 
+The use of a numerical optimisation algorithm makes it straightforward to introduce constraints. 
+Minimising $\e = \e_\phi + \e_\psi + \e_{\text{sp}}$ (\cref{eq:e}) is equivalent to minimising $\e_\phi + \e_\psi$ alone in this context since $\e_{\text{sp}}$ is fixed.
 
+\subsubsection{Flat sheet as a solution} \label{subsubsec:flat}
 
-The constraint is defined by a vector function $f((c, b)) = |\bm{r}_c - \bm{r}_b| - \ell = 0$ for all cell-collar edges $(c, b)$. If $n_{\text{collars}}$ is the number of cell-collar edges in $\{\text{cell-collar edges }(c,b) \}$, then $f$ defines a $n_{\text{collars}}$-vector function. 
+A flat sheet generated with a hexagonal lattice has a regular structure that makes $\phi_{\alpha\rho} = \phi_0$, $\psi_{(\alpha,\beta:\rho\sigma}) = \psi_0$, $|\bm{r}_\alpha - \bm{r}_\rho| = \ell_0$ for all cell-collar pairs $(\alpha,\rho)$ and collar-collar interfaces $(\alpha,\beta:\rho,\sigma)$. 
+Consequently, all terms in $\e$ (\cref{eq:e}) are zero.
+Since $\e_\phi$ and $\e_\psi$ are nonnegative, the flat sheet is a stable solution for appropriate $\phi_0, \psi_0$. 
 
-My optimisation routine requires that we calculate a Jacobian matrix for the vector constraint function. This gets ugly if we use $f$ as written above, but it is fortunately equivalent to set the constraint $f'((c, b)) = |\bm{r}_c - \bm{r}_b|^2 - \ell^2 = 0$. It is an interesting problem to take the gradient of $\bm{f'}$ with respect to all of the coordinates, but I won't include it here. It's implemented in my code.
+Moreover, given \cref{eq:h0} describing sheet curvature in terms of $\phi_0, \psi_0$ and the geometry of collar interactions (\cref{fig:hpsi}), we expect that any pair $(\phi_0, \psi_0)$ where $\phi_0 = \psi_0$ will give a zero energy, flat sheet.
+A landscape of minimum sheet energies over several pairs $(\phi_0, \psi_0)$ is expected to a minimum energy valley along the diagonal.
 
 \subsubsection{Solving sheet shape}
 
@@ -260,7 +361,8 @@ The linearity of the gradient permits us to take the gradient term-by-term in \c
 As discussed in \ref{subsec:e_psi}, an angle $\psi_{(\alpha, \beta: \rho, \sigma)}$ for a cell-cell interface depends in a piecewise constant way on the cells' normal vectors. While the angles are consequentially only piecewise differentiable, gradient descent makes reasonable the assumption that there will not be any discontinuities in $\e_\psi$ for sufficiently small steps in the direction of the negative gradient. The below expression for $\partial \e_\psi / \partial \bm{r}_\gamma$ assumes that the sign of $\bh{n}_\alpha \cdot (\vec{\alpha\rho}\times \vec{\alpha\sigma})$ remains constant.
 
 \begin{align}
-	psi eq \label{eq:grad_psi}
+	\frac{\partial \e_\psi}{\partial \bm{r}_\gamma} &= \sum_{(\alpha,\beta: \rho,\sigma)} \frac{\left(\psi_{(\alpha,\beta:\rho,\sigma)} - \psi_0 \right)}{2\sqrt{1 - (\bh{n}_{\rho\alpha\sigma}\cdot \bh{n}_{\rho\beta\sigma})^2}} \left(\bh{n}_{\rho\alpha\sigma} \cdot \frac{\partial \bh{n}_{\rho\beta\sigma}}{\partial \bm{r}_\gamma} + \bh{n}_{\rho\beta\sigma} \cdot \frac{\partial \bh{n}_{\rho\alpha\sigma}}{\partial \bm{r}_\gamma} \right) \nonumber \\
+	\bh{n}_{\rho\alpha\sigma} \cdot \frac{\partial \bh{n}_{\rho\beta\sigma}}{\partial \bm{r}_\gamma} &= \frac{\sgn \left(\vec{\beta\rho} \times \vec{\beta\sigma} \cdot \bh{n}_\beta \right)}{|\vec{\beta\rho} \times \vec{\beta\sigma}|} \left[ \left(\frac{\bh{n}_{\rho\alpha\sigma} \cdot \vec{\beta\rho}\times\vec{\beta\sigma}}{|\vec{\beta\rho}\times\vec{\beta\sigma}|^2} \vec{\beta\rho}\times\vec{\beta\sigma} - \bh{n}_{\rho\alpha\sigma} \right) \times \left( (\delta_{\gamma\rho} - \delta_{\gamma\beta}) \vec{\beta\sigma} - (\delta_{\gamma\sigma} - \delta_{\gamma\beta}) \vec{\beta\rho} \right) \right] \label{eq:grad_psi}
 \end{align}
 
 The gradient $\partial \e_{\text{sp}} / \partial \bm{r}_\gamma$ is given by the linear spring force 
@@ -408,83 +510,6 @@ There is no evidence to suggest changing collar properties, so we are led to pre
     \frac{\partial \psi_{(\alpha, \beta: \sigma, \rho)}}{\partial r_{\gamma i}} &= \frac{-1}{\sqrt{1 - (\hat{\bm{n}}_{\rho\alpha\sigma} \cdot \hat{\bm{n}}_{\rho\beta\sigma}})^2} \left(\frac{\partial \hat{\bm{n}}_{\rho\alpha\sigma j}}{\partial r_{\gamma i}} \hat{\bm{n}}_{\rho\beta\sigma j} + \frac{\partial \hat{\bm{n}}_{\rho\beta\sigma j}}{\partial r_{\gamma i}} \hat{\bm{n}}_{\rho\alpha\sigma j} \right) \\
     \frac{\partial \hat{\bm{n}}_{\rho\alpha\sigma j}}{\partial r_{\gamma i}} &= \text{too big see notes}
 \end{align*}
-\section{Everything before written}
-\section{Discrete surface model}
-\subsection{How to define the surface}
-
-We need to determine what parts of our physical problem we will keep track of, and how we will use them to define an energy. There are two natural, physical planar graphs to look at. We could either form the graph with cell bodies forming vertices and edges defined by cells whose collars make contact with each other. Alternatively, vertices could be represented by places where two cells' collars lose contact with each other, and edges could be along the line where those collars contact. 
-
-Since these graphs are planar (albeit not necessarily lying along a physical plane), we have a well-defined notion of a graph dual, where each face in one graph corresponds to a vertex in the other. What we find is that the two graphs described above are dual to each other (Figure \ref{subfig:duals1}). One graph specifies the topology of the other, but we are considering these as spatial graphs to use their geometries so our problem is not so simple. Knowing the positions of all vertices and knowing the edges of one graph does not give complete information about the other.
-
-Since each cell is identical, we might imagine that the distances between two cells and their mutual boundary is equal. In a loose sense, then, their interactions form a Voronoi tesselation on the surface of collar interactions (with respect to the metric on that surface). We can then take the dual to know that the graph of cell bodies is triangulated, as the dual of a Voronoi tesselation is a Delaunay triangulation (Figure \ref{subfig:duals2}).
-
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.52\textwidth}
-        \includegraphics[width=\textwidth]{duals1.jpg}
-        \caption{}
-        \label{subfig:duals1}
-    \end{subfigure}
-    ~
-    \begin{subfigure}[b]{0.46\textwidth}
-        \includegraphics[width=\textwidth]{duals2.jpg}
-        \caption{}
-        \label{subfig:duals2}
-    \end{subfigure}
-    \caption{Two views of the physical dual graphs used in describing \textit{C. flexa}.}
-    \label{fig:duals}
-\end{figure}
-
-\subsection{Surface formed by collar boundaries}
-\subsubsection{Stretching}
-
-The physical interactions happen at the collar boundaries, so it makes sense to define energy based on the graph that quantifies them. If two cells have a collar boundary described by $\bm{r_a} t + (1-t)\bm{r_b}$ with $0 \leq t \leq 1$ and the energy is defined by continuously many springs from the boundary to a projected cell point $\bm{r_\Delta}$, then the energy $\e_{ab}$ of that boundary is 
-
-\begin{align}
-    \e_{ab} = \int_0^1 \left[(\bm{r_a}t + (1-t)\bm{r_b}) - \bm{r_\Delta} \right]^2 dt &= \frac{1}{3} (\bm{r_a} + \bm{r_b})^2 - \frac{1}{3} \bm{r_a}\cdot\bm{r_b} - \bm{r_\Delta} \cdot (\bm{r_a} + \bm{r_b}) + \bm{r_\Delta}^2. \label{eq:eab}
-\end{align}
-
-The energy corresponding to a cell consists of the line energies of all the collar interfaces. We find the position $\bm{r_\Delta}$ by setting the gradient of equation \ref{eq:eab} with respect to $\bm{r_\Delta}$ to zero for all lines $ab$. If $b$ indexes the vertices that cell $\Delta$ has, then 
-
-\begin{align*}
-    0 = \frac{d\e}{d\bm{r_\Delta}} &= -\sum_{b\in\Delta} \bm{r_b} + 2n\bm{r_\Delta} \\
-    \bm{r_\Delta} &= \frac{1}{n} \sum_{b\in\Delta} \bm{r_b}.
-\end{align*}
-
-The force on vertex $a$ is then given by the gradient of the whole sheet energy $\e_{\text{sheet}}$, which is the sum of the energies $\e_\Delta$ corresponding to each cell $\Delta$. 
-
-\begin{align*}
-    \frac{d \e_{\text{sheet}}}{d\bm{r_a}} &= \frac{d}{d\bm{r_a}} \sum_\Delta \e_\Delta = \sum_{\Delta:a \in \Delta} \frac{d\e_\Delta}{d\bm{r_a}} = \sum_{\Delta:a\in\Delta} \frac{d}{d\bm{r_a}} \sum_{b \in \Delta} (\bm{r_b} - \bm{r_\Delta})^2. \\
-    \intertext{Since $\bm{r_\Delta}$ depends on $\bm{r_a}$ itself, we write} \\
-    \bm{f_{\text{on }a}} &= -\sum_{\Delta:a\in\Delta} \frac{d}{d\bm{r_a}} \sum_{b \in \Delta} \left(\bm{r_b} - \frac{1}{n} \sum_{c\in\Delta} \bm{r_c} \right)^2 \\
-    &= \sum_{\Delta:a\in\Delta} \sum_{b \in \Delta} \left(2\bm{r_a}\delta_{ab} - \frac{2}{n} \sum_{c\in\Delta}\left(\bm{r_c}\delta_{ab} + \bm{r_b}\delta_{ac}\right) + \frac{1}{n^2} \sum_{c\in\Delta}\sum_{d\in\Delta} \left(\delta_{ac}\bm{r_d} + \delta_{ad}\bm{r_c} \right) \right) \\
-    &= -2\left(\bm{r_a} - \bm{r_\Delta} \right)
-\end{align*}
-
-This process was overkill, since we could have reasonably assumed that $\bm{r_\Delta}$ would be at the vertices' center of mass and that we'd effectively get springs from $\bm{r_\Delta}$ to each vertex. This is thanks to linearity of the collar springs. However, assuming that the collars have a positive equilibrium length $r_0$ makes it necessary to go through the above procedure.
-
-If instead the line energy is 
-
-\begin{align*}
-    \e_{ab} &= \int_0^1 \left(\left|\bm{r_a}t + (1-t)\bm{r_b} - \bm{r_\Delta}\right| - r_0 \right)^2 dt, \\
-    \intertext{then the cell position $\bm{r_\Delta}$ is the solution to} \\
-    0 &= -2 \sum_{b\in\Delta} \bm{r_b} + 6 \bm{r_\Delta} - 2r_0 \frac{d}{d\bm{r_\Delta}} \sum_{(b,c) \text{ edge in }\Delta} \int_0^1 \left| \bm{r_b}t - (1-t)\bm{r_c} - \bm{r_\Delta} \right| dt \\
-    0 &= -2 \sum_{b\in\Delta} \bm{r_b} + 6 \bm{r_\Delta} - 2r_0 \sum_{(b,c)} \int_0^1 \frac{\bm{r_\Delta} - \bm{r_c} - t(\bm{r_b} - \bm{r_c})}{\left|\bm{r_b}t - (1-t)\bm{r_c} - \bm{r_\Delta} \right|} dt.
-\end{align*}
-
-We can actually evaluate the integral above, but I found that it gives a transcendental equation for $\bm{r_\Delta}$ and decided it wasn't pursuing further on paper. Nonzero equilibrium length springs is better pursued numerically. Alternatively, we simply define springs from $\bm{r_\Delta}$ to each dual graph vertex rather than making the collars consist of continuous springs.
-
-\subsubsection{Bending}
-
-One way to define a bending energy is to give each cell a vector that corresponds to the midline pointing out from the center of the cell, which I have implicitly drawn in the figures of individuals flexas. From there, we could reasonably define a bending energy from the interactions between two interacting flexas by the angle between their corresponding ``normal'' vectors weighted by the length of their interface. 
-
-Defining an individual vector is made complicated by the fact that the vertices along the cycles corresponding to each flexa are not necessarily coplanar, provided that a given cell is interacting with more than three other cells. One option, although I have not developed it, is to find the plane whose summed mean squared distances to each vertex for a cell is minimised. It would possibly be more accurate to again treat the edges as lines and minimise the integrated distance from the normal plane to the edges. Either way, the energy dictated by the angle between adjacent normal vectors will need to be summed over all pairs of neighboring cells, namely all edges in the graph where edges correspond to cell neighbors (not collar interfaces).
-
-\subsection{Surface formed by cell bodies}
-
-The graph of cell bodies and neighbor edges makes it easy to work with springs, but it is less clear how to define a bending energy. The math for springs is identical to previously, so let's just think about how to define bending energy.
-
-\mynote{needs more work}
 
 % \subsubsection{Bending}
 
