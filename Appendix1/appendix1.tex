@@ -1,4 +1,19 @@
 %!TEX root = ../thesis.tex
 % ******************************* Thesis Appendix A ****************************
-\chapter{my first appendix} 
+\chapter{my first appendix} \label{apx:cts}
+
+\Cref{ch:2} expresses an integral to evaluate the energy density at a given point in terms of constants $a, b, c, d, e$. 
+\begin{align*}
+    \int_{-\pi}^\pi (\phi - \phi_0)^2 d\theta &= \int_{-\pi}^\pi \frac{\left(a\cos^2\theta + b\sin^2\theta + 2c\sin\theta\cos\theta + d \right)^2}{\left(a\cos^2\theta + b\sin^2\theta + 2c\sin\theta\cos\theta + e \right)^2} d\theta \\
+    &= \left\{-\sin2\theta \left[a^2 (-4bc\theta -4ce\theta + d^2 - 2de +e^2) \right. \right.
+    &\qquad \qquad \qquad + a(4b^2c\theta -2b(d-e)^2+4c\theta(c^2 - e^2)) \\
+    &\qquad \qquad \qquad \left. + b^2(4ce\theta + d^2 -2de + e^2) + 4bc\theta(e^2 - c^2) + 4c^2 (d-e)^2 \right] \\
+    &\qquad + 2(a + b +2e) \left[c^2 \theta (b - a) + \theta (a - b) (a + e) (b + e) - c (d - e)^2 \right] \\
+    &\qquad \left.+ 2 \theta (a - b)^2 \cos(2 \theta) (a (b + e) + e (b + e) - c^2) \right\} \\
+    &\qquad \big/ 2\left[(a - b) (a (b + e) + e (b + e) - c^2) \right. \\
+    &\qquad \qquad \left. ((a - b) \cos(2 \theta) + a + b + 2 c \sin(2 \theta) + 2 e)\right] \\
+    &\quad + \frac{(e - d) (a (4 b + d + 3 e) + b d + 3 b e - 4 c^2 + 2 d e + 2 e^2) }{2(a (b + e) + e (b + e) - c^2)^{3/2}} \\
+    &\qquad \tan^{-1}\left(\frac{-(b + e) \tan\theta - c}{\sqrt{a (b + e) + e (b + e) - c^2}}\right)
+\end{align*}
+\noindent evaluated at $\theta=-\pi, \pi$.
 

@@ -11,20 +11,120 @@
     \graphicspath{{Chapter4/Figs/Vector/}{Chapter4/Figs/}}
 \fi
 
+The modeling done here offers several perspectives to study the mechanics of sheet shape and inversion in \textit{Choanoeca}. 
+We see that the discrete, lattice structure of the sheet makes the sheet's intrinsic curvature possible, and the sheet's curvature emerges in response to the lattice structure.
+The presence of topological defects gives a tight ring of cells at the sheet boundary, which presents an energetic challenge during inversion.
+The models that I built make it clear that stretching plays a major role in the dynamics of sheet inversion, and they distill the essential mechanics of \textit{C. flexa} colony shape to only two parameters.
+This discrete model of sheet inversion supports the hypothesis that \textit{C. flexa} inverts using an instantaneous active change of collar microvillus preferred shape.
 
 %********************************** %First Section  **************************************
-\section{section} 
+\section{\textit{C. flexa} geometry} 
 
-Think about why \textit{C. flexa} has the behavior that it does. Given how other choanoflagellates like \textit{S. rosetta} get their morphology by division \citep{fairclough2010,larson2020}, it could be that \textit{C. flexa} forms by division and has evolved its contractile ring to take advantage of that. This would make sense from the perspective that choanoflagellate cells aligned and lined up next to each other drive the strongest flows (though still not stronger than they could individually) \citet{kirkegaard2016}. This paper also found that being farther from a wall increases flux. This is interesting considering that the feeding state of \textit{C. flexa} was observed to be so ineffective at swimming that it sank and remained in place. However this was on a slide and in the absense of external flows \citet{brunet2019}.
+% why have a curved sheet?
+The small curvature in \textit{C. flexa} colonies permit them to drive strong flows by aligning their apicobasal axes close to parallel while simultaneously producing two stable shape equilibria. 
+This contrasts with the rosette colonies of \textit{S. rosetta}, which are known to have morphology inefficient for driving feeding flows \citep{kirkegaard2016}.
 
-When thinking about \textit{C. flexa} in the context of multicellularity, we should not overlook the simplicity by which it achieves large-scale geometric changes. While we can develop increasingly complex models by introducing collar filament bending, tension and stress at the collar filaments' bases, or the effects of the contractile ring, my work demonstrates that a coarse description of individual cells is sufficient to explain the behavior that we observe in colonies. Compare this with \textit{Volvox}, which uses connections and communication between cells to control its inversion. One might imagine that the complexity of a molecular pathway for a single cell to exhibit phototaxis or regulate feeding/swimming efficiency could easily exceed the ring contraction as currently understood in \textit{C. flexa} \citep{brunet2019}. \mynote{cite Volvox inversion papers, cite papers on phototaxis or swimming signalling pathways}
+% What is special about Choanoeca in particular?
+Connections via an extracellular matrix are known to produce choanoflagellate colonies as disks, cups, or branched trees with flagella splayed out depending on the material properties \citep{larson2020}.
+In each of these, that the ECM connects cell bodies prevents cells from imparting a force on each other through direct contact.
+Nevertheless, a substantial amount remains to be learned about the collar-collar connections that facilitate \textit{Choanoeca} colony cohesion.
+For collars to splay as they do in individual cells, they must not adhere to each other; a small azimuthal torque would otherwise easily cause several microvilli to join, interfering with flagellar beating.
+
+% why does choanoeca align as it does
+Think about why \textit{C. flexa} has the behavior that it does. 
+Given how other choanoflagellates like \textit{S. rosetta} get their morphology by division \citep{fairclough2010,larson2020}, it could be that \textit{C. flexa} forms by division and has evolved its contractile ring to take advantage of that. 
+This would make sense from the perspective that choanoflagellate cells aligned and lined up next to each other drive the strongest flows (though still not stronger than they could individually) \citet{kirkegaard2016}. 
+This paper also found that being farther from a wall increases flux. 
+This is interesting considering that the feeding state of \textit{C. flexa} was observed to be so ineffective at swimming that it sank and remained in place. 
+However this was on a slide and in the absense of external flows \citet{brunet2019}.
+
+% what does this work achieve
+When thinking about \textit{C. flexa} in the context of multicellularity, we should not overlook the simplicity by which it achieves large-scale geometric changes. 
+While we can develop increasingly complex models by introducing collar filament bending, tension and stress at the collar filaments' bases, or the effects of the contractile ring, my work demonstrates that a coarse description of individual cells is sufficient to explain the behavior that we observe in colonies. 
+Compare this with \textit{Volvox}, which uses connections and communication between cells to control its inversion. 
+One might imagine that the complexity of a molecular pathway for a single cell to exhibit phototaxis or regulate feeding/swimming efficiency could easily exceed the ring contraction as currently understood in \textit{C. flexa} \citep{brunet2019}. 
+\mynote{cite Volvox inversion papers, cite papers on phototaxis or swimming signalling pathways}
 
 \section{Discrete cell sheet topology}
 
+% what did I find about lattice topology?
 The discrete model of \textit{C. flexa} demonstrates that deviations from a hexagonally packed sheet at as few as one cell are sufficient to induce substantial bending.
-The geometric effects of such \textit{topological defects} are established in the context of crystal structures.
+This result is consistent with that described in \citet{seung1988}, albeit through a different mechanism where stretching and bending are closely related.
 
-As discussed in the comparison between the continuous and discrete model, a topological defect at a cell can be likened to a different preferred Gaussian curvature in the continuous perspective. 
-Indeed, \citet{seung1988} wrote a comparable model with defected lattices that deformed to an energy function given by stretching energies and bending energies.
-There, the authors also found that 
+% How reasonable was this model?
+Physical reasoning suggests that the interfaces would be equidistant from the two cells, since each cell is assumed to be identical and the forces must balance at equilibrium. 
+Imaging supports this idea (\cref{fig:cflexa}), though any imaging requiring fixation may affect the collar stiffness or preferred curvature.
+That the collar microvilli at the boundaries form an arc around the apicobasal axis suggests that they freely take angle $\phi_0$ at the base and do not contribute meaningfully to the energy (\cref{subfig:contact2}). 
+This validates the treatment of boundary collar vertices used in the discrete model.
 
+% what do we actually observe and how does it line up with the model used here?
+\citet{leadbeater1983} describes that in \textit{C. perplexa} colonies, each cell is typically adjacent to six others. 
+Given the strong \textit{Choanoeca} sheet curvatures and known association between Gaussian curvature and topological defects in lattice structure (\cref{subsec:cts}) \citep{sachdev1984,seung1988}, it is reasonable to expect that many cells have more or fewer than six neighbors.
+Even in a small section of the colony \cref{subfig:contact1}, several defects may be readily identified.
+
+\section{Extensions}
+
+% studying what prevents inversion
+Both the continuous and discrete models developed make clear that azimuthal stretching in curved sheets is critical in \textit{C. flexa} inversion, especially by introducing an energetic barrier.
+With even relatively large-area sheets observed inverting readily in culture (collar diameter relative to sheet major-axis diameter as low as $\sim20\%$), collar-collar interfaces must either be able to substantially stretch or connections must break.
+
+% describing colony growth and resulting lattice topology
+A model for \textit{Choanoeca} colony growth may help understand the origins and distributions of topological defects in the lattice structure. 
+Given the possible division strategy of these cells (\cref{fig:division}) and the idea that other choanoflagellate colony cells divide without synchronisation \citep{larson2020}, we might build a model by spontaneously splitting cells into pairs of adjacent daughter cells.
+The goal of a colony growth model is two-fold.
+First, a model for colony growth may explain the origin of topological defects in \textit{C. flexa} colonies.
+We would obtain graph topological statistics that are comparable to experiments to determine if this method of colony growth is accurate or if another method produces the observed topological defects.
+Second, such a model may cause the cup-like sheets observed, rather than sheets with other complex geometries.
+Moreover, the distribution of defects over the sheet may produce non-icosahedral or -spherical equilibrium geometries, as large \textit{Choanoeca} sheets tend to be ellipsoidal rather than spherical \citep{leadbeater1983,brunet2019}.
+It remains to be resolved how colonies form without buckling at sheet boundary: uniform, isotropic cell division would give proportionally scaling area and boundary length, but preferred sheet curvature would cause buckling with too large of a boundary.
+
+% alternative colony growth theorising
+An alternative theory for \textit{Choanoeca} colony growth is via aggregation \citep{grosberg2007}, though choanoflagellate colonies have only been observed to form by clonal division \citep{fairclough2010,alegado2012,woznica2016}.
+Sequential cell adhesion at the boundary would resolve buckling at the edges due to uniform, isotropic growth.
+Moreover, aggregation resolves the issue that there are a discrete number of microvilli at cell-cell interfaces.
+Hence, the interfaces cannot be divided between daughter cells indefinitely.
+Recent evidence from \textit{S. rosetta} points that several processes involved in maintaining the colony ECM are involved in preventing spurious aggregation \citep{wetzel2018}, indicating that aggregation is specifically disfavored in other choanoflagellates.
+Colony formation by aggregation is unprecendented in our understanding of choanoflagellates, and of course comes with the organisational challenge of producing a single consistent orientation over the entire sheet.
+
+% changing lattice topology to induce inversion
+While the structures used in this work had discrete symmetry around an axis, \textit{C. flexa} sheets observed experimentally may have substantial irregularities both in the bulk and at the boundary. 
+Several images in \citet{brunet2019} show uneven sheet boundaries, resembling crenellations of a castle wall (\cref{fig:edges}).
+As suggested in \cref{subsec:dynamics}, a sheet with excessively restrictive lattice topology may be able to achieve inversion by a temporary change in its cell-cell connections.
+An extreme example of inversion through topological change is performed by \textit{Volvox} embryos, which invert by creating a hole in their sphere and pass the entire sheet through the hole \citep{hohn2015}.
+Type-A \textit{Volvox} inversion forms this hole by making four lips and peels them back to begin inversion at the boundary, similar to how inversion proceeds in \cref{fig:dynamics} \citep{viamontes1977}.
+Even besides boundary ruggedness, asymmetry in the sheet may promote the initiation of inversion at one region of the boundary while it is not yet possible elsewhere.
+
+% how do colonies break apart?
+\citet{leadbeater1983} described that large \textit{C. perplexa} sheets may take irregular shapes such as ribbons. 
+Either as a consequence of tearing during inversion or itself causing tearing during inversion, such unusual geometries may be involved in colony division.
+If colonies tear, we would not expect them to fully separate since a single connection at the boundary of either colony fragment would not hinder inversion. 
+Consequently, it is possible that the weight of colony fragments themselves in the flagella-in state (with resulting incompatible drag tensors) or the strong collective flows driven by separate colony fragments in the flagella-out state are responsible for separating colony fragments.
+If entirely physically facilitated, colony division is likely to substantially involve both cell-cell connection lattice structure and flows.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\includegraphics[height=\textwidth,angle=90]{edges1.png}
+		\caption{}
+		\label{subfig:edges1}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{edges2.png}
+		\caption{}
+		\label{subfig:edges2}
+	\end{subfigure}
+	\caption[\textit{C. flexa} sheets with ragged boundaries]{\textit{C. flexa} sheets with ragged boundaries. From \citet{brunet2019}. Reprinted with permission from AAAS.}
+	\label{fig:edges}
+\end{figure}
+
+\section{Multicellularity and \textit{C. flexa}}
+
+\textit{C. flexa} contrasts with volvocine algae because it does not connect cells via cytoplasmic bridges, which is a substantial difference between the two models. 
+It is not completely clear that \textit{C. flexa} sheets form with a temporary incomplete cytokinesis stage as in the algae \citep{green1981,herron2015}.
+
+Ultimately, multicellularity in \textit{Chonoaeca} appears to be the result of a tradeoff between a decrease in the flow efficiency of individual choanoflagellate cells and the ability of the colony to invert. 
+Inversion is highly dependent on the sheet structure and its lattice, which may itself change to facilitate inversion and potentially colony divison. 
+A more complete experimental characterisation of \textit{Choanoeca} colonies would further inform the models developed here and clear up the connection between lattice topology, inversion, colony formation, and colony division.
+Nevertheless, the multicellular mechanics of \textit{C. flexa} are crucial to its inversion and the behavior that inversion make possible.

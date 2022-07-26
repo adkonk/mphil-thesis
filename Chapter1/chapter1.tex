@@ -11,9 +11,18 @@
     \graphicspath{{Chapter1/Figs/Vector/}{Chapter1/Figs/}}
 \fi
 
+What physical driving factors led to the proliferation of multicellular life?
+Across all eukaryotic lineages, phylogenetic evidence suggests that multicellularity evolved independently several times \citep{king2004}.
+Within just the volvocine algae, a common model family for studying the origins of multicellularity, it is believed that the transition to multicellularity and cooperation of distinct differentiated cells has repeatedly emerged independently \citep{herron2008}.
+Given the overwhelming success of multicellular life in the biosphere, we are led to hypothesize that common physical selective pressures promoted life to cooperate, differentiate, and delegate the responsibility of ensuring fitness for the sake of proliferation \citep{grosberg2007}.
+
+This question has led to flourishing recent interest in evolutionarily basal model eukaryotes, especially choanoflagellates, volvocine green algae, and sponges.
+Both the biological and physical properties of these groups make them especially favorable \citep{goldstein2015}: choanoflagellates have long been regarded as a close relative to the animal kingdom owing to their similarity to choanocytes in sponges \citep{james1871}, and the volvocine algae span a range of cell numbers per individual \citep{kirk2005}.
+These organisms and their colonies are also large enough that they operate at high P\'eclet number ($Pe \sim 10^2$), the ratio between advective and diffusive transport, meaning that advection must contribute substantially to deriving food \citep{solari2006}. 
+Consequently, these organisms must facilitate their food collection, unlike bacteria which rely on diffusion for nutrient transport \citep{berg1977}.
 
 %********************************** %First Section  **************************************
-\section{Background} %Section - 1.1 
+\section{Multicellularity} %Section - 1.1 
 
 % \textbf{Thesis statement: studying evolutionarily basal organisms lets us study the simple ways that nature exploits geometry in living systems without higher order functional complications.}
 
@@ -29,70 +38,81 @@
 \nomenclature[s-0]{$0$}{subscript index}                                                        % first letter S is for subscripts
 \end{comment}
 
-Discuss evolutionary origins of multicellularity and some basic examples like Volvox. What drives organisms to become multicellular? 
-We expect there was genuine evolutionary favorability to developing multicellularity. 
-In the volvocine algae, it is believed that the transition to multicellularity and cooperation of distinct differentiated cells has occured several times \citep{herron2008}. 
-Across all eukaryotic lineages, there is evidence that multicellularity evolved independently many times \citep{king2004}.
+\nomenclature[a-pe]{$Pe$}{P\'eclet number, the ratio between advective and diffusive transport in a fluid with specified flow velocity and length scale}
+\nomenclature[z-ECM]{ECM}{Extracellular matrix}
 
-Organisms like vovocine green algae and choanoflagellates are sought as models in the search for evolutionary origins of multicellularity for both their biological and physical features \citep{goldstein2015}. 
-Choanoflagellates have long been regarded as a close relative to the animal kingdom owing to their similarity to choanocytes in sponges \citep{james1871}, and we now understand them to be most closely related by genetics \citep{lang2002,sebe2017}.
-These organisms' colonies are also large enough that they operate at high P\'eclet number ($Pe \sim 10^2$), the ratio between advective and diffusive transport, meaning that advection must contribute substantially to deriving food \citep{solari2006}. 
-This of course contrasts with typical bacteria, where diffusion dominates nutrient transport \citep{berg1977}.
+\subsection{Origins of multicellularity}
+% ** Why attach?
 
-\subsection{Why attach?} % ** Why attach?
+Before discussing eukaryotic multicellularity, I would be remiss in omitting any discussion of prokaryotic multicellularity \citep{shapiro1988}. 
+Beyond the notorious biofilm formation, cyanobacteria (e.g. \textit{Anabaena}) form filaments and some sporulating bacteria (e.g. Myxobacteria, \textit{Steptomyces}) form fruiting bodies \citep{claessen2014}.
+These multicellular aggregates demonstrate complex population dynamics and emergent collective behavior from basic interactions \citep{lopez2010,welch2001,zhang2012}.
+Biofilms and filaments have phenotypically diverse and even differentiated regions that contribute to antibiotic resistance \citep{stewart2008} or enable photosynthesis \citep{flores2010}
+This differentiation can parallel germ-soma differentiation in eukaryotes by sacrificing individual division for colony persistence \citep{lewis2010,wilcox1973}.
+Moreover, the extracellular matrix (ECM) of biofilms allows bacteria to exploit a tradeoff between environmental protection and growth by slowing diffusion from the exterior \citep{mah2001,rittmann1980}.
+The rest of this work centres around eukaryotic multicellularity, but it is valuable to keep in mind that several multicellular organisms have bacterial parallels.
 
-\mynote{could probably say some stuff about bacteria and biofilms here}
+The benefit of multicellularity on individual cells is not immediate.
+\citet{michod2003} argues that a key transition in the development of multicellularity is the transition away from selecting for single cell fitness to multicellular fitness. 
+Indeed, while several pathways for multicellularity have been proposed, they share the idea that emergent group benefits through cooperation sufficiently outweigh individual sacrifice \citep{michod2001}.
 
-From a simplistic optimality perspective, we do not readily identify a motivation for attaching. 
-\citet{michelin2011} demonstrated that regardless of P\'eclet number, cells feed optimally when they maximise their swimming velocity. 
-Despite this solution, \citet{kirkegaard2016} modeled for cell arrangements such as the choanoflagellate colonies to be studied in this work (\cref{sec:choano}) that swimming is maximised for individual cells. 
-When collared choanoflagellates are near each other, cells with their flagella pointing in the same direction (\textit{i.e.} a straight chain) are best at swimming.
-Based on feeding efficiency via swimming alone, it does not appear that basic aquatic multicellular colonies, such as \textit{S. rosetta} or \textit{C. flexa} have much to gain from their propulsion cooperation.
+Multicellularity requires that resources are shared, and \textit{cheat cells} which exploit this cooperation arise.
+Several have argued that exploitation and internal conflict may have facilitated evolution and differentation that contributes to individuality of the whole organism \citep{michod2001,rainey2010,hammerschmidt2014,grosberg2007}.
 
-The organisms in the \textit{Volvox} genus are well studied for being a primitive example of multicellularity and a shining beacon of functional geometric changes. 
-These organisms attach their cells to one another using an extra-cellular matrix, as \textit{S. rosetta} does as well (discussed later). 
+% size
 
-One suggestion for cell-cell attachment in colonies is to avoid phagocytosis from predators by physically becoming too large. 
+A major competing argument for the origin of multicellularity centers around physical size. 
+\citet{bonner1998} argues that size enables the advantages conferred by multicellularity, and scale itself comprises a spectrum of niches available for exploitation.
+An immediate consequence of an increase in size is the ability to avoid predation via phagocytosis.
 \citet{stanley1973} argues that the emergence of heterotrophs, or organisms that derive energy by consuming others, led to rapid diversification and the rise of multicellularity through intense selective pressure. 
 \citet{boraas1998} demonstrated in a laboratory culture that stable multicellularity emerged in the green alga \textit{Chlorella vulgaris} when exposed to predators.
 Eight-cell colonies were observed to predominate, indicating that multicellularity emerged to balance colony survival as well as individual demands of each cell.
 
+\subsection{Benefits}
+
+% division of labour
+\paragraph*{Division of labour} The organisms in the \textit{Volvox} genus are well studied for being a primitive example of multicellularity and a shining beacon of functional geometric changes. 
+These organisms attach their cells to one another using an extra-cellular matrix, as \textit{S. rosetta} does as well (discussed later). 
+
+\mynote{complete the above}
+
+% germ-soma
+
 % * Attaching supports flows
+\paragraph*{Generating flows} With size increasing the P\'eclet number for an organism ($Pe = Lu/D$, where $L$ is the length scale, $u$ is flow velocity, and $D$ is diffusion coefficient), multicellular organisms benefit more from advective nutrient transport as they become larger. 
+The volvocine algae increase the proportion of advective flux as they increase in size by generating a thin boundary layer in solute concentration, in turn facilitating long-range nutrient transport \citep{short2006}.
 
-\subsubsection*{Attaching supports generating flows}
-Spherical colony geometries have long been documented \citep{lauterborn1898} for choanoflagellates. 
+The advantages of multicellularity for choanoflagellate flows are yet unclear. 
+\citet{kirkegaard2016} modeled that the best flows through a collar of microvilli are generated when cells swim independently, aligning with the idea that unicellular swimming is optimal feeding \citep{michelin2011}. 
+Rosette choanoflagellate colonies are even worse at generating flows through collars, as their flagella all point in different directions. 
 
-We understand, for example, in \textit{Volvox} colonies that driving flows supports nutrient transport by advection as well as phototaxis. 
-
-\mynote{Here is a good place to describe sponges!}
-
-% ** Why differentiate?
-\subsection{Why differentiate?}
-
-We are interested in multicellularity at an evolutionarilty basal level to understand the basic reasons that life evolved to form multicellular organisms. Sponges are as basal as multicellular animal life goes \mynote{Discuss why and reference a review about sponges evolutionary simplicity. \citet{carr2008} could be a good ref to give here regarding choanoflagellates}. 
-
-\mynote{discuss \citet{dayel2011} about differentiation in \textit{S. rosetta}}
-
-While we are interested in sponges since they are members of the animal kingdom, choanoflagellates are often considered to be evolutionarily and morphologically comparable. 
-
-
+For the colony geometries studied in this work, however, we may compare to sponge choanocyte chambers and the substantial flows they are capable of producing. 
+Sponges drive flow using choanocytes, which are morphologically and functionally similar to choanoflagellates despite being animal cells \citep{larsen1994,carr2008}.
+By organising into spherical chambers, sponges are able to efficiently generate flows and chain together pumps to drive macroscopic flow \citep{asadzadeh2019}.
+Deriving from the first animals, sponges bring the evolutionary conclusions from these models for basic multicellularity closer to increasingly complex animals \citep{nielsen2008}.
 
 %********************************** %Second Section  *************************************
 \section{Choanoflagellates} \label{sec:choano} %Section - 1.2 
 
-\mynote{Discuss \citet{carr2008} about molecular phylogeny of choanoflagellates}
-
-The connection between choanoflagellates and animals predates studies using molecular phylogeny. 
+Choanoflagellates are aquatic heterotrophs that feed in their motile stage by driving flows through a collar of microvilli using a single apical flagellum \citep{karpov1998}.
+Choanoflagellates are considered the genetically closest group to metazoans \citep{carr2008}, though the association between choanoflagellates and animals predates studies using molecular phylogeny.
 \citet{james1871} first compared choanoflagellate morphology with the choanocytes in sponge choanocyte chamber. 
 Morphological similarities between choanocytes and protists led to the belief that the two emerged from a common ancestor \citep{saedeleer1930,tuzet1963}.
 
-\citet{mah2014} offers the first comprehensive comparison between sponge choanocyte and choanoflagellate morphology. Sponge collars are fairly cylindrical while choanoflagellate collars are more cone-like. Choanoflagellates have glycocalyx, but seemingly around the cell body \citep{leadbeater2008}. Notably the collars in choanoflagellates are always microvillar and always present, while in sponges they emerge as a consequence of cell differentiation \mynote{cite this!}. 
+Sponge choanocytes and choanoflagellate morphology bear substantial resemblence to each other in that both collars and apical flagella.
+However, choanoflagellate cells always have collar filaments, while choanocytes develop them through differentiation \citep{mah2014}.
+Choanoflagellate glycocalyx tends to surround the cell body, while sponges use it to form a web with the collar microvilli \citep{leadbeater2008}.
 
-Choanoflagellates are increasingly studied as a model for understanding how multicellular animal life emerged. \citet{fairclough2010} shows that the transition from single cell to multicellular colony in \textit{Salpingoeca rosetta} occurs by cell division, with cells remaining attached to each other. 
+Choanoflagellates are increasingly studied as a model for understanding how multicellular animal life emerged. 
+Much of the recent work on choanoflagellates has been done with \textit{Salpingoeca rosetta}, a model for the development of multicellularity for its propensity to form multicellular rosettes bound by an extracellular matrix (ECM).
+Based on \textit{S. rosetta} studies, out understanding of choanoflagellate colony formation is that single cells initiate colonies by cell division, rather than aggregation \citep{fairclough2010}.
+Additionally, choanoflagellate colony morphology appears to be dictated by the ECM material properties, producing a variety of structures attached at cell bodies \citep{larson2020}.
 
-\textit{S. rosetta} has an extracellular matrix \citep{larson2020}. \citet{larson2020} finds that the extracellular matrix constrains cells to grow and divide to a given colony shape. This paper also finds that \textit{S. rosetta} does not have distinct cell lineages or a developmental plan.
-
-\citet{kirkegaard2016} finds that collared choanoflagellates drive the most flow through their collars by swimming fastest, which occurs in the unicellular state \citep{michelin2011}. This makes it unclear that forming rosette colonies is for the sake of improved feeding. The authors point to evidence that \textit{S. rosetta} is induced to form rosette colonies by bacterial cues to suggest that the reasons for the development of multicellularity may be more subtle than previously expected \citep{alegado2012}.
+The reasons for colony formation (i.e. multicellularity) in choanoflagellates are unclear. 
+\citet{kirkegaard2016} found that collared choanoflagellates drive the most flow through their collars by swimming fastest, which occurs when colonies are unicellular.
+Despite the complicated feeding geometry resulting from bacterial capture at the collar, this result is consistent with the result that optimal feeding aligns with optimal feeding for small swimmers \citep{michelin2011}.
+Hence, rosette formation in \textit{S. rosetta} or adhesion in any choanoflagellate is expected to benefit the feeding rates of individual cells. 
+Evolutionary causes of colony formation are obscured further by strong recent evidence that rosette formation in \textit{S. rosetta} is induced by chemical cues from bacteria \citep{alegado2012,woznica2016}.
 
 %********************************** % Third Section  *************************************
 \section{\textit{Choanoeca flexa}}  %Section - 1.3 
@@ -126,7 +146,7 @@ While we do not have observations on cell replication in the colonial phase, \te
 	\label{fig:division}
 \end{figure}
 
-While choanoflagellate colonies typically orient their flagella to point away from the colony centre, sheets of \textit{Choanoeca} in their rest state point flagella inward. \mynote{cite this! \citet{brunet2019} uses a leadbeater textbook}
+% While choanoflagellate colonies typically orient their flagella to point away from the colony centre, sheets of \textit{Choanoeca} in their rest state point flagella inward. \mynote{cite this! \citet{brunet2019} uses a leadbeater textbook}
 
 \subsection{Sheet inversion}
 
@@ -171,13 +191,20 @@ Increased motility in the dark-induced state and accumulation in regions with li
 		\caption{}
 		\label{subfig:table}
 	\end{subfigure}
-	\begin{subfigure}[b]{0.4\textwidth}
+	\begin{subfigure}[b]{0.48\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{voronoi.png}
+		\includegraphics[width=\textwidth]{contact1.png}
 		\caption{}
-		\label{subfig:voronoi}
+		\label{subfig:contact1}
 	\end{subfigure}
-	\caption[Overview of \textit{C. flexa} colonies of collared choanoflagellate cells]{Overview of \textit{C. flexa} colonies of collared choanoflagellate cells. (\ref{subfig:cflexa}) Images of the two conformations observed, flagella-in and flagella out. (\ref{subfig:table}) Summary of the two states of \textit{C. flexa} colonies. The transition from flagella-in to flagella-out is induced naturally by darkness, and the reverse transition is induced by the reintroduction of light \citep{brunet2019}. (\ref{subfig:voronoi}) Transmission electron micrograph of collar interactions between neighboring cells. f: flagella, m: microvilli. A similar figure is presented in \citet{leadbeater1983} for \textit{C. perplexa}. \cref{subfig:cflexa,subfig:voronoi} from \citet{brunet2019}. Reprinted with permission from AAAS.}
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{contact2.png}
+		\caption{}
+		\label{subfig:contact2}
+	\end{subfigure}
+	
+	\caption[Overview of \textit{C. flexa} colonies of collared choanoflagellate cells]{Overview of \textit{C. flexa} colonies of collared choanoflagellate cells. (\ref{subfig:cflexa}) Images of the two conformations observed, flagella-in and flagella out. (\ref{subfig:table}) Summary of the two states of \textit{C. flexa} colonies. The transition from flagella-in to flagella-out is induced naturally by darkness, and the reverse transition is induced by the reintroduction of light \citep{brunet2019}. (\ref{subfig:contact1}) Scanning electron micrograph in the tangential plane of a \textit{C. flexa} sheet. Arrows indicate collar-collar contacts. (\ref{subfig:contact2}) Transmission electron micrograph of collar interactions between neighboring cells in a \textit{C. perplexa} colony. f: flagella. From \citet{leadbeater1983} with permission. \cref{subfig:cflexa,subfig:contact1} from \citet{brunet2019}. Reprinted with permission from AAAS.}
 	\label{fig:cflexa}
 \end{figure} 
 
@@ -186,14 +213,13 @@ Sheet inversion is rapid and reversible, allowing colonies the flexibility to co
 \mynote{discuss how larger sheets are harder to invert}
 
 
-Coordinated geometric changes in multicellular organisms are frequent, though they are typically achieved with several differentiated cell types or molecular signalling cascades \citep{todo}. 
+% Coordinated geometric changes in multicellular organisms are frequent, though they are typically achieved with several differentiated cell types or molecular signalling cascades \citep{todo}. 
 
-\section{Motivation and objective}
-
-As in the other basal model organisms used to probe the evolution of multicellularity, \textit{C. flexa} provides a context to study the earliest driving factors towards multicellular shape change through cooperative individual action. 
-In addition to sharing similar geometry with sponge choanocyte chambers and directly informing structural modeling there \citep{asadzadeh2019}, \textit{C. flexa} captures the close relationship between geometry and flow in biological settings. 
-
-\mynote{add here}
+% \section{Motivation and objective}
+% 
+% As in the other basal model organisms used to probe the evolution of multicellularity, \textit{C. flexa} offers a context to study the earliest driving factors towards multicellular shape change through cooperative individual action. 
+% In addition to sharing similar geometry with sponge choanocyte chambers and directly informing structural modeling there \citep{asadzadeh2019}, \textit{C. flexa} captures the close relationship between geometry and flow in biological settings. 
+% The suspected functionality of its inversion gives a potential evolutionary reason for colony formation in a choanoflagellate.
 
 \section{Thesis overview}
 
@@ -210,13 +236,13 @@ I numerically intergrate the forces on all spatial coordinates and torques on ce
 
 My discrete model for \textit{C. flexa} colonies successfully models inversion in small sheets consisting of few cells. 
 In larger sheets, conformational changes are hindered by rings of cells which cannot undergo the requisite stretching or compression required for inversion or folding. 
-For sheets with too many cells at the boundary, the inability to compress results in buckling at the edges. 
+% For sheets with too many cells at the boundary, the inability to compress results in buckling at the edges. 
 When sheets are already curved with flagella pointing in or out, the inability to sufficiently stretch at the boundary prevents sheets from inverting and causes the cells on the sheet interior to experience substantial stress.
-By framing my discrete model of \textit{C. flexa} using graph theory, I identify that the topology of the cell-cell connection network determines a sheet's ability to bend without buckling or overstretching.
+By framing my discrete model of \textit{C. flexa} using graph theory, I identify that the topology of the cell-cell connection lattice determines a sheet's ability to bend without buckling or overstretching.
 This finding and my structural results compare well with the understanding of geometric effects of topological defects in crystal lattices.
 
 The model I present makes it possible to identify regions where equilibrium angles $\phi_0$ and $\psi_0$ give minimal energy structures in the flagella-in and -out conformations.
 For values that facilitate a flagella-out structure, the flagella-out structure is lower in energy than the flagella-in structure when sheet size prevents inversion as expected.
 I argue that the greater amount of time required for larger sheets to invert is the result of a larger energetic barrier or smaller net internal forces, rather than greater hydrodynamic damping through drag. 
-This effect from topological constraints at the sheet boundary explains the rapid contraction and slow inversion observed in large sheets in \citet{brunet2019}.
+This effect from topological constraints at the sheet boundary explains the rapid contraction and slow inversion observed in large sheets in \citep{brunet2019}.
 My model supports the hypothesis that \textit{C. flexa} sheets are able to invert as a result of extreme stretching at sheet boundaries or topological changes through collar-collar linkages temporarily breaking.

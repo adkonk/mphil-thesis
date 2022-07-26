@@ -20,8 +20,6 @@ I write an expression for the sheet energy and vary it to derive a shape equatio
 
 \section{One-dimensional model} \label{sec:c_1d}
 
-\mynote{Discuss when a continuous model is appropriate}
-
 We are interested in the problem of \textit{Choaneca flexa} inversion. 
 To build intuition, consider a chain of cells connected by their collar filaments like beads on a string. 
 Supposing there are sufficiently many cells that the length contributed to the chain of cells by a single cell is small relative to the total length, we approximate the filament with a continuous function $\vec{r}(s)$ parameterised by arclength $s$.
@@ -127,13 +125,23 @@ We identify here the key deficiency of the one-dimensional description of \texti
 
 \section{Surface approximation}
 
-The simplified dynamics that we get from the Mange representation lack energetic costs from the compression and extension that come with deforming a two dimensional surface. The logical step to include these energies is to model the flexa sheet a surface of revolution based on a curve $\bm{r}(\rho, \theta)=(\rho \cos \theta, \rho \sin \theta, z(\rho))$ with cylindrical coordinates $\rho, \theta$ and height function $z$. In doing so, we could take the elastohydrodynamic equation of motion written in terms of curvature $H$ and $K$ and express it as purely as a function of $z$.
+The simplified dynamics that we get from the Mange representation lack energetic costs from the compression and extension that come with deforming a two dimensional surface. 
+Here, I evaluate two continuous approaches to describing the sheet as a continuous surface that approximates the positions of collar-collar interfaces.
+Since bending and stretching are coupled in \textit{C. flexa} sheets, I write a single energy function that encompasses both.
 
-We will proceed by writing the equations of motion generally for a surface and reducing it to a surface of revolution.
+The resulting energy function is found to be too challenging to approach analytically and motivates \cref{ch:3} to describe the \textit{C. flexa} sheet as a discrete system.
 
-\subsection{$H$ and collar connection angle}
+\subsection{$H$ and collar connection angle} \label{subsec:h_phi}
 
-Before getting into the continuous sheet problem, it is worth describing the two degrees of freedom that our collar connections afford. The collar makes an angle $\phi$ between the vector pointing directly out of the cell and the vector between the cell and its collar boundary with the next cell. Additionally, there is an angle between the collars of two adjacent cells $\psi$. The latter results in the sheet's curvature, so we want to relate it to mean curvature $H$ or preferred curvature $H_0$. 
+\nomenclature[g-mn]{$\mu,\nu$}{Indices for a surface. $\mu,\nu \in \{1, 2\}$}
+\nomenclature[a-g]{$g_{\mu\nu}$}{First fundamental form of a surface}
+\nomenclature[a-k]{$K_{\mu\nu}$}{Second fundamental form of a surface}
+\nomenclature[a-H]{$H$}{Mean curvature of a surface, the mean of the two principal curvature $g_{\mu\nu}K^{\mu\nu}/2$. Preferred mean curvature (constant) is denoted $H_0$}
+\nomenclature[a-K]{$K$}{Gaussian curvature of a surface, the determinant of the second fundamental form $\det K_\mu^\nu$}
+
+Before getting into the continuous sheet problem, it is worth describing the two degrees of freedom that our collar connections afford. 
+The collar makes an angle $\phi$ between the vector pointing directly out of the cell and the vector between the cell and its collar boundary with the next cell. 
+Additionally, there is an angle between the collars of two adjacent cells $\psi$. The latter results in the sheet's curvature, so we want to relate it to mean curvature $H$ or preferred curvature $H_0$. 
 
 \mynote{Discuss why we need a collar angle $\psi$ despite \citet{brunet2019} and other sources just talking about $\phi$. This has to do with the straight-collar approximation that I use, where the collar shape and curvature + clamped boundary condition of the meeting collars is distilled into two angles}
 
@@ -153,7 +161,7 @@ Consider two neighboring cells with collar boundaries $a$, $b$, and $c$, as show
 \noindent to get the inverse radius of curvature 
 
 \begin{align}
-    H_0 = \frac{1}{\sqrt{x_\circ^2 + y_\circ^2}} &= \frac{\sin(\psi_0 - \phi_0)}{\ell \sin\phi_0}. \label{eq:H0_phipsi}
+    H_0 = \frac{1}{\sqrt{x_\circ^2 + y_\circ^2}} &= \frac{\sin(\psi_0 - \phi_0)}{\ell \sin\phi_0}. \label{eq:h0}
 \end{align}
 
 This has a nice, simple interpretation in that if $\psi_0 > \phi_0$, $H_0 > 0$ (as drawn in Figure \ref{fig:hpsi}). On the other hand, $\psi_0 < \phi_0$ implies $H_0 < 0$, or the sheet is concave on the cell body side. 
@@ -166,16 +174,15 @@ Alternatively, we solve for $\psi_0$ as a function of $H_0$,
 
 As we find later in equation \ref{eq:hlb}, the curvature of the sheet in any given direction is greater than or equal to $-1/\ell$ (cell bodies and collars cannot go through each other). This lower bound corresponds in \ref{eq:h0_psi} to $\psi_0 = 0$, which we expect when cells are pressing tightly against each other (Figure \ref{fig:maxcurv}).
 
-
 \subsection{Problem statement} \label{subsec:problem}
 
-\citet{powers2010} (Section IV.B) shows that for an energy density $\e$ written in terms of the first and second fundamental forms $g_{\alpha\beta}$ and $K_{\alpha\beta}$, we can write an expression for the stress tensor $\bm{F}^\alpha$ 
+\citet{powers2010} shows that for an energy density $\e$ written in terms of the first and second fundamental forms $g_{\alpha\beta}$ and $K_{\alpha\beta}$, we can write an expression for the stress tensor $\bm{F}^\alpha$ 
 
 \begin{align}
-    \bm{F}^\alpha &= \left(T^{\alpha\beta} + \e^{\alpha\beta}K_\gamma^\beta \right)\bm{t}_\beta - (\nabla_\beta \e^{\alpha\beta})\hat{\bm{n}}. \label{eq:stress}
+    \bm{F}^\alpha &= \left(T^{\alpha\beta} + \e^{\alpha\beta}K_\gamma^\beta \right)\bm{t}_\beta - (\nabla_\beta \e^{\alpha\beta})\hat{\bm{n}}, \label{eq:stress}
 \end{align}
 
-\noindent Here, $K_\gamma^\beta = K_{\gamma \delta}g^{\delta \beta}$, $\bm{t}_\beta = \partial_\beta \bm{r}$, and 
+\noindent where summation over repeated indices is implied. Here, $K_\gamma^\beta = K_{\gamma \delta}g^{\delta \beta}$, $\bm{t}_\beta = \partial_\beta \bm{r}$, and 
 
 \begin{align*}
     T^{\alpha\beta} &= g^{\alpha\beta} \e + 2 \frac{\partial \e}{\partial g_{\alpha\beta}} = \frac{2}{\sqrt{g}} \frac{\partial}{\partial g_{\alpha\beta}} \left(\sqrt{g}\e \right) \\
@@ -184,13 +191,60 @@ As we find later in equation \ref{eq:hlb}, the curvature of the sheet in any giv
 
 \noindent with $g = \det{g_{\alpha\beta}}$.
 
-Since the force $\bm{f}$ acting on a surface point is given by the covariant divergence of the stress $\nabla_\alpha \bm{F}^\alpha$, our problem is effectively solved once we decide on an appropriate energy density. \citet{brunet2019} showed that the angle formed by the \textit{C. flexa} collars changes when individual cells are triggered for inversion. We might reasonably suggest preferred sheet curvature is prescribed by changing the preferred angle of the collar $\phi_0$ and imposing and energetic cost based on the amount that the collar angle $\phi(\theta)$ differs around the collar in $\theta$: $\e \sim \int (\phi(\theta) - \phi_0)^2 d\theta$.
+Since the force $\bm{f}$ acting on a surface point is given by the covariant divergence of the stress $\nabla_\alpha \bm{F}^\alpha$, our problem is effectively solved once we decide on an appropriate energy density. 
+I discuss two choices: one which introduces the energy density with separate bending and stretching energies from continuum mechanics and another developed by studying the geometry specific to \textit{C. flexa} cells.
+\citet{brunet2019} showed that the angle formed by the \textit{C. flexa} collars changes when individual cells are triggered for inversion. 
+We might reasonably suggest preferred sheet curvature is prescribed by changing the preferred angle of the collar $\phi_0$ and imposing and energetic cost based on the amount that the collar angle $\phi(\theta)$ differs around the collar in $\theta$: $\e \sim \int (\phi(\theta) - \phi_0)^2 d\theta$.
+
+\subsection{Continuum surface mechanics approach} \label{subsec:cts}
+
+We begin by describing the \textit{C. flexa} sheet as a thin plate with large deflections to define an energy density in terms of the strain tensor and displacement.
+The displacement of a surface defined in the $xy$-plane can be described with a displacement vector function $\bm{u}(\bm{r})$ and deflection function $\zeta(\bm{r})$ so that $(x, y, 0)$ is mapped to $(x + u_x, y + u_y, \zeta)$ \citep{landau1986}.
+Using the chain rule, we see that an infinitesimal length squared $ds^2$ on the surface $dx^2 + dy^2$ becomes 
+\begin{align*}
+	d{s'}^2 &= (dx + du_x)^2 + (dy + du_y)^2 + d\zeta^2 \\
+	&= \left(dx + \frac{\partial u_x}{\partial x} dx\right)+ \left(dy + \frac{\partial u_y}{\partial y} \right)^2 + \left(\frac{\partial\zeta}{\partial x} + \frac{\partial\zeta}{\partial y} \right)^2 \\
+	&= \delta_{ij} dx_i dx_j + \left(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} + \frac{\partial \zeta}{\partial x_i} \frac{\partial \zeta}{\partial x_j}\right) dx_i dx_j \\
+	&= (\delta_ij + u_{ij}) dx_i dx_j,
+\end{align*}
+where $i,j$ index over $1$ and $2$. The strain tensor $u_{ij}$, which describes infinitesimal displacement, is typically used to define a quadratic energy 
+\begin{align}
+	\e_s &= \frac{1}{2} \int_S \sum_{i,j}\left( 2\mu u_{ij}^2 + \lambda u_{kk} \right) d^2r \label{eq:stretch}
+\end{align}
+as an infinitesimal form of Hooke's law \citep{landau1986}. 
+
+The bending energy of membranes is often prescribed to be the Helfrich bending energy \citep{helfrich1973},
+\begin{align}
+	\e_b &= \int_S \frac{\kappa}{2} (2H - 2H_0)^2 + \kappa_G K d^2r. \label{eq:helfrich}	
+\end{align}
+\noindent Here $H=1/2 (g_{\mu\nu}K^{\mu\nu}$ is the mean curvature of the sheet given by $\bm{u}$ and $\zeta$ and $K = \det K_\mu^\nu$. 
+Since \textit{C. flexa} sheets do not form closed surfaces, any shape equation from \cref{eq:helfrich} must come with appropriate boundary conditions. 
+\citet{tu2003} derived a general equilibrium solution to \cref{eq:helfrich} with boundary, as well as the simplified axisymmetric case, by taking the functional variation of \cref{eq:helfrich} with respect to the surface position.
+
+\citet{seung1988} derived the equilibrium solution to the simultaneous stretching and bending problem in the limit of small $|\nabla \zeta|$, analogous to the approximation used in \cref{sec:c_1d}.
+The resulting equations are too difficult to solve \citep{landau1986}, but the authors find that Gaussian curvature effectively cancels stress due to disclinations and dislocations, or topological defects in the underlying surface crystal structure \citep{sachdev1984}.
+The shape equations derived from functional variations of \cref{eq:stretch,eq:helfrich} may be solved in the inextensional limit that $\mu,\lambda \to\infty$ and show that topological defects produce buckling.
+
+Since we know well that collars may vary in length, the limit solution to the resulting shape equations is unrealistic and we would resort to treating the problem numerically.
+Additionally, as in \cref{subsec:h_phi}, sheet bending and collar angle (hence, sheet stretching) are coupled. 
+Due to this coupling, I aimed to write a combined energy density for use in \cref{eq:stress} with the goal of deriving a more manageable solution.
+\mynote{qualify that collars may vary in length}
 
 \subsection{Connecting continuous surface with individual cell mechanics}
 
-For any point on a smooth surface, we could find an orthonormal basis of eigenvectors $\bm{e}_1, \bm{e}_2$ in the tangent space that diagonalises $K_\mu^\nu$. In terms of a vector $\bm{\Delta \xi}$ written in this basis, we have that the change in height with respect to the tangent plane and its normal $\Delta h$ is given by $K_{\mu\nu}\Delta\xi^\mu\Delta\xi^\nu$.
+Following cues from the experimental descriptions of \textit{C. flexa} collars, I sought to write an energy density in terms of the collar angle $\phi$. 
+Since $\phi$ may vary around a cell at some position on the sheet, I write $\phi(\theta)$ as a function of angle $\theta$ varying from $0$ to $2\pi$ around the cell.
+Then the energy density is written proportionally to the intergral of squared deviation of $\phi$ from a reference collar angle $\phi_0$,
+\begin{align}
+	\e &= \int_0^{2\pi} (\phi(\theta) - \phi_0)^2 d\theta. \label{eq:phi_int}
+\end{align}
+I proceed by deriving the relationship between $\phi(\theta)$ and the second fundamental form $K_{\mu\nu}$ which describes the sheet curvature.
 
-Let's consider a cell with collar angle $\phi(\theta)$, where $\theta$ measures the location on the collar. If the cell has an optimal collar angle $\phi_0$ and corresponding optimal curvature $K_{0\mu\nu}$, then the height of the collar will be $K_{0\mu\nu}\Delta\xi_0^\mu\Delta\xi_0^\nu$. The distance from the centerline of the cell (the norm of $\bm{\Delta\xi_0}$) is determined by $\phi_0$. The geometry is shown in Figure \ref{fig:geom}.
+For any point on a smooth surface, we could find an orthonormal basis of eigenvectors $\bm{e}_1, \bm{e}_2$ in the tangent space that diagonalises $K_\mu^\nu$. 
+In terms of a vector $\bm{\Delta \xi}$ written in this basis, we have that the change in height with respect to the tangent plane and its normal $\Delta h$ is given by $K_{\mu\nu}\Delta\xi^\mu\Delta\xi^\nu$.
+
+If the cell has an optimal collar angle $\phi_0$ and corresponding optimal curvature $K_{0\mu\nu}$, then the height of the collar will be $K_{0\mu\nu}\Delta\xi_0^\mu\Delta\xi_0^\nu$. 
+The distance from the centerline of the cell (the norm of $\bm{\Delta\xi_0}$) is determined by $\phi_0$. The geometry is shown in Figure \ref{fig:geom}.
 
 \begin{figure}[htbp]
     \centering
@@ -199,7 +253,10 @@ Let's consider a cell with collar angle $\phi(\theta)$, where $\theta$ measures 
     \label{fig:geom}
 \end{figure}
 
-If the cell has collar angle $\phi$ in direction $\theta$, we know the collar distance as $\bm{\Delta\xi} = \ell(\cos\phi, \sin\phi)$. For a fixed collar length $\ell$, we know the difference in height between the ground state and deformed state is $\ell(\cos\phi - \cos\phi_0)$. We can then relate the collar angle and sheet curvature by equating 
+\mynote{make these vectors here three dimensional}
+If the cell has collar angle $\phi$ in direction $\theta$, we know the collar distance as $\bm{\Delta\xi} = \ell(\cos\phi, \sin\phi)$.\footnote{These calculations are temporarily done in the cell-collar plane, assuming that the collar extends only radially from the apicobasal axis. \Cref{fig:geom} is drawn showing geometry in this plane.} 
+For a fixed collar length $\ell$, we know the difference in height between the ground state and deformed state is $\ell(\cos\phi - \cos\phi_0)$. 
+We can then relate the collar angle and sheet curvature by equating 
 
 \begin{align}
     K_{\mu\nu}\Delta\xi^\mu\Delta\xi^\nu - K_{0\mu\nu}\Delta\xi_0^\mu\Delta\xi_0^\nu &= \ell(\cos\phi - \cos\phi_0). \label{eq:base}
@@ -212,7 +269,8 @@ The radius out from the center for the ground state is $\ell\sin\phi_0$ while fo
     H_\theta \ell^2\sin^2\phi - H_0 \ell^2\sin^2\phi_0 &= \ell(\cos\phi - \cos\phi_0)
 \end{align*}
 
-\noindent where $H_\theta = K_{11}\cos^2\theta + K_{22}\sin^2\theta + 2K_{12}\sin\theta\cos\theta$ is the curvature of a line on the surface in direction $\theta$. We can cancel a factor of $\ell$, redefine units of length in terms of $\ell$ (such that $H_\theta$ is the ratio of $\ell$ with the radius of curvature in direction $\theta$), and express $\sin^2\phi$ in terms of $\cos\phi$ to get
+\noindent where $H_\theta = K_{11}\cos^2\theta + K_{22}\sin^2\theta + 2K_{12}\sin\theta\cos\theta$ is the curvature of a line on the surface in direction $\theta$. 
+We can cancel a factor of $\ell$, redefine units of length in terms of $\ell$ (such that $H_\theta$ is the ratio of $\ell$ with the radius of curvature in direction $\theta$), and express $\sin^2\phi$ in terms of $\cos\phi$ to get
 
 \begin{align*}
     0 &= H_\theta \cos^2\phi + \cos\phi + (H_0\sin^2\phi_0 - \cos\phi_0 - H_\theta) \\
@@ -226,18 +284,20 @@ If we take the collars to always have angle $0 \leq \phi \leq \pi/2$, we can con
     1 \geq \cos\phi_0 - H_0 \sin^2\phi_0. \label{eq:ineq2}
 \end{align}
 
-\noindent The second inequality can be simplified to $H_0 \geq -(1+\cos\phi_0)^{-1}$. Combining the two inequalities yields 
+\noindent The second inequality can be simplified to $H_0 \geq -(1+\cos\phi_0)^{-1}$. 
+Combining the two inequalities yields 
 
 \begin{align}
     H_\theta \geq -1. \label{eq:hlb}
 \end{align}
 
-\noindent Re-expressed with units, this means that $H_\theta \geq -1/\ell$, or that the radius of curvature can never be smaller than $\ell$ on the cells' side. In other words, the cells can't push through each other! (Figure \ref{fig:maxcurv})
+\noindent Re-expressed with units, \cref{eq:hlb} expresses that $H_\theta \geq -1/\ell$, or that the radius of curvature can never be smaller than $\ell$ on the cells' side. 
+Physically, we understand this to mean that cells are unable to push through each other (\cref{fig:maxcurv}).
 
 \begin{figure}[hbtp]
     \centering
     \includegraphics[width=0.5\textwidth]{arc.jpg}
-    \caption[Minimum sheet curvature permitted in the continuous sheet description]{Maximum cell-side curvature is given by inequalities \ref{eq:ineq1}, \ref{eq:ineq2} to have radius $\ell$. This corresponds to every (point) cell bumping into each other.}
+    \caption[Bounded sheet curvature permitted in the continuous sheet description]{Maximum cell-side curvature is given by inequalities \ref{eq:ineq1}, \ref{eq:ineq2} to have radius $\ell$. This corresponds to every (point) cell bumping into each other.}
     \label{fig:maxcurv}
 \end{figure}
 
@@ -265,30 +325,26 @@ Using these approximations we rewrite equation \ref{eq:preapprox} to first order
     \frac{(H_\theta-H_0)^2 \sin^4\phi_0}{(H_\theta + \sin\phi_0 / \sin2\phi_0)^2 \sin^2 2\phi_0} &= (\phi - \phi_0)^2.
 \end{align*}
 
-We want to integrate this function in $\theta$, so let $K_{11} = a$, $K_{22} = b$, $K_{12} = c$, $-H_0 = d$ and $\sin\phi_0/ \sin 2 \phi_0 = e$ for simplicity when we write
+To integrate this function in $\theta$ (\cref{eq:phi_int}, let $K_{11} = a$, $K_{22} = b$, $K_{12} = c$, $-H_0 = d$ and $\sin\phi_0/ \sin 2 \phi_0 = e$ for simplicity when we write
 
-\begin{align*}
-    \int_{-\pi}^\pi (\phi - \phi_0)^2 d\theta &= \int_{-\pi}^\pi \frac{\left(a\cos^2\theta + b\sin^2\theta + 2c\sin\theta\cos\theta + d \right)^2}{\left(a\cos^2\theta + b\sin^2\theta + 2c\sin\theta\cos\theta + e \right)^2} d\theta \\
-    &= \left\{-\sin2\theta \left[a^2 (-4bc\theta -4ce\theta + d^2 - 2de +e^2) + a(4b^2c\theta -2b(d-e)^2+4c\theta(c^2 - e^2)) \right. \right. \\
-    &\qquad \qquad \qquad \left. + b^2(4ce\theta + d^2 -2de + e^2) + 4bc\theta(e^2 - c^2) + 4c^2 (d-e)^2 \right] \\
-    &\qquad + 2(a + b +2e) \left[c^2 \theta (b - a) + \theta (a - b) (a + e) (b + e) - c (d - e)^2 \right] \\
-    &\qquad \left.+ 2 \theta (a - b)^2 \cos(2 \theta) (a (b + e) + e (b + e) - c^2) \right\} \\
-    &\qquad \big/ 2\left[(a - b) (a (b + e) + e (b + e) - c^2) ((a - b) \cos(2 \theta) + a + b + 2 c \sin(2 \theta) + 2 e)\right] \\
-    &\quad + \frac{(e - d) (a (4 b + d + 3 e) + b d + 3 b e - 4 c^2 + 2 d e + 2 e^2) \tan^{-1}\left(\frac{-(b + e) \tan\theta - c}{\sqrt{a (b + e) + e (b + e) - c^2}}\right)}{2(a (b + e) + e (b + e) - c^2)^{3/2}}
-\end{align*}
+\begin{align}
+    \int_{-\pi}^\pi (\phi - \phi_0)^2 d\theta &= \int_{-\pi}^\pi \frac{\left(a\cos^2\theta + b\sin^2\theta + 2c\sin\theta\cos\theta + d \right)^2}{\left(a\cos^2\theta + b\sin^2\theta + 2c\sin\theta\cos\theta + e \right)^2} d\theta. \label{eq:integral}
+\end{align}
 
-\noindent evaluated at $\theta = -\pi, \pi$. Evaluating this expression is surprisingly straightforward, and gives the result 
+The integral in \cref{eq:integral} can be solved analytically and expressed in terms of $H$ and $K$ (Appendix \ref{apx:cts}), 
 
-\begin{align*}
-    \int_{-\pi}^\pi (\phi - \phi_0)^2 d\theta &= \text{const.} + \text{const.} \frac{4 K + 2(d+3e)H + 2de + e^2}{(K + 2H + e^2)^{3/2}}.
-\end{align*}
+\begin{align}
+    \int_{-\pi}^\pi (\phi - \phi_0)^2 d\theta &= \text{const.} + \text{const.} \frac{4 K + 2(d+3e)H + 2de + e^2}{(K + 2H + e^2)^{3/2}}. \label{eq:phi_int_complete}
+\end{align}
 
-Varying this expression will be more difficult than the typical membrane energy defined only in terms of curvature $(H-H_0)^2 + K$ since the Gaussian curvature term is not alone. This means that we cannot use the Gauss Bonnet theorem $\int_S K dA = 2\pi n + \oint_{\partial S}K ds$ to simply write it as a boundary term. Nevertheless, provided that we can vary $K$ on the surface, the shape equation that results shouldn't be very difficult to derive.
+Varying the energy density defined by \cref{eq:phi_int_complete} (from \cref{eq:phi_int}) is more challenging than the Helfrich membrane energy density (\cref{eq:helfrich}) since there is no term linear in $K$. 
+As a result, the Gauss-Bonnet theorem $\int_S K d^2r = 2\pi n + \oint_{\partial S} K ds$ for an integer $n$ based on surface topology cannot be used to reduce the effects of Gaussian curvature to boundary conditions.
 
-\subsection{Varying the energy}
+\subsection{Energy variation}
 
-Following subsection \ref{subsec:problem}, we just need to express our energy in terms of $K_{\mu\nu}$ and $g_{\mu\nu}$ to derive a force from it. We of course have that $H = (1/2) (K_{\mu\nu} g^{\mu\nu})$, which is easily differentiated with respect to $K_{\mu\nu}$ and $g_{\mu\nu}$. We can differentiate $K$ by re-expressing it with the identity $K^{\alpha\beta}K_{\alpha\beta} = 4H^2 - 2K$.\footnote{This comes from $4H^2 - 2K = (K^1_1 + K^2_2)^2 - 2(K^1_1K^2_2 - 2K^1_2) = (K^1_1)^2 + 2 K^1_2K^1_2 + (K^2_2)^2 = K^\alpha_\beta K_\alpha^\beta = K^{\alpha\beta}K_{\alpha\beta}$.} Then we have $K = (g^{\alpha\beta}K_{\alpha\beta})^2 - K_{\mu\nu}K_{\alpha\beta}g^{\mu\alpha}g^{\nu\beta}$.
+The energy density \cref{eq:phi_int_complete} can be varied directly or used in \cref{eq:stress} to solve forces on the sheet or the equilibrium shape equations.
+While the functional variation is possible and not too challenging for the surface interior (Appendix \ref{apx:cts}), the resulting shape equation is clearly unapproachable in a simple way.
+Since obtaining an approximate solution would require a numerical implementation, we are better suited to treat the sheet as the interactions between several discrete units.
 
-\section{Energy variation}
-
-
+\mynote{move this to the appendix apx:cts}
+% Following subsection \ref{subsec:problem}, we just need to express our energy in terms of $K_{\mu\nu}$ and $g_{\mu\nu}$ to derive a force from it. We of course have that $H = (1/2) (K_{\mu\nu} g^{\mu\nu})$, which is easily differentiated with respect to $K_{\mu\nu}$ and $g_{\mu\nu}$. We can differentiate $K$ by re-expressing it with the identity $K^{\alpha\beta}K_{\alpha\beta} = 4H^2 - 2K$.\footnote{This comes from $4H^2 - 2K = (K^1_1 + K^2_2)^2 - 2(K^1_1K^2_2 - 2K^1_2) = (K^1_1)^2 + 2 K^1_2K^1_2 + (K^2_2)^2 = K^\alpha_\beta K_\alpha^\beta = K^{\alpha\beta}K_{\alpha\beta}$.} Then we have $K = (g^{\alpha\beta}K_{\alpha\beta})^2 - K_{\mu\nu}K_{\alpha\beta}g^{\mu\alpha}g^{\nu\beta}$.
