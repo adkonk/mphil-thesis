@@ -14,7 +14,7 @@
 What physical driving factors led to the proliferation of multicellular life?
 Across all eukaryotic lineages, phylogenetic evidence suggests that multicellularity evolved independently several times \citep{king2004}.
 Within just the volvocine algae, a common model family for studying the origins of multicellularity, it is believed that the transition to multicellularity and cooperation of distinct differentiated cells has repeatedly emerged independently \citep{herron2008}.
-Given the overwhelming success of multicellular life in the biosphere, we are led to hypothesize that common physical selective pressures promoted life to cooperate, differentiate, and delegate the responsibility of ensuring fitness for the sake of proliferation \citep{grosberg2007}.
+Given the overwhelming success of multicellular life in the biosphere, we are led to hypothesize that common physical advantages promoted life to cooperate, differentiate, and delegate the responsibility of ensuring fitness for the sake of proliferation \citep{grosberg2007}.
 
 This question has led to flourishing recent interest in evolutionarily basal model eukaryotes, especially choanoflagellates, volvocine green algae, and sponges.
 Both the biological and physical properties of these groups make them especially favorable \citep{goldstein2015}: choanoflagellates have long been regarded as a close relative to the animal kingdom owing to their similarity to choanocytes in sponges \citep{james1871}, and the volvocine algae span a range of cell numbers per individual \citep{kirk2005}.
@@ -42,25 +42,21 @@ Consequently, these organisms must facilitate their food collection, unlike bact
 \nomenclature[z-ECM]{ECM}{Extracellular matrix}
 
 \subsection{Origins of multicellularity}
-% ** Why attach?
 
-Before discussing eukaryotic multicellularity, I would be remiss in omitting any discussion of prokaryotic multicellularity \citep{shapiro1988}. 
-Beyond the notorious biofilm formation, cyanobacteria (e.g. \textit{Anabaena}) form filaments and some sporulating bacteria (e.g. Myxobacteria, \textit{Steptomyces}) form fruiting bodies \citep{claessen2014}.
+% prokaryotic multicellularity
+Before discussing eukaryotic multicellularity, I would be remiss in neglecting prokaryotic multicellularity \citep{shapiro1988}. 
+Beyond the notorious biofilm formation, cyanobacteria (e.g. \textit{Anabaena}) form chains of cells as filaments and some sporulating bacteria (e.g. Myxobacteria, \textit{Steptomyces}) form fruiting bodies \citep{claessen2014}.
 These multicellular aggregates demonstrate complex population dynamics and emergent collective behavior from basic interactions \citep{lopez2010,welch2001,zhang2012}.
 Biofilms and filaments have phenotypically diverse and even differentiated regions that contribute to antibiotic resistance \citep{stewart2008} or enable photosynthesis \citep{flores2010}
 This differentiation can parallel germ-soma differentiation in eukaryotes by sacrificing individual division for colony persistence \citep{lewis2010,wilcox1973}.
 Moreover, the extracellular matrix (ECM) of biofilms allows bacteria to exploit a tradeoff between environmental protection and growth by slowing diffusion from the exterior \citep{mah2001,rittmann1980}.
 The rest of this work centres around eukaryotic multicellularity, but it is valuable to keep in mind that several multicellular organisms have bacterial parallels.
 
-The benefit of multicellularity on individual cells is not immediate.
+The benefit of multicellularity for individual cells is not immediate.
 \citet{michod2003} argues that a key transition in the development of multicellularity is the transition away from selecting for single cell fitness to multicellular fitness. 
 Indeed, while several pathways for multicellularity have been proposed, they share the idea that emergent group benefits through cooperation sufficiently outweigh individual sacrifice \citep{michod2001}.
 
-Multicellularity requires that resources are shared, and \textit{cheat cells} which exploit this cooperation arise.
-Several have argued that exploitation and internal conflict may have facilitated evolution and differentation that contributes to individuality of the whole organism \citep{michod2001,rainey2010,hammerschmidt2014,grosberg2007}.
-
 % size
-
 A major competing argument for the origin of multicellularity centers around physical size. 
 \citet{bonner1998} argues that size enables the advantages conferred by multicellularity, and scale itself comprises a spectrum of niches available for exploitation.
 An immediate consequence of an increase in size is the ability to avoid predation via phagocytosis.
@@ -68,10 +64,17 @@ An immediate consequence of an increase in size is the ability to avoid predatio
 \citet{boraas1998} demonstrated in a laboratory culture that stable multicellularity emerged in the green alga \textit{Chlorella vulgaris} when exposed to predators.
 Eight-cell colonies were observed to predominate, indicating that multicellularity emerged to balance colony survival as well as individual demands of each cell.
 
+Multicellularity requires that resources are shared, and \textit{cheat cells} which exploit this cooperation arise.
+Several have argued that exploitation and internal conflict may have facilitated evolution and differentation that contributes to individuality of the whole organism \citep{michod2001,rainey2010,hammerschmidt2014,grosberg2007}.
+On the other hand, an altruistic strategy allows cells to cooperate and help each other, increasing the success of the colony more than the sum of the individual cells \citep{michod2006,gulli2019}.
+
+
 \subsection{Benefits}
 
 % division of labour
-\paragraph*{Division of labour} The organisms in the \textit{Volvox} genus are well studied for being a primitive example of multicellularity and a shining beacon of functional geometric changes. 
+\paragraph*{Division of labour} Differentiation of isolated cells 
+
+The organisms in the \textit{Volvox} genus are well studied for being a primitive example of multicellularity and a shining beacon of functional geometric changes. 
 These organisms attach their cells to one another using an extra-cellular matrix, as \textit{S. rosetta} does as well (discussed later). 
 
 \mynote{complete the above}
@@ -118,9 +121,39 @@ Evolutionary causes of colony formation are obscured further by strong recent ev
 \section{\textit{Choanoeca flexa}}  %Section - 1.3 
 
 % intro`
-\citet{brunet2019} describe a newly discovered choanoflagellate, \textit{Choanoeca flexa}, which lives and feeds in aquatic environments. 
+\citet{brunet2019} describe a newly discovered choanoflagellate, \textit{Choanoeca flexa}, which lives and feeds in aquatic environments (\cref{fig:cflexa}). 
 Here, I describe the relevant properties and characteristics of these cells and their colonies for modeling its structure and behavior. 
 All descriptions of \textit{C. flexa} proceed from \citet{brunet2019} and private communications with the authors.
+
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}[b]{0.55\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{cflexa.png}
+		\caption{}
+		\label{subfig:cflexa}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.43\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{table.png}
+		\caption{}
+		\label{subfig:table}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.57\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{contact1.png}
+		\caption{}
+		\label{subfig:contact1}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.42\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{contact2.png}
+		\caption{}
+		\label{subfig:contact2}
+	\end{subfigure}
+	\caption[Overview of \textit{C. flexa} colonies of collared choanoflagellate cells]{Overview of \textit{C. flexa} colonies of collared choanoflagellate cells. (\ref{subfig:cflexa}) Images of the two conformations observed, flagella-in and flagella out. (\ref{subfig:table}) Summary of the two states of \textit{C. flexa} colonies. The transition from flagella-in to flagella-out is induced naturally by darkness, and the reverse transition is induced by the reintroduction of light \citep{brunet2019}. (\ref{subfig:contact1}) Scanning electron micrograph in the tangential plane of a \textit{C. flexa} sheet. Arrows indicate collar-collar contacts. (\ref{subfig:contact2}) Transmission electron micrograph of collar interactions between neighboring cells in a \textit{C. perplexa} colony. f: flagella. From \citet{leadbeater1983} with permission. \cref{subfig:cflexa,subfig:contact1} from \citet{brunet2019}. Reprinted with permission from AAAS.}
+	\label{fig:cflexa}
+\end{figure} 
 
 % general description
 \textit{C. flexa} is an aquatic colonial choanoflagellate that forms sheets on the order of $\SI{100}{\micro\meter}$ in diameter (\cref{fig:cflexa}).
@@ -176,37 +209,6 @@ In contrast, flagella-in sheets are non-motile to the extent that they typically
 The lack of mobility is compensated by an increase in cells phagocytosed by several times: flagella-in sheets are substantially more effective at driving flow towards the collars, where individual cells feed.
 Increased motility in the dark-induced state and accumulation in regions with light facilitates a primitive form of phototaxis.
 \mynote{why does swimming not directly translate to feeding as in lauga2011 paper?}
-
-\begin{figure}[htbp]
-	\centering
-	\begin{subfigure}[b]{0.7\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{cflexa.png}
-		\caption{}
-		\label{subfig:cflexa}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.29\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{table.jpg}
-		\caption{}
-		\label{subfig:table}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.48\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{contact1.png}
-		\caption{}
-		\label{subfig:contact1}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.48\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{contact2.png}
-		\caption{}
-		\label{subfig:contact2}
-	\end{subfigure}
-	
-	\caption[Overview of \textit{C. flexa} colonies of collared choanoflagellate cells]{Overview of \textit{C. flexa} colonies of collared choanoflagellate cells. (\ref{subfig:cflexa}) Images of the two conformations observed, flagella-in and flagella out. (\ref{subfig:table}) Summary of the two states of \textit{C. flexa} colonies. The transition from flagella-in to flagella-out is induced naturally by darkness, and the reverse transition is induced by the reintroduction of light \citep{brunet2019}. (\ref{subfig:contact1}) Scanning electron micrograph in the tangential plane of a \textit{C. flexa} sheet. Arrows indicate collar-collar contacts. (\ref{subfig:contact2}) Transmission electron micrograph of collar interactions between neighboring cells in a \textit{C. perplexa} colony. f: flagella. From \citet{leadbeater1983} with permission. \cref{subfig:cflexa,subfig:contact1} from \citet{brunet2019}. Reprinted with permission from AAAS.}
-	\label{fig:cflexa}
-\end{figure} 
 
 % dynamics
 Sheet inversion is rapid and reversible, allowing colonies the flexibility to convert when given suitable environmental cues.

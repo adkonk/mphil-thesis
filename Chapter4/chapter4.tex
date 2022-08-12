@@ -31,12 +31,10 @@ Nevertheless, a substantial amount remains to be learned about the collar-collar
 For collars to splay as they do in individual cells, they must not adhere to each other; a small azimuthal torque would otherwise easily cause several microvilli to join, interfering with flagellar beating.
 
 % why does choanoeca align as it does
-Think about why \textit{C. flexa} has the behavior that it does. 
-Given how other choanoflagellates like \textit{S. rosetta} get their morphology by division \citep{fairclough2010,larson2020}, it could be that \textit{C. flexa} forms by division and has evolved its contractile ring to take advantage of that. 
-This would make sense from the perspective that choanoflagellate cells aligned and lined up next to each other drive the strongest flows (though still not stronger than they could individually) \citet{kirkegaard2016}. 
-This paper also found that being farther from a wall increases flux. 
-This is interesting considering that the feeding state of \textit{C. flexa} was observed to be so ineffective at swimming that it sank and remained in place. 
-However this was on a slide and in the absense of external flows \citet{brunet2019}.
+\textit{Choanoeca} is remarkable in the common orientation of all cells in its colonies. 
+This is made possible by the absense of any discernible extracellular matrix \citep{leadbeater1983,brunet2019}, which would otherwise be expected to confine colonies to some other morphologies \citep{larson2020}. 
+Apart from the mechanical implication of facilitating inversion, connections at the collars that align cell apicobasal axes drive the strongest flows through collars in a numerical model \citep{kirkegaard2016}. 
+While it is enticing to speculate about \textit{Choanoeca} evolution based on its colonies' ability to change shape, it is worth keeping in mind that there may have been other pressures for evolving as the species did.
 
 % what does this work achieve
 When thinking about \textit{C. flexa} in the context of multicellularity, we should not overlook the simplicity by which it achieves large-scale geometric changes. 
@@ -49,10 +47,11 @@ One might imagine that the complexity of a molecular pathway for a single cell t
 
 % what did I find about lattice topology?
 The discrete model of \textit{C. flexa} demonstrates that deviations from a hexagonally packed sheet at as few as one cell are sufficient to induce substantial bending.
-This result is consistent with that described in \citet{seung1988}, albeit through a different mechanism where stretching and bending are closely related.
+This result is consistent with that described in \citet{seung1988} for planar lattices, albeit through a different mechanism where stretching and bending are closely related.
+Indeed, topological defects induce buckling and non-local inability to satisfy equilibrium conditions, yet these defects are also vital to achieving large-scale sheet curvature.
 
 % How reasonable was this model?
-Physical reasoning suggests that the interfaces would be equidistant from the two cells, since each cell is assumed to be identical and the forces must balance at equilibrium. 
+Physical reasoning suggests that interfaces between cells would be equidistant from the cell bodies, since each cell is assumed to be identical and the forces must balance at equilibrium. 
 Imaging supports this idea (\cref{fig:cflexa}), though any imaging requiring fixation may affect the collar stiffness or preferred curvature.
 That the collar microvilli at the boundaries form an arc around the apicobasal axis suggests that they freely take angle $\phi_0$ at the base and do not contribute meaningfully to the energy (\cref{subfig:contact2}). 
 This validates the treatment of boundary collar vertices used in the discrete model.
@@ -101,6 +100,12 @@ If colonies tear, we would not expect them to fully separate since a single conn
 Consequently, it is possible that the weight of colony fragments themselves in the flagella-in state (with resulting incompatible drag tensors) or the strong collective flows driven by separate colony fragments in the flagella-out state are responsible for separating colony fragments.
 If entirely physically facilitated, colony division is likely to substantially involve both cell-cell connection lattice structure and flows.
 
+% assuming all cells are the same
+An underlying assumption throughout this work is that \textit{Choanoeca} colonies consist entirely of identical cells, both in genetics and morphology.
+Recent findings in \textit{S. rosetta} suggest that choanoflagellates are capable of spatial differentiation within colonies \citep{laundon2019,naumann2019}.
+Different properties throughout the cell-cell connection network, especially different preferred collar shapes due to cell body morphology or filament mechanics, substantially affect inversion dynamics.
+Most substantial would be if some adjacent cells do not form adhesive contact at all, in contrast to our current interpretation of \textit{Choanoeca} colony imaging \citep{brunet2019}.
+
 \begin{figure}
 	\centering
 	\begin{subfigure}[b]{0.48\textwidth}
@@ -121,8 +126,8 @@ If entirely physically facilitated, colony division is likely to substantially i
 
 \section{Multicellularity and \textit{C. flexa}}
 
-\textit{C. flexa} contrasts with volvocine algae because it does not connect cells via cytoplasmic bridges, which is a substantial difference between the two models. 
-It is not completely clear that \textit{C. flexa} sheets form with a temporary incomplete cytokinesis stage as in the algae \citep{green1981,herron2015}.
+% \textit{C. flexa} contrasts with volvocine algae because it does not connect cells via cytoplasmic bridges, which is a substantial difference between the two models. 
+% It is not completely clear that \textit{C. flexa} sheets form with a temporary incomplete cytokinesis stage as in the algae \citep{green1981,herron2015}.
 
 Ultimately, multicellularity in \textit{Chonoaeca} appears to be the result of a tradeoff between a decrease in the flow efficiency of individual choanoflagellate cells and the ability of the colony to invert. 
 Inversion is highly dependent on the sheet structure and its lattice, which may itself change to facilitate inversion and potentially colony divison. 
