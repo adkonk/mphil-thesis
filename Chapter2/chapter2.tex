@@ -16,45 +16,51 @@ In an effort to develop an analytically tractable model for sheets consisting of
 
 I begin by developing a one-dimensional filament model with inversion dynamics, which demonstrates that azimuthal stretching is key to understanding the flipping process observed in \citet{brunet2019}. 
 I proceed to describe a method for approximating sheets of \textit{C. flexa} with two-dimensional surfaces and relate the collar-opening angle $\phi$ and collar-collar contact angle $\psi$ to surface curvature. 
-I write an expression for the sheet energy and vary it to derive a shape equation.
+I write an expression for the sheet energy but find that it yields no tractable shape equation.
 
 \section{One-dimensional model} \label{sec:c_1d}
 
-We are interested in the problem of \textit{Choaneca flexa} inversion. 
-To build intuition, consider a chain of cells connected by their collar filaments like beads on a string. 
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\textwidth]{chain.png}
+	\caption{Filament model of \textit{C. flexa} colonies}
+	\label{fig:chain}
+\end{figure}
+
+To build intuition on the mechanics of \textit{C. flexa} inversion, consider a chain of cells connected by their collar filaments like beads on a string (\cref{fig:chain}). 
 Supposing there are sufficiently many cells that the length contributed to the chain of cells by a single cell is small relative to the total length, we approximate the filament with a continuous function $\vec{r}(s)$ parameterised by arclength $s$.
-If the filament has preferred curvature $\kappa_0$, then the bending energy functional $\varepsilon$ is given by 
+If the filament has preferred curvature $\kappa_0$, then the bending energy functional $\e$ is given by 
 
 \begin{align*}
-    \varepsilon[\vec{r}(s)] &= \frac{1}{2} A \int (\kappa - \kappa_0)^2 ds, 
+    \e[\vec{r}(s)] &= \frac{1}{2} a \int (\kappa - \kappa_0)^2 ds, 
 \end{align*}
-\noindent where the curvature $\kappa$ is deduced from $\vec{r}(s)$ and $A$ is the bending modulus. 
+\noindent where the curvature $\kappa$ is deduced from $\vec{r}(s)$ and $a$ is the bending modulus. 
 
-If the filament is short relative to the characteristic bending length scale, we express the problem in the Mange representation by writing $\vec{r}(s) = (x, h(x))$ for a height function $h(x)$. 
+If the filament is short relative to the characteristic bending length scale, we express the problem in the Mong\'e representation by writing $\vec{r}(s) = (x, h(x))$ for a height function $h(x)$, where $|h_x|$ is small.\footnote{Here, I use subscripts to denote partial derivatives: $h_x = \partial h / \partial x$. A number denotes several partial derivatives: $h_{3x} = \partial^3 h / \partial x^3$.} 
 The resulting energy is written in terms of the prescribed (signed) curvature $H_0$, 
 \begin{align}
-    \varepsilon[\vec{h}(x)] &= \frac{1}{2} A \int_0^L (h_{xx} - H_0)^2 dx. \label{eq:energy}
+    \e[\vec{h}(x)] &= \frac{1}{2} a \int_0^L (h_{xx} - H_0)^2 dx. \label{eq:energy}
 \end{align}
 
 Since the cells in this beads-on-a-chain description consist of large spheres connected by thin filaments, we postulate that the filament experiences isotropic drag with coefficient $\zeta$ in a viscous medium.
 As a result, we describe the dynamics with a functional derivative of the energy with respect to the changing height,
 
 \begin{align}
-    \zeta \vec{r}_t &= -\frac{\delta \varepsilon}{\delta \vec{r}} \nonumber \\
-    \zeta h_t &= -\frac{\delta \varepsilon}{\delta h}. \label{eq:eom} 
+    \zeta \vec{r}_t &= -\frac{\delta \e}{\delta \vec{r}} \nonumber \\
+    \zeta h_t &= -\frac{\delta \e}{\delta h}. \label{eq:eom} 
 \end{align}
 Taking the functional derivative of equation \ref{eq:energy}, we find the energy change
 \begin{align}
-    \delta \varepsilon &= \left. A(h_{xx} - H_0)\delta h_x \right|_0^L - \left. Ah_{3x} \delta h \right|_0^L + A \int h_{4x} \delta h ds \label{eq:func_deriv} 
+    \delta \e &= \left. a(h_{xx} - H_0)\delta h_x \right|_0^L - \left. ah_{3x} \delta h \right|_0^L + a \int h_{4x} \delta h ds \label{eq:func_deriv} 
 \end{align}
 in terms of the boundary conditions of $h$.
 
 For free boundary conditions (force- and torque-free edges) $h_{xx}(0, L) = 0 = h_{3x}(0, L)$, the boundary terms in equation \ref{eq:func_deriv} vanish and we are left with the equation of motion 
 \begin{align}
-    \zeta h_t &= -A h_{4x}. \label{eq:eom_mange}
+    \zeta h_t &= -a h_{4x}. \label{eq:eom_mange}
 \end{align}
 
-Equation \ref{eq:eom_mange} is nondimensionalised by re-expressing $x$ as $x/L$ and $t$ as $t / (\frac{\zeta L^4}{A})$ (the labels $x, t, h, H_0$ are left unchanged for readability) to derive $h_t = -h_{4x}$ with boundary conditions $h_{xx}(0, 1) = 0 = h_{3x}(0, L)$. 
+Equation \ref{eq:eom_mange} is nondimensionalised by re-expressing $x$ as $x/L$ and $t$ as $t / (\frac{\zeta L^4}{a})$ (the labels $x, t, h, H_0$ are left unchanged for readability) to derive $h_t = -h_{4x}$ with boundary conditions $h_{xx}(0, 1) = 0 = h_{3x}(0, 1)$. 
 It is clear that the ground state of equation \ref{eq:energy} is given by a quadratic height function with quadratic term $\frac{1}{2}H_0x^2$. 
 Let $h_*(x) = -\frac{1}{2} H_0(x-\frac{1}{2})^2 + \frac{1}{8}H_0$ be one such ground state, and suppose $h(x, 0) = -h_*(x)$. Note that the filament in $h(x, 0)$ is not in the ground state since the curvature is given by $H_0$. 
 
@@ -75,7 +81,7 @@ Moreover, the eigenvalues $\sigma = k^4$ are given by the sequence of solutions 
 
 Equation \ref{eq:roots} is plotted in Figure \ref{subfig:roots} along with the positions of the solutions $k_n$ as solved numerically. 
 The solution $k_0 = 0$ is omitted because it contributes a constant term to $h(x, t)$ that does not evolve in time. 
-The eigenfunctions $w_n(x)$ with eigenvalues $k_n^4$ are normalized on the interval $[0,1]$ numerically, and the ratio $A/B$ is given by $(\sinh k - \sin(k)) / (\cosh k - \cos k)$. 
+The eigenfunctions $w_n(x)$ with eigenvalues $k_n^4$ are normalized on the interval $[0,1]$ numerically, and the ratio $A/B$ is given by $(\sinh k - \sin k) / (\cosh k - \cos k)$. 
 The first five eigenfunctions are shown in Figure \ref{subfig:efuncs}. 
 
 \begin{figure}[tbhp]
@@ -101,14 +107,14 @@ Letting $f(x) = \sum_{n=1}^\infty a_n f_n(x)$, we get that $a_n = \int_0^1 g(x, 
 \begin{align}
     h(x, t) &= h_*(x) + g(x) = h_*(x) + \sum_{n=1}^\infty a_n e^{k_n^4 t} f_n(x). \label{eq:sol}
 \end{align}
-\noindent In practice, only the solutions $k_n$ to equation \ref{eq:roots} shown in Figure \ref{subfig:roots} are used, since the approximation to $h(x, 0)$ is close and higher $k_n$ result in precision errors when calculating $\cosh kx$ and $\sinh kx$. 
+\noindent In practice, only the solutions $k_n$ to equation \ref{eq:roots} shown in Figure \ref{subfig:roots} are used, since the approximation to $h(x, 0)$ is close and higher $k_n$ result in precision errors when calculating $\cosh kx$ and $\sinh kx$ (as in \citet{wiggins1998}). 
 
 For the initial conditions given previously, the time evolution of $h(x, t)$ is shown in Figure \ref{fig:shapes}. 
-Immediately, we notice that the filament changes shape extremely quickly, and the timescale $\zeta L^4 / A$ must be extremely large to produce inversion at the order of $\SI{10}{\sec}$ as observed by \citet{brunet2019}. 
-Using Stokes' law $\zeta = 6 \pi \mu R$ for dynamic viscosity $\mu$ (about $\SI{1}{\kilo\gram\per\meter\per\sec}$) \citep{stokes1851} and cell radius $R\approx \SI{1e-6}{\meter}$ \citep{brunet2019}, a chain of 100 cells each contributing $\SI{5e-6}{\meter}$ length would require energy constant about 
-\mynote{finish the above. compare to bending modulus of flagella or microtubule or somethin} 
+Immediately, we notice that the filament changes shape extremely quickly, and the timescale $\zeta L^4 / k$ must be extremely large to produce inversion at the order of $\SI{10}{\sec}$ as observed by \citet{brunet2019}. 
+% Using Stokes' law $\zeta = 6 \pi \mu R$ for dynamic viscosity $\mu$ (about $\SI{1}{\kilo\gram\per\meter\per\sec}$) \citep{stokes1851} and cell radius $R\approx \SI{1e-6}{\meter}$ \citep{brunet2019}, a chain of 100 cells each contributing $\SI{5e-6}{\meter}$ length would require energy constant about 
+% \mynote{finish the above. compare to bending modulus of flagella or microtubule or somethin} 
 
-Besides the issue of timescale, the dynamics in \cref{fig:shapes} also fail to capture the \textit{rolling over} phenomenon observed at the edges of large sheets \citep{brunet2019}, where a wave of changing curvature propagates from the edge of the sheet towards the centre. 
+Besides the concern of timescale, the dynamics in \cref{fig:shapes} also fail to capture the \textit{rolling over} phenomenon observed at the edges of large sheets \citep{brunet2019}, where a wave of changing curvature propagates from the edge of the sheet towards the centre. 
 While the edges show a slight rim around $t\approx\num{9e-4}$, the effect is not as pronounced as in \textit{C. flexa} inversion and does not occur at the initation of the transition.  
 A possible explanation for this effect in the cell sheets is that the collars resist compression or stretching. 
 The representation used here, on the other hand, does not penalise filament compression.
@@ -119,13 +125,13 @@ We identify here the key deficiency of the one-dimensional description of \texti
 \begin{figure}[bthp]
     \centering
     \includegraphics[width=\textwidth]{shapes.png}
-    \caption[Dynamics of a one-dimensional filament model]{Time evolution of a one-dimensional filament which switches prescribed curvature sign instantaneously. Time and length are given in dimensionless units defined by the length $L$, bending modulus $A$, and drag coefficient $\zeta$. The time unlabeled time intervals continue sequentially in intervals of $\Delta t = \num{3e-4}$.}
+    \caption[Dynamics of a one-dimensional filament model]{Time evolution of a one-dimensional filament which switches prescribed curvature sign instantaneously. Time and length are given in dimensionless units defined by the length $L$, bending modulus $k$, and drag coefficient $\zeta$. The time unlabeled time intervals continue sequentially in intervals of $\Delta t = \num{3e-4}$.}
     \label{fig:shapes}
 \end{figure}
 
 \section{Surface approximation}
 
-The simplified dynamics that we get from the Mange representation lack energetic costs from the compression and extension that come with deforming a two dimensional surface. 
+The simplified dynamics that we get from the Mong\'e representation lack energetic costs from the compression and extension that come with deforming a two dimensional surface. 
 Here, I evaluate two continuous approaches to describing the sheet as a continuous surface that approximates the positions of collar-collar interfaces.
 Since bending and stretching are coupled in \textit{C. flexa} sheets, I write a single energy function that encompasses both.
 
@@ -139,9 +145,12 @@ The resulting energy function is found to be too challenging to approach analyti
 \nomenclature[a-H]{$H$}{Mean curvature of a surface, the mean of the two principal curvature $g_{\mu\nu}K^{\mu\nu}/2$. Preferred mean curvature (constant) is denoted $H_0$}
 \nomenclature[a-K]{$K$}{Gaussian curvature of a surface, the determinant of the second fundamental form $\det K_\mu^\nu$}
 
-Before getting into the continuous sheet problem, it is worth describing the two degrees of freedom that our collar connections afford. 
+Before tackling the continuous sheet problem, it is worth describing the two degrees of freedom that our collar connections afford. 
 The collar makes an angle $\phi$ between the vector pointing directly out of the cell and the vector between the cell and its collar boundary with the next cell. 
-Additionally, there is an angle between the collars of two adjacent cells $\psi$. The latter results in the sheet's curvature, so we want to relate it to mean curvature $H$ or preferred curvature $H_0$. 
+Additionally, there is an angle between the collars of two adjacent cells $\psi$. 
+The latter results in the sheet's curvature. 
+Hence, the goal is to relate the angles to the mean curvature $H$ or preferred curvature $H_0$.
+so we want to relate it to mean curvature $H$ or preferred curvature $H_0$. 
 
 \mynote{Discuss why we need a collar angle $\psi$ despite \citet{brunet2019} and other sources just talking about $\phi$. This has to do with the straight-collar approximation that I use, where the collar shape and curvature + clamped boundary condition of the meeting collars is distilled into two angles}
 
@@ -152,7 +161,9 @@ Additionally, there is an angle between the collars of two adjacent cells $\psi$
     \label{fig:hpsi}
 \end{figure}
 
-Consider two neighboring cells with collar boundaries $a$, $b$, and $c$, as shown in Figure \ref{fig:hpsi}. We might imagine defining a radius of curvature by the circle that passes through the three collar boundaries. If we set $\bm{x_a} = 2\ell\sin\phi_0(-1, 0)$, $\bm{x_b} = (0,0)$, and $\bm{x_c} = 2\ell\sin\phi_0 (\sin(\psi_0 - \phi_0), \cos(\psi_0-\phi_0)$, we can solve for the circle coordinates 
+Consider two neighboring cells with collar boundaries $a$, $b$, and $c$, as shown in Figure \ref{fig:hpsi}. 
+I define a radius of curvature by the circle that passes through the three collar boundaries. 
+Setting $\bm{x_a} = 2\ell\sin\phi_0(-1, 0)$, $\bm{x_b} = (0,0)$, and $\bm{x_c} = 2\ell\sin\phi_0 (\sin(\psi_0 - \phi_0), \cos(\psi_0-\phi_0)$, we solve for the circle coordinates 
 
 \begin{align*}
     (x_\circ, y_\circ) &= \ell \sin\phi_0\left(-1, \frac{1+\cos2(\psi_0 - \phi_0)}{\sin2(\psi_0 - \phi_0)} \right)
@@ -164,7 +175,7 @@ Consider two neighboring cells with collar boundaries $a$, $b$, and $c$, as show
     H_0 = \frac{1}{\sqrt{x_\circ^2 + y_\circ^2}} &= \frac{\sin(\psi_0 - \phi_0)}{\ell \sin\phi_0}. \label{eq:h0}
 \end{align}
 
-This has a nice, simple interpretation in that if $\psi_0 > \phi_0$, $H_0 > 0$ (as drawn in Figure \ref{fig:hpsi}). On the other hand, $\psi_0 < \phi_0$ implies $H_0 < 0$, or the sheet is concave on the cell body side. 
+This has a simple interpretation in that if $\psi_0 > \phi_0$, $H_0 > 0$ (as drawn in Figure \ref{fig:hpsi}). On the other hand, $\psi_0 < \phi_0$ implies $H_0 < 0$, or the sheet is concave on the cell body side. 
 
 Alternatively, we solve for $\psi_0$ as a function of $H_0$,
 
@@ -172,11 +183,12 @@ Alternatively, we solve for $\psi_0$ as a function of $H_0$,
     \psi_0 &= \phi_0 + \arcsin \left( H_0 \ell \sin \phi_0 \right). \label{eq:h0_psi}
 \end{align}
 
-As we find later in equation \ref{eq:hlb}, the curvature of the sheet in any given direction is greater than or equal to $-1/\ell$ (cell bodies and collars cannot go through each other). This lower bound corresponds in \ref{eq:h0_psi} to $\psi_0 = 0$, which we expect when cells are pressing tightly against each other (Figure \ref{fig:maxcurv}).
+As I find later in equation \ref{eq:hlb}, the curvature of the sheet in any given direction is greater than or equal to $-1/\ell$ (cell bodies and collars cannot go through each other). 
+This lower bound corresponds in \ref{eq:h0_psi} to $\psi_0 = 0$, as expected when cell bodies are pressing tightly against each other (Figure \ref{fig:maxcurv}).
 
 \subsection{Problem statement} \label{subsec:problem}
 
-\citet{powers2010} shows that for an energy density $\e$ written in terms of the first and second fundamental forms $g_{\alpha\beta}$ and $K_{\alpha\beta}$, we can write an expression for the stress tensor $\bm{F}^\alpha$ 
+\citet{powers2010} shows that for an energy density $\e$ written in terms of the first and second fundamental forms $g_{\alpha\beta}$ and $K_{\alpha\beta}$, there is an expression for the stress tensor $\bm{F}^\alpha$ 
 
 \begin{align}
     \bm{F}^\alpha &= \left(T^{\alpha\beta} + \e^{\alpha\beta}K_\gamma^\beta \right)\bm{t}_\beta - (\nabla_\beta \e^{\alpha\beta})\hat{\bm{n}}, \label{eq:stress}
@@ -191,14 +203,14 @@ As we find later in equation \ref{eq:hlb}, the curvature of the sheet in any giv
 
 \noindent with $g = \det{g_{\alpha\beta}}$.
 
-Since the force $\bm{f}$ acting on a surface point is given by the covariant divergence of the stress $\nabla_\alpha \bm{F}^\alpha$, our problem is effectively solved once we decide on an appropriate energy density. 
+Since the force $\bm{f}$ acting on a surface point is given by the covariant divergence of the stress $\nabla_\alpha \bm{F}^\alpha$, the problem is effectively solved once we decide on an appropriate energy density. 
 I discuss two choices: one which introduces the energy density with separate bending and stretching energies from continuum mechanics and another developed by studying the geometry specific to \textit{C. flexa} cells.
 \citet{brunet2019} showed that the angle formed by the \textit{C. flexa} collars changes when individual cells are triggered for inversion. 
-We might reasonably suggest preferred sheet curvature is prescribed by changing the preferred angle of the collar $\phi_0$ and imposing and energetic cost based on the amount that the collar angle $\phi(\theta)$ differs around the collar in $\theta$: $\e \sim \int (\phi(\theta) - \phi_0)^2 d\theta$.
+It would appear reasonable then to suggest that preferred sheet curvature is prescribed by changing the preferred angle of the collar $\phi_0$ and impose an energetic cost based on the amount that the collar angle $\phi(\theta)$ differs around the collar in $\theta$: $\e \sim \int (\phi(\theta) - \phi_0)^2 d\theta$.
 
 \subsection{Continuum surface mechanics approach} \label{subsec:cts}
 
-We begin by describing the \textit{C. flexa} sheet as a thin plate with large deflections to define an energy density in terms of the strain tensor and displacement.
+I begin by describing the \textit{C. flexa} sheet as a thin plate with large deflections to define an energy density in terms of the strain tensor and displacement.
 The displacement of a surface defined in the $xy$-plane can be described with a displacement vector function $\bm{u}(\bm{r})$ and deflection function $\zeta(\bm{r})$ so that $(x, y, 0)$ is mapped to $(x + u_x, y + u_y, \zeta)$ \citep{landau1986}.
 Using the chain rule, we see that an infinitesimal length squared $ds^2$ on the surface $dx^2 + dy^2$ becomes 
 \begin{align*}
@@ -209,7 +221,7 @@ Using the chain rule, we see that an infinitesimal length squared $ds^2$ on the 
 \end{align*}
 where $i,j$ index over $1$ and $2$. The strain tensor $u_{ij}$, which describes infinitesimal displacement, is typically used to define a quadratic energy 
 \begin{align}
-	\e_s &= \frac{1}{2} \int_S \sum_{i,j}\left( 2\mu u_{ij}^2 + \lambda u_{kk} \right) d^2r \label{eq:stretch}
+	\e_s &= \frac{1}{2} \int_S \left( \sum_{i,j}2\mu u_{ij}^2 + \lambda u_{kk} \right) d^2r \label{eq:stretch}
 \end{align}
 as an infinitesimal form of Hooke's law \citep{landau1986}. 
 
@@ -225,7 +237,7 @@ Since \textit{C. flexa} sheets do not form closed surfaces, any shape equation f
 The resulting equations are too difficult to solve \citep{landau1986}, but the authors find that Gaussian curvature effectively cancels stress due to disclinations and dislocations, or topological defects in the underlying surface crystal structure \citep{sachdev1984}.
 The shape equations derived from functional variations of \cref{eq:stretch,eq:helfrich} may be solved in the inextensional limit that $\mu,\lambda \to\infty$ and show that topological defects produce buckling.
 
-Since we know well that collars may vary in length, the limit solution to the resulting shape equations is unrealistic and we would resort to treating the problem numerically.
+Since we know well that collars may vary in end-to-end length, the limit solution to the resulting shape equations is unrealistic and we would resort to treating the problem numerically.
 Additionally, as in \cref{subsec:h_phi}, sheet bending and collar angle (hence, sheet stretching) are coupled. 
 Due to this coupling, I aimed to write a combined energy density for use in \cref{eq:stress} with the goal of deriving a more manageable solution.
 \mynote{qualify that collars may vary in length}
@@ -241,10 +253,10 @@ Then the energy density is written proportionally to the intergral of squared de
 I proceed by deriving the relationship between $\phi(\theta)$ and the second fundamental form $K_{\mu\nu}$ which describes the sheet curvature.
 
 For any point on a smooth surface, we could find an orthonormal basis of eigenvectors $\bm{e}_1, \bm{e}_2$ in the tangent space that diagonalises $K_\mu^\nu$. 
-In terms of a vector $\bm{\Delta \xi}$ written in this basis, we have that the change in height with respect to the tangent plane and its normal $\Delta h$ is given by $K_{\mu\nu}\Delta\xi^\mu\Delta\xi^\nu$.
+In terms of a small displacement vector $\bm{\Delta \xi}$ written in this basis, the change in height $\Delta h$ with respect to the tangent plane and its normal is given by $K_{\mu\nu}\Delta\xi^\mu\Delta\xi^\nu$ \citep{powers2010}.
 
 If the cell has an optimal collar angle $\phi_0$ and corresponding optimal curvature $K_{0\mu\nu}$, then the height of the collar will be $K_{0\mu\nu}\Delta\xi_0^\mu\Delta\xi_0^\nu$. 
-The distance from the centerline of the cell (the norm of $\bm{\Delta\xi_0}$) is determined by $\phi_0$. The geometry is shown in Figure \ref{fig:geom}.
+The distance from the centerline of the cell (the norm of $\bm{\Delta\xi_0}$) is determined by $\phi_0$. The geometry is shown in Figure \ref{fig:geom}, where the collar length $\ell$ is kept fixed.
 
 \begin{figure}[htbp]
     \centering
@@ -309,7 +321,7 @@ We want to write equation \ref{eq:base} in terms of $\phi-\phi_0$ to write down 
     H_\theta \sin^2\phi - H_0 \sin^2\phi_0 &= -2 \sin \frac{\phi - \phi_0}{2} \sin\frac{\phi + \phi_0}{2}. \label{eq:preapprox}
 \end{align}
 
-\noindent If $phi - phi_0$ is small in magnitude, then 
+\noindent If $\phi - \phi_0$ is small in magnitude, then 
 
 \begin{align*}
     \sin\frac{\phi - \phi_0}{2} &\approx \frac{\phi - \phi_0}{2} \\
