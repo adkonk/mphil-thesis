@@ -12,7 +12,7 @@
 \fi
 
 Sheets of \textit{C. flexa}, despite being discretely made up of individual cells, appear to take on curvature when looked at as a whole. 
-In an effort to develop an analytically tractable model for sheets consisting of many cells and avoid buildilng a detailed network topology, I approximate here sheets of \textit{C. flexa} using continuous functions.
+In an effort to develop an analytically tractable model for sheets consisting of many cells and avoid building a detailed network topology, I approximate here sheets of \textit{C. flexa} using continuous functions.
 
 I begin by developing a one-dimensional filament model with inversion dynamics, which demonstrates that azimuthal stretching is key to understanding the flipping process observed in \citet{brunet2019}. 
 I proceed to describe a method for approximating sheets of \textit{C. flexa} with two-dimensional surfaces and relate the collar-opening angle $\phi$ and collar-collar contact angle $\psi$ to surface curvature. 
@@ -62,7 +62,7 @@ For free boundary conditions (force- and torque-free edges) $h_{xx}(0, L) = 0 = 
 
 Equation \ref{eq:eom_mange} is nondimensionalised by re-expressing $x$ as $x/L$ and $t$ as $t / (\frac{\zeta L^4}{a})$ (the labels $x, t, h, H_0$ are left unchanged for readability) to derive $h_t = -h_{4x}$ with boundary conditions $h_{xx}(0, 1) = 0 = h_{3x}(0, 1)$. 
 It is clear that the ground state of equation \ref{eq:energy} is given by a quadratic height function with quadratic term $\frac{1}{2}H_0x^2$. 
-Let $h_*(x) = -\frac{1}{2} H_0(x-\frac{1}{2})^2 + \frac{1}{8}H_0$ be one such ground state, and suppose $h(x, 0) = -h_*(x)$. Note that the filament in $h(x, 0)$ is not in the ground state since the curvature is given by $H_0$. 
+Let $h_*(x) = -\frac{1}{2} H_0(x-\frac{1}{2})^2 + \frac{1}{8}H_0$ be one such ground state, and suppose $h(x, 0) = -h_*(x)$. Note that the filament in $h(x, 0)$ is not in the ground state since the curvature is given by $-H_0$. 
 
 The dynamics of the displacement $g(x, t) = h(x, t) - h_*(x)$ is given by $g_t = g_{4x}$. 
 If $g(x, t) = e^{-\sigma t} f(x)$ for some $f(x)$ and eigenvalue $\sigma$, we obtain the ordinary boundary value problem 
@@ -150,7 +150,6 @@ The collar makes an angle $\phi$ between the vector pointing directly out of the
 Additionally, there is an angle between the collars of two adjacent cells $\psi$. 
 The latter results in the sheet's curvature. 
 Hence, the goal is to relate the angles to the mean curvature $H$ or preferred curvature $H_0$.
-so we want to relate it to mean curvature $H$ or preferred curvature $H_0$. 
 
 \mynote{Discuss why we need a collar angle $\psi$ despite \citet{brunet2019} and other sources just talking about $\phi$. This has to do with the straight-collar approximation that I use, where the collar shape and curvature + clamped boundary condition of the meeting collars is distilled into two angles}
 
@@ -163,7 +162,7 @@ so we want to relate it to mean curvature $H$ or preferred curvature $H_0$.
 
 Consider two neighboring cells with collar boundaries $a$, $b$, and $c$, as shown in Figure \ref{fig:hpsi}. 
 I define a radius of curvature by the circle that passes through the three collar boundaries. 
-Setting $\bm{x_a} = 2\ell\sin\phi_0(-1, 0)$, $\bm{x_b} = (0,0)$, and $\bm{x_c} = 2\ell\sin\phi_0 (\sin(\psi_0 - \phi_0), \cos(\psi_0-\phi_0)$, we solve for the circle coordinates 
+Setting $\bm{x_\rho} = 2\ell\sin\phi_0(-1, 0)$, $\bm{x_\sigma} = (0,0)$, and $\bm{x_\gamma} = 2\ell\sin\phi_0 (\sin(\psi_0 - \phi_0), \cos(\psi_0-\phi_0))$, we solve for the circle's centre's coordinates 
 
 \begin{align*}
     (x_\circ, y_\circ) &= \ell \sin\phi_0\left(-1, \frac{1+\cos2(\psi_0 - \phi_0)}{\sin2(\psi_0 - \phi_0)} \right)
@@ -217,7 +216,7 @@ Using the chain rule, we see that an infinitesimal length squared $ds^2$ on the 
 	d{s'}^2 &= (dx + du_x)^2 + (dy + du_y)^2 + d\zeta^2 \\
 	&= \left(dx + \frac{\partial u_x}{\partial x} dx\right)+ \left(dy + \frac{\partial u_y}{\partial y} \right)^2 + \left(\frac{\partial\zeta}{\partial x} + \frac{\partial\zeta}{\partial y} \right)^2 \\
 	&= \delta_{ij} dx_i dx_j + \left(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} + \frac{\partial \zeta}{\partial x_i} \frac{\partial \zeta}{\partial x_j}\right) dx_i dx_j \\
-	&= (\delta_ij + u_{ij}) dx_i dx_j,
+	&= (\delta_{ij} + u_{ij}) dx_i dx_j,
 \end{align*}
 where $i,j$ index over $1$ and $2$. The strain tensor $u_{ij}$, which describes infinitesimal displacement, is typically used to define a quadratic energy 
 \begin{align}
@@ -227,7 +226,7 @@ as an infinitesimal form of Hooke's law \citep{landau1986}.
 
 The bending energy of membranes is often prescribed to be the Helfrich bending energy \citep{helfrich1973},
 \begin{align}
-	\e_b &= \int_S \frac{\kappa}{2} (2H - 2H_0)^2 + \kappa_G K d^2r. \label{eq:helfrich}	
+	\e_b &= \int_S \left[ \frac{\kappa}{2} (2H - 2H_0)^2 + \kappa_G K \right] d^2r. \label{eq:helfrich}	
 \end{align}
 \noindent Here $H=1/2 (g_{\mu\nu}K^{\mu\nu})$ is the mean curvature of the sheet given by $\bm{u}$ and $\zeta$ and $K = \det K_\mu^\nu$. 
 Since \textit{C. flexa} sheets do not form closed surfaces, any shape equation from \cref{eq:helfrich} must come with appropriate boundary conditions. 
@@ -246,7 +245,7 @@ Due to this coupling, I aimed to write a combined energy density for use in \cre
 
 Following cues from the experimental descriptions of \textit{C. flexa} collars, I sought to write an energy density in terms of the collar angle $\phi$. 
 Since $\phi$ may vary around a cell at some position on the sheet, I write $\phi(\theta)$ as a function of angle $\theta$ varying from $0$ to $2\pi$ around the cell.
-Then the energy density is written proportionally to the intergral of squared deviation of $\phi$ from a reference collar angle $\phi_0$,
+Then the energy density is written proportionally to the integral of squared deviation of $\phi$ from a reference collar angle $\phi_0$,
 \begin{align}
 	\e &= \int_0^{2\pi} (\phi(\theta) - \phi_0)^2 d\theta. \label{eq:phi_int}
 \end{align}
@@ -256,7 +255,7 @@ For any point on a smooth surface, we could find an orthonormal basis of eigenve
 In terms of a small displacement vector $\bm{\Delta \xi}$ written in this basis, the change in height $\Delta h$ with respect to the tangent plane and its normal is given by $K_{\mu\nu}\Delta\xi^\mu\Delta\xi^\nu$ \citep{powers2010}.
 
 If the cell has an optimal collar angle $\phi_0$ and corresponding optimal curvature $K_{0\mu\nu}$, then the height of the collar will be $K_{0\mu\nu}\Delta\xi_0^\mu\Delta\xi_0^\nu$. 
-The distance from the centerline of the cell (the norm of $\bm{\Delta\xi_0}$) is determined by $\phi_0$. The geometry is shown in Figure \ref{fig:geom}, where the collar length $\ell$ is kept fixed.
+The distance from the centreline of the cell (the norm of $\bm{\Delta\xi_0}$) is determined by $\phi_0$. The geometry is shown in Figure \ref{fig:geom}, where the collar length $\ell$ is kept fixed.
 
 \begin{figure}[htbp]
     \centering
