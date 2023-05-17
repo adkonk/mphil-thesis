@@ -57,7 +57,7 @@ For a cell $\alpha\in C$ whose collar microvilli are all in contact with those o
 As each edge in $G^*$ transects an edge $(\alpha, \beta)$ between cells $\alpha, \beta$ in $G$, we identify $G^*$ as the dual graph of $G$ (\cref{fig:duals}). \footnote{As $G$ is finite, all vertices in $G^*$ as described above which indicate two cells' interactions ending at the edge of a colony sheet would be merged into a single vertex $v_*$ in the dual graph of $G$. Consequently $G^*$ is not exactly the dual graph of $G$. We address this later when defining sheet edges numerically by replacing each edge $(v, v_*)$ in $G^*$ with the edge $(v, v')$ for new vertices $v'$ and removing $v_*$ from $G^*$ and deleting all edges incident on $v_*$.}
 Consequently, we have that either $G$ or $G^*$ is sufficient to specify the topology of the other provided the coordinates of vertices. 
 
-For the remainder of this chapter, I will use $\alpha,\beta$ to index cell vertices in $G$, $\rho, \sigma$ to index collar-collar interface boundary vertices in $G^*$, and $\gamma$ to index either type of vertex.
+For the remainder of this chapter, I will use indices $\alpha,\beta$ to index cell vertices in $G$, indices $\rho, \sigma$ to index collar-collar interface boundary vertices in $G^*$, and index $\gamma$ to index either type of vertex.
 
 \subsection{Defining a sheet} \label{subsec:springs}
 
@@ -113,7 +113,7 @@ Indeed, the continuous approximation of this energy function for small differenc
 When cells make boundaries with more than three cells simultaneously, there is not an immediately clear way to define the normal vector $\bh{n}_\alpha$ of a cell $\alpha$. 
 
 As I discuss later (\cref{subsubsec:approx_norm}), a reasonable choice that does not depend on cell position (which in this case is already projected onto the approximated plane of collar positions) would be to approximate $\bh{n}_\alpha$ as the normal vector of a plane approximation to the collar vectices $\bm{r}_\rho$ for $\rho\subset\alpha$. 
-Although this choice is intuitively reasonable, it lacks physical motivation as it does not necessarily minimise the energy when the cell body is considered(\cref{subsubsec:opt_norm}).
+Although this choice is intuitively reasonable, it lacks physical motivation as it does not necessarily minimise the energy when the cell body is considered (\cref{subsubsec:opt_norm}).
 On the other hand, treating the normal vectors as free variables here would allow them to take any direction to minimise the energy, which does not translate to any physical movement or rotation of the cell body. 
 
 \subsection{Surface formed by cell bodies}
@@ -206,12 +206,19 @@ For initial collar positions not too far from cells, collars would not overlap o
 \end{figure}
 
 In developing the simplified, discrete model for \textit{C. flexa} as a spatial graph, I aimed to distill the complex physics of collar-collar interactions into a minimum number of sufficient energy terms to capture the sheet bending that we observe experimentally. 
-In what follows, I treat edges $(\alpha, \rho)$ between a cell $\alpha$ and collar vertex $\rho$ as straight line collar microvilli and cell pairs, flanking collar pairs $(\alpha, \beta: \rho, \sigma)$ as lines of interactions between the planes given by points $\rho, \alpha, \sigma$ and $\rho, \beta, \sigma$ (\cref{fig:model_details}). 
+In what follows, I treat edges $(\alpha, \rho)$ between a cell $\alpha$ and collar vertex $\rho$ as straight line collar microvilli and cell pairs, flanking collar pairs $(\alpha, \beta: \rho, \sigma)$ as lines of interactions between the planes given by points $\rho, \alpha, \sigma$ and $\rho, \beta, \sigma$ (\cref{fig:model_details}).
+The angles $\phi$ between collar microvilli directions and cell normal vectors and $\psi$ between interfacing collar-cell-collar planes are fully specified by the all cells' coordinates $\{\bm{r}_\alpha\}$, the cells' normal vectors $\{\bm{n}_\alpha\}$ as variables each constrained to have unit length, and the collar interface endpoints $\{\bm{r}_\rho\}$.
 
-Consequently, as detailed in the continuous model description of \cref{ch:2}, I build an energy function $\e$ that penalises deviations for angles $\phi$ and $\psi$, which describe angles between ($\phi$) collar microvilli and cell normal vectors $\bh{n}_\alpha$, ($\psi$) plane normals $\bh{n}_{\rho\alpha\sigma}, \bh{n}_{\rho\beta\sigma}$, and (sp) collar lengths $|\bm{r}_\alpha - \bm{r}_\rho|$:
+Consequently, as detailed in the continuous model description of \cref{ch:2}, I build an energy function $\e = \e(\{\bm{r}_\alpha, \bm{n}_\alpha\}, \{\bm{r}_\rho\})$ that penalises deviations for angles $\phi$ and $\psi$, which describe angles between ($\phi$) collar microvilli and cell normal vectors $\bh{n}_\alpha$, ($\psi$) plane normals $\bh{n}_{\rho\alpha\sigma}, \bh{n}_{\rho\beta\sigma}$, and (sp) collar lengths $|\bm{r}_\alpha - \bm{r}_\rho|$:
 \begin{align}
-	\e &= \e_\phi + \e_\psi + \e_{\text{sp}} \label{eq:e}
+	\e &= \e_\phi + \e_\psi + \e_{\text{sp}}. \label{eq:e}
 \end{align}
+
+The terms $\e_\phi$ and $\e_\psi$ capture the energetic penalty incurred by collar bending.
+The former results from bending over the length of the collar from the angle formed at the collar base, and the latter captures the bending induced by a neighbouring cell's collars imparting a force.
+Moreover, any intrinsic curvature in the collar is captured in the latter term; two filaments each having preferred zero curvature would be in their ground state when the filaments align and cell bodies touch, as in \cref{fig:maxcurv}.
+If filaments have intrinsic curvature, the term $\e_\psi$ will encourage distance between cell body positions.
+We will see in the following sections that $\e_\phi$ and $\e_\psi$ are functions of all variables $\{\bm{r}_\alpha, \bm{n}_\alpha\}$ and $\{\bm{r}_\rho\}$, while $\e_{\text{sp}}$ is a function only of the spatial coordinates $\{\bm{r}_\alpha\}$ and $\{\bm{r}_\rho\}$.
 
 \subsection{Cell-collar angle energy}
 For a physical \textit{C. flexa} cell $\alpha$ with fixed position $\bm{r}_\alpha$ and fixed collar positions $\{\bm{r}_\rho\}_{\rho\subset\alpha}$, we realise that the cell still has freedom in its rotation which we expect will contribute substantially to its energy. 
@@ -362,12 +369,14 @@ In contrast to a numerical optimisation routine, gradient descent requires subst
 
 \subsection{Deriving the gradient}
 
-The linearity of the gradient permits us to take the gradient term-by-term in \cref{eq:e}. For an energy function $\e(\{ \bm{r}_\gamma\})$ with cell normal vectors $\bh{n}_\alpha$ approximated in terms of each cell's collar vertices, I find that the gradient $\partial \e_\phi / \partial \bm{r}_\gamma$ is given by 
+The linearity of the gradient permits us to take the gradient term-by-term in \cref{eq:e}.
+For energy function $\e_\phi(\{ \bm{r}_\alpha, \bm{n}_\alpha\}, \{\bm{r}_\rho\})$, I find that the gradient $\partial \e_\phi / \partial \bm{r}_\gamma$ is given by 
 \begin{align}
-	\frac{\partial\e_\phi}{\partial\bm{r}_\gamma} &= \sum_{(\alpha,\rho)} \frac{-(\phi_{(\alpha,\rho)} - \phi_0)}{\sqrt{1-(\bh{n}_\alpha \cdot \hat{\alpha\rho})^2}} \left(\frac{\partial \bh{n}_\alpha}{\partial \bm{r}_\gamma} \cdot \hat{\alpha\rho} + \frac{\partial\hat{\alpha\rho}}{\partial\bm{r}_\gamma} \cdot \bh{n}_\alpha \right), \label{eq:grad_phi}
+	\frac{\partial\e_\phi}{\partial\bm{r}_\gamma} &= \sum_{(\alpha,\rho)} \frac{-(\phi_{(\alpha,\rho)} - \phi_0)}{\sqrt{1-(\bh{n}_\alpha \cdot \hat{\alpha\rho})^2}} \left(\frac{\partial\hat{\alpha\rho}}{\partial\bm{r}_\gamma} \cdot \bh{n}_\alpha \right), \label{eq:grad_phi}
 \end{align}
 \noindent where for vectors $\bm{a}, \bm{b}$ I denote $(\partial\bm{a}/\partial\bm{b})_{ij} = \partial\bm{a}_j /\partial\bm{b}_i$.
-When the cell normal vectors $\bh{n}_\alpha$ are free variables, the first term in \cref{eq:grad_phi} is zero and the calculation is completed with
+\Cref{eq:grad_phi} applies over indices $\gamma$ describing both cell bodies and collar-collar interface points.
+Calculating equation \cref{eq:grad_phi} is completed with
 \begin{align}
 	\frac{\partial \hat{\alpha\rho}_j}{\partial\bm{r}_{\gamma i}} &= \frac{\delta_{\gamma\rho}-\delta_{\gamma\alpha}}{|\vec{\alpha\rho}|} \left[\delta_{ij} - (\vec{\alpha\rho})_i(\vec{\alpha\rho})_j \right], \label{eq:dap_dr}
 \end{align}
@@ -389,7 +398,7 @@ As discussed in \ref{subsec:e_psi}, an angle $\psi_{(\alpha, \beta: \rho, \sigma
 
 The gradient $\partial \e_{\text{sp}} / \partial \bm{r}_\gamma$ is given by the linear spring force 
 \begin{align}
-	\frac{\partial\e}{\partial\bm{r}_\gamma} &= k_{\text{sp}} \sum_{(\alpha,\rho)} \left(\delta_{\alpha\gamma} - \delta_{\rho\gamma} \right)\vec{\alpha\rho} \label{eq:grad_sp}
+	\frac{\partial\e_{\text{sp}}}{\partial\bm{r}_\gamma} &= k_{\text{sp}} \sum_{(\alpha,\rho)} \left(\delta_{\alpha\gamma} - \delta_{\rho\gamma} \right)\vec{\alpha\rho} \label{eq:grad_sp}
 \end{align}
 which is simply Hooke's law.
 
@@ -491,8 +500,10 @@ For example, cells at either the centre nor boundary in a bent sheet (\cref{fig:
 	\label{fig:landscape_flat}
 \end{figure}
 
-For graph topologies generated with an icosphere which contain topological defects, we observe a more rich energy landscape (\cref{fig:landscape_ico}).
-A small section of the icosphere (points with polar angle greater than $3\pi/5$ with respect to vertical axis) gives an energy landscape with two diagonal valleys corresponding to flagella-in and flagella-out sheets (upper and lower, respectively).
+We can observe a more rich energy landscape by using a grgaph topology containing defects from a hexagonal lattice.
+A simple choice is an icosahedron, which is formed using a polyhedron of twelve vertices each of degree five forming twenty faces of equilateral triangles.
+Each triangular face can each be repeatedly subdivided into four smaller equilateral triangular face by introducing a vertex along each edge, such that the surface gains vertices of degree six in a hexagonal lattice \citep{dahl2014}.
+A small section of the icosphere (points with polar angle greater than $3\pi/5$ with respect to vertical axis) after two subdivisons gives an energy landscape with two diagonal valleys corresponding to flagella-in and flagella-out sheets (upper and lower, respectively).
 That there are two valleys, rather than the one valley along $\phi_0 = \psi_0$, is interpreted to be the result of topological defects in the lattice structure that are essential to the construction of the icosphere. 
 The two energy valleys achieve similar values for the minimum sheet energy, suggesting there is not necessarily any energetic preference to either state in this model.
 The positive and negative sheet curvatures respectively, in the convention of \cref{ch:2} is consistent with how we expect $\phi_0$ and $\psi_0$ to induce spontaneous curvature (\cref{eq:h0}).

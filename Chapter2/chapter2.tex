@@ -28,18 +28,18 @@ I write an expression for the sheet energy but find that it yields no tractable 
 \end{figure}
 
 To build intuition on the mechanics of \textit{C. flexa} inversion, consider a chain of cells connected by their collar filaments like beads on a string (\cref{fig:chain}). 
-Supposing there are sufficiently many cells that the length contributed to the chain of cells by a single cell is small relative to the total length, we approximate the filament with a continuous function $\vec{r}(s)$ parameterised by arclength $s$.
+Supposing there are sufficiently many cells that the length contributed to the chain of cells by a single cell is small relative to the total length, we approximate the filament with a continuous function $\vec{r}(s, t)$ parameterised by arclength $s$ and changing in time $t$.
 If the filament has preferred curvature $\kappa_0$, then the bending energy functional $\e$ is given by 
 
 \begin{align*}
-    \e[\vec{r}(s)] &= \frac{1}{2} a \int (\kappa - \kappa_0)^2 ds, 
+    \e[\vec{r}(s, t)] &= \frac{1}{2} a \int (\kappa - \kappa_0)^2 ds, 
 \end{align*}
-\noindent where the curvature $\kappa$ is deduced from $\vec{r}(s)$ and $a$ is the bending modulus. 
+\noindent where the curvature $\kappa$ is deduced from $\vec{r}(s, t)$ and $a$ is the bending modulus. 
 
-If the filament is short relative to the characteristic bending length scale, we express the problem in the Mong\'e representation by writing $\vec{r}(s) = (x, h(x))$ for a height function $h(x)$, where $|h_x|$ is small.\footnote{Here, I use subscripts to denote partial derivatives: $h_x = \partial h / \partial x$. A number denotes several partial derivatives: $h_{3x} = \partial^3 h / \partial x^3$.} 
+If the filament is short relative to the characteristic bending length scale, we express the problem in the Monge representation by writing $\vec{r}(s, t) = (x, h(x, t))$ for a height function $h(x, t)$, where $|h_x|$ is small.\footnote{Here, I use subscripts to denote partial derivatives: $h_x = \partial h / \partial x$. A number denotes several partial derivatives: $h_{3x} = \partial^3 h / \partial x^3$.} 
 The resulting energy is written in terms of the prescribed (signed) curvature $H_0$, 
 \begin{align}
-    \e[\vec{h}(x)] &= \frac{1}{2} a \int_0^L (h_{xx} - H_0)^2 dx. \label{eq:energy}
+    \e[\vec{h}(x, t)] &= \frac{1}{2} a \int_0^L (h_{xx} - H_0)^2 dx. \label{eq:energy}
 \end{align}
 
 Since the cells in this beads-on-a-chain description consist of large spheres connected by thin filaments, we postulate that the filament experiences isotropic drag with coefficient $\zeta$ in a viscous medium.
@@ -51,11 +51,11 @@ As a result, we describe the dynamics with a functional derivative of the energy
 \end{align}
 Taking the functional derivative of equation \ref{eq:energy}, we find the energy change
 \begin{align}
-    \delta \e &= \left. a(h_{xx} - H_0)\delta h_x \right|_0^L - \left. ah_{3x} \delta h \right|_0^L + a \int h_{4x} \delta h ds \label{eq:func_deriv} 
+    \delta \e &= \left. a(h_{xx} - H_0)\delta h_x \right|_0^L - \left. ah_{3x} \delta h \right|_0^L + a \int h_{4x} \delta h dx \label{eq:func_deriv} 
 \end{align}
 in terms of the boundary conditions of $h$.
 
-For free boundary conditions (force- and torque-free edges) $h_{xx}(0, L) = 0 = h_{3x}(0, L)$, the boundary terms in equation \ref{eq:func_deriv} vanish and we are left with the equation of motion 
+For free boundary conditions (force- and torque-free edges) $h_{xx}(0, t) = 0, h_{xx}(L, t) = 0$ and $h_{3x}(0, t) = 0, h_{3x}(L, t) = 0$, the boundary terms in equation \ref{eq:func_deriv} vanish and we are left with the equation of motion 
 \begin{align}
     \zeta h_t &= -a h_{4x}. \label{eq:eom_mange}
 \end{align}
@@ -131,7 +131,7 @@ We identify here the key deficiency of the one-dimensional description of \texti
 
 \section{Surface approximation}
 
-The simplified dynamics that we get from the Mong\'e representation lack energetic costs from the compression and extension that come with deforming a two dimensional surface. 
+The simplified dynamics that we get from the Monge representation lack energetic costs from the compression and extension that come with deforming a two dimensional surface. 
 Here, I evaluate two continuous approaches to describing the sheet as a continuous surface that approximates the positions of collar-collar interfaces.
 Since bending and stretching are coupled in \textit{C. flexa} sheets, I write a single energy function that encompasses both.
 
@@ -156,11 +156,11 @@ Hence, the goal is to relate the angles to the mean curvature $H$ or preferred c
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\textwidth]{hpsi.png}
-    \caption[Geometry of sheet curvature]{Geometry for relating collar boundary angle $\psi$ to curvature $H$. }
+    \caption[Geometry of sheet curvature]{Geometry for relating collar boundary angle $\psi$ to curvature $H$. The diagram represents a cross section in plane formed by two neighbouring cells' bodies and the middle of the line along which their collars make contact. Cell bodies are represented by points at the intersections of black lines with bisecting angle $\phi_0$, and collars (black lines) make contact with neighbouring cells' collars at points $\rho$, $\sigma$, and $\gamma$. The non-physical blue line represents a surface describing the collar-collar interfaces, where the radius of the circle is shown with a blue line of length $1/H_0$.}
     \label{fig:hpsi}
 \end{figure}
 
-Consider two neighboring cells with collar boundaries $a$, $b$, and $c$, as shown in Figure \ref{fig:hpsi}. 
+Consider two neighboring cells with collar boundaries $\rho$, $\sigma$, and $\gamma$, as shown in Figure \ref{fig:hpsi}. 
 I define a radius of curvature by the circle that passes through the three collar boundaries. 
 Setting $\bm{x_\rho} = 2\ell\sin\phi_0(-1, 0)$, $\bm{x_\sigma} = (0,0)$, and $\bm{x_\gamma} = 2\ell\sin\phi_0 (\sin(\psi_0 - \phi_0), \cos(\psi_0-\phi_0))$, we solve for the circle's centre's coordinates 
 
@@ -190,7 +190,7 @@ This lower bound corresponds in \ref{eq:h0_psi} to $\psi_0 = 0$, as expected whe
 \citet{powers2010} shows that for an energy density $\e$ written in terms of the first and second fundamental forms $g_{\alpha\beta}$ and $K_{\alpha\beta}$, there is an expression for the stress tensor $\bm{F}^\alpha$ 
 
 \begin{align}
-    \bm{F}^\alpha &= \left(T^{\alpha\beta} + \e^{\alpha\beta}K_\gamma^\beta \right)\bm{t}_\beta - (\nabla_\beta \e^{\alpha\beta})\hat{\bm{n}}, \label{eq:stress}
+    \bm{F}^\alpha &= \left(T^{\alpha\beta} + \e^{\alpha\gamma}K_\gamma^\beta \right)\bm{t}_\beta - (\nabla_\beta \e^{\alpha\beta})\hat{\bm{n}}, \label{eq:stress}
 \end{align}
 
 \noindent where summation over repeated indices is implied. Here, $K_\gamma^\beta = K_{\gamma \delta}g^{\delta \beta}$, $\bm{t}_\beta = \partial_\beta \bm{r}$, and 
