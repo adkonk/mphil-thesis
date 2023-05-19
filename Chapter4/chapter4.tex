@@ -36,9 +36,6 @@ This contrasts with the rosette colonies of \textit{S. rosetta}, which are known
 \textit{C. flexa} may also be driven to form the observed monolayers of cells because this morphology allows cells more flow of their own for feeding.
 Nevertheless, there may be a myriad of other reasons that these species have evolved to have their current morphologies, especially external influences from the ecosystems they inhabit.
 
-% What is special about Choanoeca in particular?
-For collars to splay as they do in individual cells, they must not adhere to each other; a small azimuthal torque would otherwise easily cause several microvilli to join, interfering with flagellar beating.
-
 % why does choanoeca align as it does
 \textit{Choanoeca} is remarkable in the common orientation of all cells in its colonies, which is made possible by its colonies' connections via collar filaments rather than an extracellular matrix \citep{leadbeater1983}. 
 It is clear that the collar filaments are essential to the sheet orientation, and that they are the means by which sheets achieve variable curvature.
@@ -56,6 +53,7 @@ This result is consistent with that described in \citet{seung1988} for planar la
 Indeed, topological defects induce buckling and non-local inability to satisfy equilibrium conditions, yet these defects are also vital to achieving large-scale sheet curvature.
 The model I develop in \cref{ch:3} supports the idea that, loosely, defects in the small-scale lattice topology induce curvature in the large-scale sheet geometry.
 While not previously explored, we should expect to find a small but non-negligible fraction of cells in \textit{Choanoeca} colonies to have an irregular number of neighbours.
+Further imaging as in \cref{subfig:contact1},\ref{subfig:contact2} to quantify the statistics of the numbers of neighbours in colonies would be valuable.
 
 % what do we actually observe and how does it line up with the model used here?
 \citet{leadbeater1983} describes that in \textit{C. perplexa} colonies, each cell is typically adjacent to six others. 
@@ -74,6 +72,16 @@ This validates the treatment of boundary collar vertices used in the discrete mo
 Both the continuous and discrete models developed make clear that azimuthal stretching in curved sheets is critical in \textit{C. flexa} inversion, especially by introducing an energetic barrier.
 With even relatively large-area sheets observed inverting readily in culture (collar diameter relative to sheet major-axis diameter as low as $\sim20\%$), collar-collar interfaces must either be able to substantially stretch or connections must break.
 
+% more detailed flow
+The simple, continuous one-dimensional model of \cref{sec:c_1d} had two clear limitations discussed there: the lack of chain elongation or shortening and the assumption of linear, isotropic drag.
+The results discussed in this work support the hypothesis that the former is largely responsible for \textit{Choanoeca} colony shape.
+However, the extent to which flow affects sheet shape is unclear, both in experimental results \citep{brunet2019} as well as the larger theoretical work this thesis contributes to.
+Linear, local isotropic drag would suggest a chain of cells falling through the fluid has the same shape as it falls, yet intuitively we expect the ends of the chain to lag behind its centre.
+I expect that the effect would be less pronounced in a two-dimensional sheet since azimuthal stretching and compression generally appear to restrict sheet shape (\cref{fig:extra}), though there are nevertheless many questions to explore relating flow and geometry.
+Consequently, we should be careful to draw conclusions from details in the dynamics of the models presented here, including \cref{fig:shapes} and \cref{fig:dynamics}.
+Since the shape changes in the discrete model are slow relative to the timescale defined by system size and fluid properties, it is compelling to at least treat sheet boundaries rolling over as a consequence of topological constraints.
+Our understanding of flow's impact on colony shape would be improved greatly by experiments placing colonies near surfaces or in external flows and observing any changes in shape.
+
 % describing colony growth and resulting lattice topology
 A model for \textit{Choanoeca} colony growth may help understand the origins and distributions of topological defects in the lattice structure. 
 Given the possible division strategy of these cells (\cref{fig:division}) and the idea that other choanoflagellate colony cells divide without synchronisation \citep{larson2020}, we might build a model by spontaneously splitting cells into pairs of adjacent daughter cells.
@@ -84,6 +92,7 @@ Second, such a model may cause the cup-like sheets observed, rather than sheets 
 Moreover, the distribution of defects over the sheet may produce non-icosahedral or -spherical equilibrium geometries, as large \textit{Choanoeca} sheets tend to be ellipsoidal rather than spherical \citep{leadbeater1983,brunet2019}.
 It remains to be resolved how colonies form without buckling at sheet boundary: uniform, isotropic cell division would give proportionally scaling area and boundary length, but preferred sheet curvature would cause buckling with too large of a boundary.
 We can consider this as a conflict between preferred sheet curvature with bending based on $\sin (\psi_0 - \phi_0)$ and preferred cell space based on $\ell_0 \sin \phi_0$ (\cref{eq:h0}).
+Experimental observations of colonies as they grow and divide would validate a model for growth, as well as provide some insight into the formation, coordination, and persistence of collar-collar connections.
 
 % alternative colony growth theorising
 An alternative theory for \textit{Choanoeca} colony growth is via aggregation \citep{grosberg2007}, though choanoflagellate colonies have only been observed to form by clonal division \citep{fairclough2010,alegado2012,woznica2016}.
@@ -96,7 +105,8 @@ Colony formation by aggregation is unprecendented in our understanding of choano
 % changing lattice topology to induce inversion
 While the structures used in this work had discrete symmetry around an axis, \textit{C. flexa} sheets observed experimentally may have substantial irregularities both in the bulk and at the boundary. 
 Several images in \citet{brunet2019} show uneven sheet boundaries, resembling crenellations of a castle wall (\cref{fig:edges}).
-As suggested in \cref{subsec:dynamics}, a sheet with excessively restrictive lattice topology may be able to achieve inversion by a temporary change in its cell-cell connections.
+As suggested in \cref{subsec:dynamics}, a sheet with excessively restrictive lattice topology may be able to achieve inversion by a temporary change in its cell-cell connections, especially by tearing or forming holes in the sheet.
+Continued experimental work should look for disconnections between adjacent cells between inversion.
 An extreme example of inversion through topological change is performed by \textit{Volvox} embryos, which invert by creating a hole in their sphere and pass the entire sheet through the hole \citep{hohn2015}.
 Type-A \textit{Volvox} inversion forms this hole by making four lips and peels them back to begin inversion at the boundary, similar to how inversion proceeds in \cref{fig:dynamics} \citep{viamontes1977}.
 Even besides boundary ruggedness, asymmetry in the sheet may promote the initiation of inversion at one region of the boundary while it is not yet possible elsewhere.
