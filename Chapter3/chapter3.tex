@@ -68,6 +68,7 @@ For the remainder of this chapter, I will use indices $\alpha,\beta$ to index ce
 
 A reasonable simplification of the cell sheet will use either the cell-cell interaction graph $G$ or the collar boundary edge graph $G^*$. 
 Since physical interactions occur at the collar interfaces, I consider first the physical details of a model defined on $G^*$. 
+The following analysis establishes that it is reasonable to consider only the endpoints of lines along which cells' collars interact, at the meeting points of blue lines in \cref{fig:duals}.
 
 If two cells have a collar boundary described by $\bm{r}_\rho t + (1-t)\bm{r}_\sigma$ with $0 \leq t \leq 1$ and the energy is defined by continuously many springs from the boundary to a projected cell point $\bm{r}^*_\alpha$, then the energy $E_{\rho\sigma}$ of that boundary is 
  \begin{align}
@@ -139,7 +140,7 @@ Since neither approach here nor in \cref{subsec:springs} captures all physical i
 For sheets whose graph of cell-cell connections $G$ can be drawn on a plane with edges as straight lines, it is simplest to define the initial spatial graph $G$ as lying in the $xy$-plane with cell coordinates $\{\bm{r}_\alpha\}_{\alpha\in C}$ and to use Voronoi tessellation to generate collar vertices in $G^*$. 
 Voronoi tessellation allows for generalisation beyond regular lattices, though it does not facilitate graph topologies that cannot be drawn in a plane as described above. 
 
-To build more complex graphs $G$ that are nevertheless planar, we can either use subsets of common polyhedra (e.g. subdivided icosahedron) or triangulate points that lie along a surface. 
+To build more complex graphs $G$ that are nevertheless planar, we can either use subsets of common polyhedra (e.g. subdivided icosahedron) or triangulate points that lie along a surface.\footnote{These topologies are detailed further in \cref{subsec:landscape}.}
 In the latter case, I found sufficient flexibility in randomly sampling a specified number of points uniformly distributed on a sphere below some latitude, then calculating the generalised Voronoi tessellation with respect to the metric on the sphere as described in \citet{caroli2010}.
 \mynote{add a figure showing the various initial conditions}
 
@@ -325,7 +326,7 @@ When interested in sheets with constrained collar length, we may either take a n
 
 \section{Minimising sheet energy} \label{sec:minimise_energy}
 
-The sheet energy $\e(\{\bm{r}_\gamma \}_{\gamma \in \mathfrak{G}}$ (\cref{eq:e}) is parameterised over the cell and collar boundary vertex coordinates given a function $\bh{n}_\alpha(\bm{r}_\alpha, \{\bm{r}_\rho \}_{\rho\subset\alpha})$ that approximates the cell normal for all cells $\alpha$.
+The sheet energy $\e(\{\bm{r}_\gamma \}_{\gamma \in \mathfrak{G}}, \{\bm{n}_\alpha\}_{\alpha\in G})$ (\cref{eq:e}) is parameterised over the cell and collar boundary vertex coordinates as well as the free apicobasal axis unit vectors $\bm{n}_\alpha$ for cell bodies $\alpha$.
 When sheet topology is left fixed, the summations in \cref{eq:e_phi,eq:e_psi,eq:e_sp} remain unchanged.
 
 Minimisations of \cref{eq:e} using a numerical optimisation routine were suitable in simple, small systems. 
@@ -508,6 +509,9 @@ For example, cells at either the centre nor boundary in a bent sheet (\cref{fig:
 We can observe a more rich energy landscape by using a grgaph topology containing defects from a hexagonal lattice.
 A simple choice is an icosahedron, which is formed using a polyhedron of twelve vertices each of degree five forming twenty faces of equilateral triangles.
 Each triangular face can each be repeatedly subdivided into four smaller equilateral triangular face by introducing a vertex along each edge, such that the surface gains vertices of degree six in a hexagonal lattice \citep{dahl2014}.
+Intuitively, the fixed number of vertices with degree five make it possible for the vertices to form a closed surface.
+For example, the patchwork of a football is formed by replacing each degree-five vertex of an icosahedron with a regular pentagon, and the polygons on the surface are able to form a regular pattern while forming an overall curved surface due to the diversity of shapes present.
+
 A small section of the icosphere (points with polar angle greater than $3\pi/5$ with respect to vertical axis) after two subdivisons gives an energy landscape with two diagonal valleys corresponding to flagella-in and flagella-out sheets (upper and lower, respectively).
 That there are two valleys, rather than the one valley along $\phi_0 = \psi_0$, is interpreted to be the result of topological defects in the lattice structure that are essential to the construction of the icosphere. 
 The two energy valleys achieve similar values for the minimum sheet energy, suggesting there is not necessarily any energetic preference to either state in this model.
