@@ -110,17 +110,22 @@ Letting $f(x) = \sum_{n=1}^\infty a_n f_n(x)$, we get that $a_n = \int_0^1 g(x, 
 \noindent In practice, only the solutions $k_n$ to equation \ref{eq:roots} shown in Figure \ref{subfig:roots} are used, since the approximation to $h(x, 0)$ is close and higher $k_n$ result in precision errors when calculating $\cosh kx$ and $\sinh kx$ (as in \citet{wiggins1998}). 
 
 For the initial conditions given previously, the time evolution of $h(x, t)$ is shown in Figure \ref{fig:shapes}. 
-Immediately, we notice that the filament changes shape extremely quickly, and the timescale $\zeta L^4 / k$ must be extremely large to produce inversion at the order of $\SI{10}{\sec}$ as observed by \citet{brunet2019}. 
+We can observe that inversion occurs much more rapidly than the timescale defined by the fluid and system properties, which results from exponential decay with eigenvalues of $k_n^4$ in \cref{eq:sol}.
+Moreover, we only weakly see a \textit{rolling over} effect observed at the edges of large inverting sheets \citep{brunet2019}, where a wave of changing curvature propagates from the edge of the sheet towards the centre.
+Experimentally, the effect is moer pronounced and occurs at the initiation of the transition.
+
+Two limitations of this model stand out.
+The first is the localised viscous drag assumed in \cref{eq:eom}, which allows a much faster inversion than would be allowed with nonlocal drag.
+Here and later in this work (\cref{subsec:grad_desc}), I make this assumption to make solving for the dynamics of the problem more tractable.
+The impact of a localised drag assumption is ameliorated by the fact that resting flagella-in colonies sediment to the ground \citep{brunet2019}, though we generally do not know the extent to which drag due to nonlocal flow affects \textit{C. flexa} inversion and shape.
+The second limitation is that the model used above does not penalise compression or stretching of the whole chain of cells, while stiffness in the collar would prevent the colony from changing in length\footnote{As a surface, area.} freely.
+In particular, this is a consequence of the Monge representation used in \cref{eq:energy}.
 % Using Stokes' law $\zeta = 6 \pi \mu R$ for dynamic viscosity $\mu$ (about $\SI{1}{\kilo\gram\per\meter\per\sec}$) \citep{stokes1851} and cell radius $R\approx \SI{1e-6}{\meter}$ \citep{brunet2019}, a chain of 100 cells each contributing $\SI{5e-6}{\meter}$ length would require energy constant about 
 % \mynote{finish the above. compare to bending modulus of flagella or microtubule or somethin} 
 
-Besides the concern of timescale, the dynamics in \cref{fig:shapes} also fail to capture the \textit{rolling over} phenomenon observed at the edges of large sheets \citep{brunet2019}, where a wave of changing curvature propagates from the edge of the sheet towards the centre. 
-While the edges show a slight rim around $t\approx\num{9e-4}$, the effect is not as pronounced as in \textit{C. flexa} inversion and does not occur at the initation of the transition.  
-A possible explanation for this effect in the cell sheets is that the collars resist compression or stretching. 
-The representation used here, on the other hand, does not penalise filament compression.
-
-As the arclength decreases substantially during the transition in \cref{fig:shapes} without affecting its dynamics, it is clear that collar extension and compression are essential to describing appropriate dynamics. Moreover, the timescales between this one-dimensional model and those observed experimentally being as misaligned as they are indicates that some energetic barrier to inversion is missing in the above description. 
-We identify here the key deficiency of the one-dimensional description of \textit{C. flexa} sheets, which is that compression and extension, especially in the azimuthal direction, are essential to understand the sheets' bistable nature.
+Since a goal of this model is to capture sheet boundaries rolling over to initiate the transition, and this occurs slowly experimentally compared to the rapidly propagating wave of inversion afterwards, I chose to develop the model more to address the latter limitation.
+The slow initiation of inversion for large sheets suggests that a mechanical barrier, rather than a dynamic one caused by interactions with the surround fluid, is responsible for the characteristic dynamics observed.
+To address this, we find that compression and extension, especially in the azimuthal direction, are essential to understand the sheets' bistable nature.
 
 \begin{figure}[bthp]
     \centering
@@ -129,7 +134,7 @@ We identify here the key deficiency of the one-dimensional description of \texti
     \label{fig:shapes}
 \end{figure}
 
-\section{Surface approximation}
+\section{Surface approximation} \label{sec:surface_approx}
 
 The simplified dynamics that we get from the Monge representation lack energetic costs from the compression and extension that come with deforming a two dimensional surface. 
 Here, I evaluate two continuous approaches to describing the sheet as a continuous surface that approximates the positions of collar-collar interfaces.
@@ -156,11 +161,12 @@ Hence, the goal is to relate the angles to the mean curvature $H$ or preferred c
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\textwidth]{hpsi.png}
-    \caption[Geometry of sheet curvature]{Geometry for relating collar boundary angle $\psi$ to curvature $H$. The diagram represents a cross section in plane formed by two neighbouring cells' bodies and the middle of the line along which their collars make contact. Cell bodies are represented by points at the intersections of black lines with bisecting angle $\phi_0$, and collars (black lines) make contact with neighbouring cells' collars at points $\rho$, $\sigma$, and $\gamma$. The non-physical blue line represents a surface describing the collar-collar interfaces, where the radius of the circle is shown with a blue line of length $1/H_0$.}
+    \caption[Geometry of sheet curvature]{Geometry for relating collar boundary angle $\psi$ to curvature $H$. The diagram represents a cross section in the plane formed by two neighbouring cells' bodies and the middle of the line along which their collars make contact. Cell bodies are represented by points at the intersections of black lines with bisecting angle $\phi_0$, and collars (black lines) make contact with neighbouring cells' collars at points $\rho$, $\sigma$, and $\gamma$. The non-physical blue arc represents a surface describing the collar-collar interfaces, where the radius of the circle is shown with a blue line of length $1/H_0$. The figure is not drawn to scale; roughly, $1/H_0 \sim \SI{50}{\per\micro\meter}$, $\ell_0 \sim \SI{10}{\micro\meter}$, and cell bodies (not pictured) have diameter about $\SI{4}{\micro\meter}$. (\Cref{ch:1})}
     \label{fig:hpsi}
 \end{figure}
 
 Consider two neighboring cells with collar boundaries $\rho$, $\sigma$, and $\gamma$, as shown in Figure \ref{fig:hpsi}. 
+We seek to relate the preferred sheet curvature $H_0$ of units inverse length to the angles $\phi_0$ and $\psi_0$, the preferred angles that $\phi$ and $\psi$ take, and the preferred collar length $\ell_0$ with units of length.
 I define a radius of curvature by the circle that passes through the three collar boundaries. 
 Setting $\bm{x_\rho} = 2\ell\sin\phi_0(-1, 0)$, $\bm{x_\sigma} = (0,0)$, and $\bm{x_\gamma} = 2\ell\sin\phi_0 (\sin(\psi_0 - \phi_0), \cos(\psi_0-\phi_0))$, we solve for the circle's centre's coordinates 
 
@@ -229,6 +235,7 @@ The bending energy of membranes is often prescribed to be the Helfrich bending e
 	\e_b &= \int_S \left[ \frac{\kappa}{2} (2H - 2H_0)^2 + \kappa_G K \right] d^2r. \label{eq:helfrich}	
 \end{align}
 \noindent Here $H=1/2 (g_{\mu\nu}K^{\mu\nu})$ is the mean curvature of the sheet given by $\bm{u}$ and $\zeta$ and $K = \det K_\mu^\nu$. 
+The model \cref{eq:helfrich} is commonly found in studies of fluid membrane curvature, particularly for lipid bilayers or micelles formed using surfactants \citep{andelman1994,seifert1997}.
 Since \textit{C. flexa} sheets do not form closed surfaces, any shape equation from \cref{eq:helfrich} must come with appropriate boundary conditions. 
 \citet{tu2003} derived a general equilibrium solution to \cref{eq:helfrich} with boundary, as well as the simplified axisymmetric case, by taking the functional variation of \cref{eq:helfrich} with respect to the surface position.
 

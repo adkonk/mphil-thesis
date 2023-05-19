@@ -22,6 +22,11 @@ Expressing the gradient of the energy as summations over collars belonging to ea
 The dynamics can efficiently be solved numerically as a result.
 Of course, describing choanoflagellate sheets as discrete systems also remains faithful to real sheets, and this approach remains applicable over colonies of arbitrarily many cells.
 
+In \cref{sec:description}, I discuss the reasoning behind the discrete model that I choose to use: why cells and collar boundary endpoints are used as the vertices, how the apicobasal axis unit vector is determined, why collar-collar connections at the sheet boundary matter, and how initial sheet geometries are set up numerically.
+The following \cref{sec:sheet_energy} proceeds to write an equation for the mechanical energy of the sheet in terms of cell positions and cell-cell interface endpoint coordinates, as well as the apicobasal axis unit vectors as free variables.
+\Cref{subsec:grad_desc}-\ref{subsec:forward_int} proceed to minimise energy by following the negative gradient\footnote{Equivalently, equilibrate forces.}, and the remainder of \cref{sec:minimise_energy} discusses the solutions observed under various sheet graph topologies.
+
+
 \section{Discrete sheet description} \label{sec:description}
 
 \nomenclature[a-G]{$G$}{Graph consisting of \textit{C. flexa} cells as vertices and cell-cell interactions through collar microvilli as edges}
@@ -50,7 +55,7 @@ For a cell $\alpha\in C$ whose collar microvilli are all in contact with those o
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.6\textwidth]{duals.png}
-    \caption[Planar dual graphs describing \textit{C. flexa} colonies]{Planar dual graphs describing \textit{C. flexa} colonies. The graph of cells and cell-cell interactions $G$ shown in red and collar interfaces $G^*$ shown in blue.}
+    \caption[Planar dual graphs describing \textit{C. flexa} colonies]{Planar dual graphs describing \textit{C. flexa} colonies. The graph of cells and cell-cell interactions $G$ shown in red and collar interfaces $G^*$ shown in blue. Compare to \cref{subfig:contact1}, with prominent cell bodies and lines of interface between neighbouring cells' collars.}
     \label{fig:duals}
 \end{figure}
 
@@ -196,7 +201,7 @@ For initial collar positions not too far from cells, collars would not overlap o
     \label{fig:layout_init}
 \end{figure}
 
-\section{Sheet energy}
+\section{Sheet energy} \label{sec:sheet_energy}
 
 \begin{figure}[tbhp]
 	\centering
@@ -278,7 +283,7 @@ The normal vector to this plane oriented away from the cell defines a normal vec
 
 The plane approximation approach is easiest achieved using ordinary least squares. 
 Briefly, we approximate $\hat{r}_{\rho 3} = (r_{\rho 1}, r_{\rho 2}) \cdot (\beta_1, \beta_2) + \beta_0$ and minimise the sum of squared residuals $\sum_{\rho\subset\alpha} (\hat{r}_{\rho 3} - r_{\rho 3})^2$ with respect to $\beta_0, \beta_1, \beta_2$. 
-The normal vector of the plane approximation is then $(\hat{beta}_1, \hat{\beta}_2, -1)$ up to normalisation and multiplication by $-1$.\footnote{The notation here is chosen to be consistent with that typically used in ordinary least squares, hence the hatted values indicate an approximation rather than vector normalisation as I use otherwise.} 
+The normal vector of the plane approximation is then $(\hat{\beta}_1, \hat{\beta}_2, -1)$ up to normalisation and multiplication by $-1$.\footnote{The notation here is chosen to be consistent with that typically used in ordinary least squares, hence the hatted values indicate an approximation rather than vector normalisation as I use otherwise.} 
 Although the gradient of the energy \cref{eq:e} can be computed in this approximation, I found that it resulted in frequent numerical instabilities.
 
 Due to the lack of a suitable approximation to the apicobasal axis vectors $\bh{n}_\alpha$ in terms of the cell $\alpha$'s position and its collar vertices' positions, I instead let these vectors be free variables.
@@ -318,7 +323,7 @@ When done so, we find that $\phi_0, \psi_0$, and $\ell_0$ allow us to calculate 
 
 When interested in sheets with constrained collar length, we may either take a numerical approach or exploit the above energy term by setting $k_{\text{sp}}$ to a large value. 
 
-\section{Minimising sheet energy}
+\section{Minimising sheet energy} \label{sec:minimise_energy}
 
 The sheet energy $\e(\{\bm{r}_\gamma \}_{\gamma \in \mathfrak{G}}$ (\cref{eq:e}) is parameterised over the cell and collar boundary vertex coordinates given a function $\bh{n}_\alpha(\bm{r}_\alpha, \{\bm{r}_\rho \}_{\rho\subset\alpha})$ that approximates the cell normal for all cells $\alpha$.
 When sheet topology is left fixed, the summations in \cref{eq:e_phi,eq:e_psi,eq:e_sp} remain unchanged.
@@ -355,7 +360,7 @@ A landscape of minimum sheet energies over several pairs $(\phi_0, \psi_0)$ is e
 % 
 % Call back to section \ref{sec:c_1d}
 
-\subsection{Energy gradient descent}
+\subsection{Energy gradient descent} \label{subsec:grad_desc}
 
 The goal in using gradient descent is to explicitly calculate the gradients $\partial \e / \partial \bm{r}_\gamma$ of the energy with respect to all coordinate vectors $\bm{r}_\gamma$ and incrementally take small steps in the reverse direction. 
 
@@ -402,9 +407,9 @@ The gradient $\partial \e_{\text{sp}} / \partial \bm{r}_\gamma$ is given by the 
 \end{align}
 which is simply Hooke's law.
 
-\subsection{Forward integration}
+\subsection{Forward integration} \label{subsec:forward_int}
 
-Integrating the gradient given by equations \cref{eq:grad_phi,eq:grad_psi,eq:grad_sp} produces the dynamics of sheet bending as in \cref{fig:dynamics}. 
+Integrating the gradient given by equations \cref{eq:grad_phi,eq:grad_psi,eq:grad_sp} with linear local drag produces the dynamics of sheet bending as in \cref{fig:dynamics}. 
 We can numerically integrate using gradient descent with finite step size $\Delta t$ and drag coefficient $\zeta$.
 \mynote{discuss the equilibrium states}
 \begin{align}
@@ -435,7 +440,7 @@ Since the normal component of $\partial \e / \partial \bh{n}_\alpha$ to the cons
 	\includegraphics[width=0.4\textheight]{dynamics/06000.png}
 	\includegraphics[width=0.4\textheight]{dynamics/08000.png}
 	\includegraphics[width=0.4\textheight]{dynamics/10000.png}
-	\caption[Gradient descent equilibration and dynamics of sheet inversion]{Dynamics of sheet inversion in the transition from $(\phi_0, \psi_0)=(0.55, 0.65)$ to $(0.71,0.41)$ demonstrating projected gradient descent using \cref{eq:grad_desc_r,eq:grad_desc_n1,eq:grad_desc_n2}.}
+	\caption[Gradient descent equilibration and dynamics of sheet inversion]{Dynamics of sheet inversion under linear drag in the transition from $(\phi_0, \psi_0)=(0.55, 0.65)$ to $(0.71,0.41)$ demonstrating projected gradient descent using \cref{eq:grad_desc_r,eq:grad_desc_n1,eq:grad_desc_n2}.}
 	\label{fig:dynamics}
 \end{figure}
 \end{landscape}
@@ -572,6 +577,7 @@ Informed by the transitions shown in the \cref{fig:landscape_ico3} landscape, we
 \Cref{fig:dynamics} shows the inversion from flagella-in to flagella-out by a single, sudden change in parameters.
 Unlike the filament model studied in \cref{sec:c_1d} (\cref{fig:shapes}) and the small sheet in \cref{subsec:landscape}, large sheet inversion in the discrete model features temporary flattening through stretching at the edges.
 The propagation of the change in curvature from the sheet boundary to the centre results in the \textit{rolling over} effect described in \cref{sec:c_1d} that is missing from those less detailed and smaller sheet descriptions. 
+Notably, this is achieved with simple linear isotropic drag, supporting the hypothesis posed in \cref{sec:c_1d} that collar compression and stretching contribute meaningfully to inversion dynamics.
 
 The continuities in \cref{fig:landscape_ico3} and inversion dynamics indicate that the topology of the cell-cell connection graph is key to producing bistability, where both flagella-in and flagella-out states are achievable as local energy minima for the same model parameters.
 In contrast, a sheet without topological defects (\cref{fig:landscape_flat}) or a small sheet with fewer cells at the boundary (\cref{fig:landscape_ico}) readily inverts between states with similar energies.
