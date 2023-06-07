@@ -506,13 +506,14 @@ For example, cells at either the centre nor boundary in a bent sheet (\cref{fig:
 	\label{fig:landscape_flat}
 \end{figure}
 
-We can observe a more rich energy landscape by using a grgaph topology containing defects from a hexagonal lattice.
+We can observe a more rich energy landscape by using a graph topology containing defects from a hexagonal lattice.
 A simple choice is an icosahedron, which is formed using a polyhedron of twelve vertices each of degree five forming twenty faces of equilateral triangles.
 Each triangular face can each be repeatedly subdivided into four smaller equilateral triangular face by introducing a vertex along each edge, such that the surface gains vertices of degree six in a hexagonal lattice \citep{dahl2014}.
 Intuitively, the fixed number of vertices with degree five make it possible for the vertices to form a closed surface.
 For example, the patchwork of a football is formed by replacing each degree-five vertex of an icosahedron with a regular pentagon, and the polygons on the surface are able to form a regular pattern while forming an overall curved surface due to the diversity of shapes present.
+The edges of a small section of the icosphere with two subdivisions are shown in blue at the collar-collar interfaces in \cref{fig:landscape_ico}, and edges for larger sections of the icosphere are shown in \cref{fig:landscape_ico3,fig:landscape_ico4}.
 
-A small section of the icosphere (points with polar angle greater than $3\pi/5$ with respect to vertical axis) after two subdivisons gives an energy landscape with two diagonal valleys corresponding to flagella-in and flagella-out sheets (upper and lower, respectively).
+A flexa sheet with collar-collar boundaries defined along a small section of the icosphere gives an energy landscape with two diagonal valleys corresponding to flagella-in and flagella-out sheets (upper and lower, respectively) in \cref{fig:landscape_ico}.
 That there are two valleys, rather than the one valley along $\phi_0 = \psi_0$, is interpreted to be the result of topological defects in the lattice structure that are essential to the construction of the icosphere. 
 The two energy valleys achieve similar values for the minimum sheet energy, suggesting there is not necessarily any energetic preference to either state in this model.
 The positive and negative sheet curvatures respectively, in the convention of \cref{ch:2} is consistent with how we expect $\phi_0$ and $\psi_0$ to induce spontaneous curvature (\cref{eq:h0}).
@@ -522,7 +523,7 @@ The landscape was found to differ negligibly when an inverted sheet was used to 
 \begin{figure}[hbtp]
 	\centering
 	\includegraphics[width=\textwidth]{landscape_ico.png}
-	\caption[Energy landscape of a discrete \textit{C. flexa} sheet generated from a small icosphere section]{Energy landscape of a discrete \textit{C. flexa} sheet generated from a thrice-subdivided icosphere section. Style as in \cref{fig:landscape_flat}. The icosphere was generated using code from \citep{dahl2014}.}
+	\caption[Energy landscape of a discrete \textit{C. flexa} sheet generated from a small icosphere section]{Energy landscape of a discrete \textit{C. flexa} sheet generated from a thrice-subdivided icosphere section. Style as in \cref{fig:landscape_flat}. The icosphere was generated using code from \citep{dahl2014}. Cells comprising topological defects (those with five neighbours instead of the typical six) can be seen in the bottom-right-most panel, at the top right of the sheet and at the top left. The latter is difficult to see because the cell-cell collar interface boundaries (translucent blue points) are nearly collinear in the projection used to plot the sheet.}
 	\label{fig:landscape_ico}
 \end{figure}
 
@@ -548,7 +549,7 @@ Note that the sheet geometries at the landscape corners in \cref{fig:landscape_i
 		\caption{}
 		\label{subfig:landscape_ico3r}
 	\end{subfigure}
-	\caption[Energy landscape for flagella-in and flagella-out curved sheets]{Energy landscapes for (\ref{subfig:landscape_ico3}) flagella-in and (\ref{subfig:landscape_ico3r}) flagella-out sheets of \textit{C. flexa}. The color scaling is the same in both images. The landscapes for a smaller segment of the icosphere were qualitatively similar.}
+	\caption[Energy landscape for flagella-in and flagella-out curved sheets]{Energy landscapes for (\ref{subfig:landscape_ico3}) flagella-in and (\ref{subfig:landscape_ico3r}) flagella-out sheets of \textit{C. flexa}. The color scaling is the same in both images. The landscapes for a smaller segment of the icosphere were qualitatively similar. Cells with five neighbours are easily visible in the bottom-right-most panel of \ref{subfig:landscape_ico3}, where one such cell is visible in the foreground and another is visible at the top right of the image.}
 	\label{fig:landscape_ico3}
 \end{figure}
 
@@ -606,7 +607,7 @@ The combined landscape of flagella-in and -out sheets (\cref{subfig:landscape4_m
 		\caption{}
 		\label{subfig:landscape4_merge}
 	\end{subfigure}
-	\caption[Energy landscape for flagella-in and flagella-out curved sheets]{(\ref{subfig:landscape_ico4}) Energy landscape for large flagella-in sheets. The landscape for flagella-out sheets was quantitatively similar, with the minimum energy valley shifted downward as in \cref{subfig:landscape_ico3r}. (\ref{subfig:landscape4_merge}) Minimum energies for flagella-in and -out large sheets. Style as in \cref{fig:landscape_merge}.}
+	\caption[Energy landscape for flagella-in and flagella-out curved sheets]{(\ref{subfig:landscape_ico4}) Energy landscape for large flagella-in sheets. The landscape for flagella-out sheets was quantitatively similar, with the minimum energy valley shifted downward as in \cref{subfig:landscape_ico3r}. Several cells with an irregular number of neighbours are readily visible in the foreground of the top-left-most panel. (\ref{subfig:landscape4_merge}) Minimum energies for flagella-in and -out large sheets. Style as in \cref{fig:landscape_merge}.}
 	\label{fig:landscape_ico4}
 \end{figure}
 
