@@ -508,14 +508,14 @@ For example, cells at either the centre nor boundary in a bent sheet (\cref{fig:
 
 We can observe a more rich energy landscape by using a graph topology containing defects from a hexagonal lattice.
 A simple choice is an icosahedron, which is formed using a polyhedron of twelve vertices each of degree five forming twenty faces of equilateral triangles.
-Each triangular face can each be repeatedly subdivided into four smaller equilateral triangular face by introducing a vertex along each edge, such that the surface gains vertices of degree six in a hexagonal lattice \citep{dahl2014}.
+Each triangular face can each be repeatedly subdivided into four smaller equilateral triangular face by introducing a vertex along each edge, such that the surface gains vertices of degree six in a hexagonal lattice \citep{cromwell1997}.
 Intuitively, the fixed number of vertices with degree five make it possible for the vertices to form a closed surface.
 For example, the patchwork of a football is formed by replacing each degree-five vertex of an icosahedron with a regular pentagon, and the polygons on the surface are able to form a regular pattern while forming an overall curved surface due to the diversity of shapes present.
 The cells in \cref{fig:landscape_ico,fig:landscape_ico3,fig:landscape_ico4} sit at the vertices of icosahedra with two subdivisions, and the number of neighbours of each cell is visible by counting edges in the shapes defined by blue lines of the collar-collar interfaces.
-Since cells with five neighbours form pentagons at their interfaces with other cells and cells with six neighbours form hexagons, the graph of collar-collar interactions matches that of a football.
+Since cells with five neighbours form pentagons at their interfaces with other cells and cells with six neighbours form hexagons, the graph of collar-collar interactions matches that of a football with an additional subdivision at each face.
 
-A flexa sheet with collar-collar boundaries defined along a small section of the icosphere gives an energy landscape with two diagonal valleys corresponding to flagella-in and flagella-out sheets (upper and lower, respectively) in \cref{fig:landscape_ico}.
-That there are two valleys, rather than the one valley along $\phi_0 = \psi_0$, is interpreted to be the result of topological defects in the lattice structure that are essential to the construction of the icosphere. 
+A flexa sheet with collar-collar boundaries defined along a small section of the subdivided icosahedron gives an energy landscape with two diagonal valleys corresponding to flagella-in and flagella-out sheets (upper and lower, respectively) in \cref{fig:landscape_ico}.
+That there are two valleys, rather than the one valley along $\phi_0 = \psi_0$, is interpreted to be the result of topological defects in the lattice structure that are essential to the construction of the icosahedron. 
 The two energy valleys achieve similar values for the minimum sheet energy, suggesting there is not necessarily any energetic preference to either state in this model.
 The positive and negative sheet curvatures respectively, in the convention of \cref{ch:2} is consistent with how we expect $\phi_0$ and $\psi_0$ to induce spontaneous curvature (\cref{eq:h0}).
 The continuity between the two valleys indicates that sheets are stably able to flatten and the minimum energy structures continuously transition between flagella-in and -out structures. 
@@ -524,13 +524,13 @@ The landscape was found to differ negligibly when an inverted sheet was used to 
 \begin{figure}[hbtp]
 	\centering
 	\includegraphics[width=\textwidth]{landscape_ico.png}
-	\caption[Energy landscape of a discrete \textit{C. flexa} sheet generated from a small icosphere section]{Energy landscape of a discrete \textit{C. flexa} sheet generated from a thrice-subdivided icosphere section. Style as in \cref{fig:landscape_flat}. The icosphere was generated using code from \citep{dahl2014}. Cells comprising topological defects (those with five neighbours instead of the typical six) can be seen in the bottom-right-most panel, at the top right of the sheet and at the top left. The latter is difficult to see because the cell-cell collar interface boundaries (translucent blue points) are nearly collinear in the projection used to plot the sheet.}
+	\caption[Energy landscape of a discrete \textit{C. flexa} sheet generated from a small subdivided icosahedron section]{Energy landscape of a discrete \textit{C. flexa} sheet generated from a twice-subdivided icosahedron section. Style as in \cref{fig:landscape_flat}. The lattice was generated using code from \citep{dahl2014}. Cells comprising topological defects (those with five neighbours instead of the typical six) can be seen in the bottom-right-most panel, at the top right of the sheet and at the top left. The latter is difficult to see because the cell-cell collar interface boundaries (translucent blue points) are nearly collinear in the projection used to plot the sheet.}
 	\label{fig:landscape_ico}
 \end{figure}
 
 \subsection{Sudden inversion}
 
-Adding more cells by taking more vertices from the icosphere (with polar angle at least $2\pi/5$) again produces two energy valleys corresponding to flagella-in and -out sheets (\cref{fig:landscape_ico3}). 
+Adding more cells by taking more vertices from the subdivided icosahedron (with polar angle at least $2\pi/5$) again produces two energy valleys corresponding to flagella-in and -out sheets (\cref{fig:landscape_ico3}). 
 In a larger sheet, however, we identify a discontinuity when beginning from a flagella-in sheet and changing parameters to achieve inversion (\cref{subfig:landscape_ico3}) as in \cref{fig:dynamics}.
 The discontinuity implies that equilibrated sheets flagella-in sheets there achieve a local energy minimum, but that a global minimum may be achieved instead by taking a flagella-out sheet with the same parameters. 
 Indeed, when using flagella-out sheets as initial conditions, the complete flagella-out energy valley is apparent and the discontinuity shifts to show the flagella-out to -in transition (\cref{subfig:landscape_ico3r}).\footnote{The large vertical discontinuity along $\phi_0=0.41$ is a consequence of the simulation parallelisation. All landscape plots shown were simulated by first equilibrating at the landscape centre ($\phi_0=0.55,\psi_0=0.65$). The row $\psi_0=0.65$ was simulated by using this as an initial condition to consecutively equilibrate to a larger or smaller value of $\phi_0$. Sheets were then simulated in columns from the central row for increasing or decreasing $\psi_0$. The vertical discontinuity indicates where the initial row simulations first transitioned, such that the sheets with $\phi_0=0.39$ in \cref{subfig:landscape_ico3r} began with a flagella-in sheet.}
@@ -550,7 +550,7 @@ Note that the sheet geometries at the landscape corners in \cref{fig:landscape_i
 		\caption{}
 		\label{subfig:landscape_ico3r}
 	\end{subfigure}
-	\caption[Energy landscape for flagella-in and flagella-out curved sheets]{Energy landscapes for (\ref{subfig:landscape_ico3}) flagella-in and (\ref{subfig:landscape_ico3r}) flagella-out sheets of \textit{C. flexa}. The color scaling is the same in both images. The landscapes for a smaller segment of the icosphere were qualitatively similar. Cells with five neighbours are easily visible in the bottom-right-most panel of \ref{subfig:landscape_ico3}, where one such cell is visible in the foreground and another is visible at the top right of the image.}
+	\caption[Energy landscape for flagella-in and flagella-out curved sheets]{Energy landscapes for (\ref{subfig:landscape_ico3}) flagella-in and (\ref{subfig:landscape_ico3r}) flagella-out sheets of \textit{C. flexa}. The color scaling is the same in both images. The landscapes for a smaller segment of the lattice were qualitatively similar. Cells with five neighbours are easily visible in the bottom-right-most panel of \ref{subfig:landscape_ico3}, where one such cell is visible in the foreground and another is visible at the top right of the image.}
 	\label{fig:landscape_ico3}
 \end{figure}
 
@@ -589,7 +589,7 @@ The continuities in \cref{fig:landscape_ico3} and inversion dynamics indicate th
 In contrast, a sheet without topological defects (\cref{fig:landscape_flat}) or a small sheet with fewer cells at the boundary (\cref{fig:landscape_ico}) readily inverts between states with similar energies.
 
 Taking this further, we expect that some sheet topologies may be so restrictive at the boundary or elsewhere that inversion is completely prohibited for sufficiently high $k_{\text{sp}}$. 
-Taking most of an icosphere to generate the sheet topology results in a complete inability to invert for the same energy constants used in \cref{fig:landscape_flat,fig:landscape_ico,fig:landscape_ico3}.
+Taking most of the subdivided icosahedron to generate the sheet topology results in a complete inability to invert for the same energy constants used in \cref{fig:landscape_flat,fig:landscape_ico,fig:landscape_ico3}.
 Instead, sheets retain their orientation always and experience substantial stress when the equilibrium angles prescribe a curvature that cannot be achieved in the present sheet orientation (\cref{fig:landscape_ico4}).
 The flagella-out landscape is qualitatively similar with a valley in the same location as \cref{subfig:landscape_ico3r}.
 The combined landscape of flagella-in and -out sheets (\cref{subfig:landscape4_merge}) again shows the two valleys, now separated by an insurmountable energetic barrier.
@@ -618,7 +618,7 @@ There is no evidence to suggest changing collar properties, so we are led to pre
 
 \subsection{Additional graph topologies}
 
-In addition to the hexagonal lattice and icosphere sections shown above, I observed that the lattice topology of the \textit{Choanoeca} sheet may restrict or force sheet bending altogether (\cref{fig:extra}).
+In addition to the hexagonal lattice and subdivded icosahedron sections shown above, I observed that the lattice topology of the \textit{Choanoeca} sheet may restrict or force sheet bending altogether (\cref{fig:extra}).
 A hexagonal lattice consisting of too many points is limited in its flexibility except at its edges (\cref{subfig:hexbig}). 
 Consequently, we see that topological defects are not necessarily the hinderance to sheet bending or inversion, but rather necessary in moderation.
 On the other hand, a sheet with many topological defects with topology formed by generalised Voronoi tesselation on the sphere using several random points is extremely restricted in curvature when there are too many points crowding a small region (\cref{subfig:sphere}).
